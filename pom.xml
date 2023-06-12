@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>club.cupk.demo</groupId>
+    <groupId>club.cupk.waterflood</groupId>
     <artifactId>group06-cloud</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -10,7 +10,11 @@
     <description>group06-cloud</description>
 
     <modules>
-
+        <module>waterflood-gateway-9001</module>
+        <module>waterflood-sentinel-9002</module>
+        <module>waterflood-permission-9003</module>
+        <module>waterflood-consumer-9004</module>
+        <module>waterflood-provider-9005</module>
     </modules>
 
 </project>
