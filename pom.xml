@@ -17,4 +17,65 @@
         <module>waterflood-provider-9005</module>
     </modules>
 
+    <properties>
+        <java.version>1.8</java.version>
+        <springboot.version>2.4.2</springboot.version>
+        <dubbo.version>2.7.8</dubbo.version>
+        <sentinel.version>1.8.0</sentinel.version>
+        <swagger.version>3.0.0</swagger.version>
+        <fastjson.version>1.2.60</fastjson.version>
+        <lombok.version>1.18.26</lombok.version>
+        <mybatisplus.version>3.0.5</mybatisplus.version>
+        <mysql.driver.version>8.0.31</mysql.driver.version>
+        <springcloudalibaba.version>2021.1</springcloudalibaba.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!--fastjson-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!--lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!--mybatis-plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.version}</version>
+            </dependency>
+            <!--mysql驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.driver.version}</version>
+            </dependency>
+            <!-- Dubbo Spring Cloud Starter -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-dubbo</artifactId>
+                <version>${springcloudalibaba.version}</version>
+            </dependency>
+            <!--Sentinel Spring Cloud Starter-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                <version>${springcloudalibaba.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
 </project>
