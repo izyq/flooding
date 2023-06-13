@@ -3,7 +3,7 @@ import club.cupk.waterflood.domain.WaterFloodingRecord;
 import club.cupk.waterflood.mapper.WaterFloodingRecordMapper;
 import club.cupk.waterflood.service.IWaterFloodingRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
-@Service
+import org.apache.dubbo.config.annotation.DubboService;
+@DubboService
 public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper,WaterFloodingRecord> implements IWaterFloodingRecordService{
 }
