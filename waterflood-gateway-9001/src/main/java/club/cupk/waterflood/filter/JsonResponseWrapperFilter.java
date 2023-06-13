@@ -1,5 +1,6 @@
 package club.cupk.waterflood.filter;
 
+import club.cupk.waterflood.domain.vo.ResultCode;
 import club.cupk.waterflood.helper.ServerHttpResponseDecoratorHelper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

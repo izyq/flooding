@@ -1,5 +1,6 @@
 package club.cupk.waterflood.domain;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -25,10 +26,10 @@ public class UserRole{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户代表的油田/注水井", position = 3)
     private Long assetId;
-    @TableId(type = IdType.AUTO)
+    @TableField("role_id")
     @ApiModelProperty(value = "用户的角色id", position = 2)
     private Long roleId;
-    @TableId(type = IdType.AUTO)
+    @TableField("user_id")
     @ApiModelProperty(value = "用户id", position = 1)
     private Long userId;
     
