@@ -13,7 +13,7 @@ import xin.altitude.cms.common.entity.PageEntity;
 @RestController
 @RequestMapping("/waterflood/water/flooding/plan")
 public class WaterFloodingPlanController{
-    @DubboReference
+    @DubboReference(check = false)
     private IWaterFloodingPlanService waterFloodingPlanService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,WaterFloodingPlan waterFloodingPlan){

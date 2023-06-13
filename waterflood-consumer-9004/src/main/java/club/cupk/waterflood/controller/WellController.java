@@ -13,7 +13,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/well")
 public class WellController{
-    @DubboReference
+    @DubboReference(check = false)
     private IWellService wellService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,Well well){

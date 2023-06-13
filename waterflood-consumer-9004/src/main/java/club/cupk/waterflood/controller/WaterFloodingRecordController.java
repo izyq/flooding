@@ -15,7 +15,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/water/flooding/record")
 public class WaterFloodingRecordController{
-    @DubboReference
+    @DubboReference(check = false)
     private IWaterFloodingRecordService waterFloodingRecordService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,WaterFloodingRecord waterFloodingRecord){

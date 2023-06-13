@@ -13,7 +13,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/role")
 public class RoleController{
-    @DubboReference
+    @DubboReference(check = false)
     private IRoleService roleService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,Role role){

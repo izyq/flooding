@@ -13,7 +13,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/user")
 public class UserController{
-    @DubboReference
+    @DubboReference(check = false)
     private IUserService userService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,User user){

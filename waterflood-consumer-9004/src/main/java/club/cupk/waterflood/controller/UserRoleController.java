@@ -15,7 +15,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/user/role")
 public class UserRoleController{
-    @DubboReference
+    @DubboReference(check = false)
     private IUserRoleService userRoleService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,UserRole userRole){

@@ -13,7 +13,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/field")
 public class FieldController{
-    @DubboReference
+    @DubboReference(check = false)
     private IFieldService fieldService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,Field field){

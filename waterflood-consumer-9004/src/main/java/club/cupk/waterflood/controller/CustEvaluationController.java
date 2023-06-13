@@ -13,7 +13,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/cust/evaluation")
 public class CustEvaluationController{
-    @DubboReference
+    @DubboReference(check = false)
     private ICustEvaluationService custEvaluationService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,CustEvaluation custEvaluation){

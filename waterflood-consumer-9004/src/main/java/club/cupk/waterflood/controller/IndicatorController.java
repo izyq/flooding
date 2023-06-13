@@ -13,7 +13,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/waterflood/indicator")
 public class IndicatorController{
-    @DubboReference
+    @DubboReference(check = false)
     private IIndicatorService indicatorService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,Indicator indicator){
