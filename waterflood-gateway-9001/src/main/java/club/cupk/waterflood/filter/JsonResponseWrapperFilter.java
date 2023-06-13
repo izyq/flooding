@@ -1,6 +1,7 @@
 package club.cupk.waterflood.filter;
 
-import club.cupk.waterflood.domain.vo.ResultCode;
+import club.cupk.waterflood.common.enums.ResultCode;
+import club.cupk.waterflood.common.vo.ResponseVO;
 import club.cupk.waterflood.helper.ServerHttpResponseDecoratorHelper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -68,11 +69,11 @@ public class JsonResponseWrapperFilter implements ComplexFilter {
                     log.debug("服务响应体已经是统一结果体，无需包装");
                     return Mono.just(originalBody);
                 } else {
-                    return makeMono(R.ok(jsonObject));
+                    return makeMono(ResponseVO.ok(jsonObject));
                 }
             } catch (Exception e) {
                 log.error("解析下游响应体异常", e);
-                return makeMono(R.ok(originalBody));
+                return makeMono(ResponseVO.ok(originalBody));
             }
         } else {
             //如果不是401和403异常则重置为200状态码
@@ -92,54 +93,54 @@ public class JsonResponseWrapperFilter implements ComplexFilter {
                     } else if (jo.containsKey("status") && jo.containsKey("ResultCode")) {
                         int resultCode = jo.getIntValue("ResultCode");
                         String message = jo.getString("message");
-                        return Mono.just(JSON.toJSONBytes(R.error(resultCode, message)
+                        return Mono.just(JSON.toJSONBytes(ResponseVO.error(resultCode, message)
                                 , SerializerFeature.WriteMapNullValue));
                     } else if ("404".equals(jo.getString("status"))) {
                         //下游返回了404
-                        return Mono.just(JSON.toJSONBytes(R.error(
+                        return Mono.just(JSON.toJSONBytes(ResponseVO.error(
                                 ResultCode.GATEWAY_DOWNSTREAM_RESOURCE_NOT_FOUND.getCode(),
-                                ResultCode.GATEWAY_DOWNSTREAM_RESOURCE_NOT_FOUND.getMessage()
+                                ResultCode.GATEWAY_DOWNSTREAM_RESOURCE_NOT_FOUND.getMsg()
                         ), SerializerFeature.WriteMapNullValue));
                     } else if ("405".equals(jo.getString("status"))) {
                         //下游返回了405
-                        return Mono.just(JSON.toJSONBytes(R.error(
+                        return Mono.just(JSON.toJSONBytes(ResponseVO.error(
                                 ResultCode.METHOD_NOT_ALLOWED.getCode(),
-                                ResultCode.METHOD_NOT_ALLOWED.getMessage()
+                                ResultCode.METHOD_NOT_ALLOWED.getMsg()
                         ), SerializerFeature.WriteMapNullValue));
                     } else if ("415".equals(jo.getString("status"))) {
                         //下游返回了415
-                        return Mono.just(JSON.toJSONBytes(R.error(
+                        return Mono.just(JSON.toJSONBytes(ResponseVO.error(
                                 ResultCode.UNSUPPORTED_MEDIA_TYPE.getCode(),
-                                ResultCode.UNSUPPORTED_MEDIA_TYPE.getMessage()
+                                ResultCode.UNSUPPORTED_MEDIA_TYPE.getMsg()
                         )));
                     } else {
                         //下游返回的包体是一个jsonobject，并不是规范的错误包体
-                        return Mono.just(JSON.toJSONBytes(R.error(
+                        return Mono.just(JSON.toJSONBytes(ResponseVO.error(
                                 ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getCode(),
-                                ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getMessage(),
+                                ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getMsg(),
                                 originalBody
                         ), SerializerFeature.WriteMapNullValue));
                     }
                 } else {
                     //不是一个jsonobject，可能是一个jsonarray
-                    return Mono.just(JSON.toJSONBytes(R.error(
+                    return Mono.just(JSON.toJSONBytes(ResponseVO.error(
                             ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getCode(),
-                            ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getMessage(),
+                            ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getMsg(),
                             originalBody
                     ), SerializerFeature.WriteMapNullValue));
                 }
             } catch (Exception e) {
                 log.error("解析下游响应体异常", e);
-                return Mono.just(JSON.toJSONBytes(R.error(
+                return Mono.just(JSON.toJSONBytes(ResponseVO.error(
                         ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getCode(),
-                        ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getMessage(),
+                        ResultCode.GATEWAY_DOWNSTREAM_ERROR_INFO_FORMAT_ERROR.getMsg(),
                         originalBody
                 ), SerializerFeature.WriteMapNullValue));
             }
         }
     }
 
-    private Mono<byte[]> makeMono(R result) {
+    private Mono<byte[]> makeMono(ResponseVO result) {
         return Mono.just(JSON.toJSONBytes(result, SerializerFeature.WriteMapNullValue));
     }
 }

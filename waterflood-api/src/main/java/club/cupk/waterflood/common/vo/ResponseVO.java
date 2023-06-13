@@ -1,54 +1,76 @@
 package club.cupk.waterflood.common.vo;
 
-import club.cupk.waterflood.common.enums.ApiCode;
-import club.cupk.waterflood.common.enums.StatusCode;
-import lombok.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import club.cupk.waterflood.common.enums.ResultCode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
-/**
- * @Auther: izyq
- * @Date: 2023/6/13
- * @Vertion 1.0
- */
 @Data
 @Builder
-@With
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseVO implements Serializable {
+public class ResponseVO {
+    private Boolean success;
 
-    private static final long serialVersionUID = -3977464215965519547L;
-    // 状态码
-    @NotNull
-    private String code = ApiCode.SUCCESS.getCode();
+    private Integer code;
 
-    // 状态信息
-    @NotNull
-    private String message = ApiCode.SUCCESS.getMessage();
+    private String message;
 
-    // 返回对象
-    @Nullable
-    private Object data = null;
+    private Object data;
 
-    // 默认返回成功状态码，数据对象
-    public ResponseVO(@Nullable Object data) {
-        this.data = data;
+    public static ResponseVO ok() {
+        return ResponseVO.builder()
+                .success(true)
+                .code(ResultCode.SUCCESS.getCode())
+                .message("Done").build();
     }
 
-    // 只返回状态码
-    public ResponseVO(@NotNull StatusCode statusCode) {
-        this.code = statusCode.getCode();
-        this.message = statusCode.getMessage();
+    public static ResponseVO ok(Object jsonObject) {
+        return ResponseVO.builder()
+                .success(true)
+                .code(ResultCode.SUCCESS.getCode())
+                .message("Done")
+                .data(jsonObject).build();
     }
 
-    // 返回指定状态码，数据对象
-    public ResponseVO(@NotNull StatusCode statusCode, @Nullable Object data) {
-        this.code = statusCode.getCode();
-        this.message = statusCode.getMessage();
-        this.data = data;
+    public static ResponseVO error() {
+        return ResponseVO.builder()
+                .success(false)
+                .code(ResultCode.ERROR.getCode())
+                .message(ResultCode.ERROR.getMsg()).build();
+    }
+
+    public static ResponseVO error(ResultCode resultCode) {
+        return ResponseVO.builder()
+                .success(false)
+                .code(resultCode.getCode())
+                .message(resultCode.getMsg()).build();
+
+    }
+
+    public static ResponseVO error(int code, String message) {
+        return ResponseVO.builder()
+                .success(false)
+                .code(code)
+                .message(message).build();
+
+    }
+
+    public static ResponseVO error(ResultCode resultCode, String message) {
+        return ResponseVO.builder()
+                .success(false)
+                .code(resultCode.getCode())
+                .message(message).build();
+
+    }
+
+
+    public static Object error(Integer code, String message, byte[] originalBody) {
+        return ResponseVO.builder()
+                .success(false)
+                .code(code)
+                .message(message)
+                .data(originalBody).build();
     }
 }
-
