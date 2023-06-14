@@ -29,7 +29,7 @@ public class WaterFloodingRecord implements Serializable{
     @ApiModelProperty(value = "创建人员", position = 6)
     private Long createUser;
     @ApiModelProperty(value = "指标值", position = 5)
-    private String data;
+    private Float data;
     @ApiModelProperty(value = "该条指标的id", position = 4)
     private Long indicatorId;
     @TableId(type = IdType.AUTO)
