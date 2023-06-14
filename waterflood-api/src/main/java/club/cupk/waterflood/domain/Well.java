@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "well")
-public class Well{
+public class Well implements Serializable{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "创建时间", position = 13)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

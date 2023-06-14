@@ -9,4 +9,5 @@ import org.springframework.stereotype.Component;
 @DubboService
 @Component
 public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper,Indicator> implements IIndicatorService{
+
 }

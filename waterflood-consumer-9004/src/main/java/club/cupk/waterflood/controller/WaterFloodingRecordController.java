@@ -41,28 +41,28 @@ public class WaterFloodingRecordController{
     public AjaxResult detail(@PathVariable("recordId") Long recordId) {
         return AjaxResult.success(waterFloodingRecordService.getById(recordId));
     }
-    @GetMapping("/well/page")
-    public AjaxResult pageVo(PageEntity pageEntity,Well well){
-        return AjaxResult.success(waterFloodingRecordService.pageVo(pageEntity.toPage(), well));
-    }
-    @GetMapping("/indicator/page")
-    public AjaxResult pageVo(PageEntity pageEntity,Indicator indicator){
-        return AjaxResult.success(waterFloodingRecordService.pageVo(pageEntity.toPage(), indicator));
-    }
-    @GetMapping("/well/list")
-    public AjaxResult listVo(Well well){
-        return AjaxResult.success(waterFloodingRecordService.listVo(well));
-    }
-    @GetMapping("/indicator/list")
-    public AjaxResult listVo(Indicator indicator){
-        return AjaxResult.success(waterFloodingRecordService.listVo(indicator));
-    }
-    @GetMapping(value = "/well/detail/{wellId}")
-    public AjaxResult detailWellVo(@PathVariable("wellId") Long wellId) {
-        return AjaxResult.success(waterFloodingRecordService.getWellVo(wellId));
-    }
-    @GetMapping(value = "/indicator/detail/{indicatorId}")
-    public AjaxResult detailIndicatorVo(@PathVariable("indicatorId") Long indicatorId) {
-        return AjaxResult.success(waterFloodingRecordService.getIndicatorVo(indicatorId));
-    }
+//    @GetMapping("/well/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,Well well){
+//        return AjaxResult.success(waterFloodingRecordService.pageVo(pageEntity.toPage(), well));
+//    }
+//    @GetMapping("/indicator/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,Indicator indicator){
+//        return AjaxResult.success(waterFloodingRecordService.pageVo(pageEntity.toPage(), indicator));
+//    }
+//    @GetMapping("/well/list")
+//    public AjaxResult listVo(Well well){
+//        return AjaxResult.success(waterFloodingRecordService.listVo(well));
+//    }
+//    @GetMapping("/indicator/list")
+//    public AjaxResult listVo(Indicator indicator){
+//        return AjaxResult.success(waterFloodingRecordService.listVo(indicator));
+//    }
+//    @GetMapping(value = "/well/detail/{wellId}")
+//    public AjaxResult detailWellVo(@PathVariable("wellId") Long wellId) {
+//        return AjaxResult.success(waterFloodingRecordService.getWellVo(wellId));
+//    }
+//    @GetMapping(value = "/indicator/detail/{indicatorId}")
+//    public AjaxResult detailIndicatorVo(@PathVariable("indicatorId") Long indicatorId) {
+//        return AjaxResult.success(waterFloodingRecordService.getIndicatorVo(indicatorId));
+//    }
 }

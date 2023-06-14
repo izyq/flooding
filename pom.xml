@@ -16,6 +16,7 @@
         <module>waterflood-consumer-9004</module>
         <module>waterflood-provider-9005</module>
         <module>waterflood-api</module>
+        <module>waterflood-auth-9003</module>
     </modules>
 
 <!--    <properties>-->

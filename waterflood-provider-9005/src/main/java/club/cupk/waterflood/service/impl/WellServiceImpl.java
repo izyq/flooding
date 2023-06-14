@@ -9,4 +9,5 @@ import org.springframework.stereotype.Component;
 @DubboService
 @Component
 public class WellServiceImpl extends ServiceImpl<WellMapper,Well> implements IWellService{
+
 }

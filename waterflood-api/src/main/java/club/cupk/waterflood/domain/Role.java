@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "role")
-public class Role{
+public class Role implements Serializable{
     private static final long serialVersionUID = 1L;
     @TableId(type = IdType.AUTO)
     @ApiModelProperty(value = "角色id", position = 1)

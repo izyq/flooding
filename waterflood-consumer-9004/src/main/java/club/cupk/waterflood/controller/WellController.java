@@ -39,16 +39,16 @@ public class WellController{
     public AjaxResult detail(@PathVariable("wellId") Long wellId) {
         return AjaxResult.success(wellService.getById(wellId));
     }
-    @GetMapping("/vo/page")
-    public AjaxResult pageVo(PageEntity pageEntity,Well well){
-        return AjaxResult.success(wellService.pageVo(pageEntity.toPage(), well));
-    }
-    @GetMapping("/vo/list")
-    public AjaxResult listVo(Well well){
-        return AjaxResult.success(wellService.listVo(well));
-    }
-    @GetMapping(value = "/vo/detail/{wellId}")
-    public AjaxResult detailVo(@PathVariable("wellId") Long wellId) {
-        return AjaxResult.success(wellService.getOneVo(wellId));
-    }
+//    @GetMapping("/vo/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,Well well){
+//        return AjaxResult.success(wellService.pageVo(pageEntity.toPage(), well));
+//    }
+//    @GetMapping("/vo/list")
+//    public AjaxResult listVo(Well well){
+//        return AjaxResult.success(wellService.listVo(well));
+//    }
+//    @GetMapping(value = "/vo/detail/{wellId}")
+//    public AjaxResult detailVo(@PathVariable("wellId") Long wellId) {
+//        return AjaxResult.success(wellService.getOneVo(wellId));
+//    }
 }

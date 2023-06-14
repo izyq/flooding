@@ -9,4 +9,5 @@ import org.springframework.stereotype.Component;
 @DubboService
 @Component
 public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,CustEvaluation> implements ICustEvaluationService{
+
 }

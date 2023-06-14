@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
-import java.util.Arrays;
 @RestController
 @RequestMapping("/asset/field/")
 public class FieldController{
-    @DubboReference(check = false)
+    @DubboReference
     private IFieldService fieldService;
     @GetMapping("/page")
     public Object page(PageEntity pageEntity,String name){

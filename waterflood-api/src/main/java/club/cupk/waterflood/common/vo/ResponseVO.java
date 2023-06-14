@@ -15,7 +15,7 @@ public class ResponseVO {
 
     private Integer code;
 
-    private String message;
+    private String msg;
 
     private Object data;
 
@@ -23,14 +23,22 @@ public class ResponseVO {
         return ResponseVO.builder()
                 .success(true)
                 .code(ResultCode.SUCCESS.getCode())
-                .message("Done").build();
+                .msg("Done").build();
+    }
+
+    public static ResponseVO ok(ResultCode resultCode,Object data){
+        return ResponseVO.builder()
+                .success(true)
+                .code(resultCode.getCode())
+                .msg(resultCode.getMsg())
+                .data(data).build();
     }
 
     public static ResponseVO ok(Object jsonObject) {
         return ResponseVO.builder()
                 .success(true)
                 .code(ResultCode.SUCCESS.getCode())
-                .message("Done")
+                .msg("Done")
                 .data(jsonObject).build();
     }
 
@@ -38,14 +46,14 @@ public class ResponseVO {
         return ResponseVO.builder()
                 .success(false)
                 .code(ResultCode.ERROR.getCode())
-                .message(ResultCode.ERROR.getMsg()).build();
+                .msg(ResultCode.ERROR.getMsg()).build();
     }
 
     public static ResponseVO error(ResultCode resultCode) {
         return ResponseVO.builder()
                 .success(false)
                 .code(resultCode.getCode())
-                .message(resultCode.getMsg()).build();
+                .msg(resultCode.getMsg()).build();
 
     }
 
@@ -53,7 +61,7 @@ public class ResponseVO {
         return ResponseVO.builder()
                 .success(false)
                 .code(code)
-                .message(message).build();
+                .msg(message).build();
 
     }
 
@@ -61,7 +69,7 @@ public class ResponseVO {
         return ResponseVO.builder()
                 .success(false)
                 .code(resultCode.getCode())
-                .message(message).build();
+                .msg(message).build();
 
     }
 
@@ -70,7 +78,7 @@ public class ResponseVO {
         return ResponseVO.builder()
                 .success(false)
                 .code(code)
-                .message(message)
+                .msg(message)
                 .data(originalBody).build();
     }
 }

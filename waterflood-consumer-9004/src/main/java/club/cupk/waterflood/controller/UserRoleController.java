@@ -41,28 +41,28 @@ public class UserRoleController{
     public AjaxResult detail(@PathVariable("roleId") Long roleId) {
         return AjaxResult.success(userRoleService.getById(roleId));
     }
-    @GetMapping("/user/page")
-    public AjaxResult pageVo(PageEntity pageEntity,User user){
-        return AjaxResult.success(userRoleService.pageVo(pageEntity.toPage(), user));
-    }
-    @GetMapping("/role/page")
-    public AjaxResult pageVo(PageEntity pageEntity,Role role){
-        return AjaxResult.success(userRoleService.pageVo(pageEntity.toPage(), role));
-    }
-    @GetMapping("/user/list")
-    public AjaxResult listVo(User user){
-        return AjaxResult.success(userRoleService.listVo(user));
-    }
-    @GetMapping("/role/list")
-    public AjaxResult listVo(Role role){
-        return AjaxResult.success(userRoleService.listVo(role));
-    }
-    @GetMapping(value = "/user/detail/{userId}")
-    public AjaxResult detailUserVo(@PathVariable("userId") Long userId) {
-        return AjaxResult.success(userRoleService.getUserVo(userId));
-    }
-    @GetMapping(value = "/role/detail/{roleId}")
-    public AjaxResult detailRoleVo(@PathVariable("roleId") Long roleId) {
-        return AjaxResult.success(userRoleService.getRoleVo(roleId));
-    }
+//    @GetMapping("/user/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,User user){
+//        return AjaxResult.success(userRoleService.pageVo(pageEntity.toPage(), user));
+//    }
+//    @GetMapping("/role/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,Role role){
+//        return AjaxResult.success(userRoleService.pageVo(pageEntity.toPage(), role));
+//    }
+//    @GetMapping("/user/list")
+//    public AjaxResult listVo(User user){
+//        return AjaxResult.success(userRoleService.listVo(user));
+//    }
+//    @GetMapping("/role/list")
+//    public AjaxResult listVo(Role role){
+//        return AjaxResult.success(userRoleService.listVo(role));
+//    }
+//    @GetMapping(value = "/user/detail/{userId}")
+//    public AjaxResult detailUserVo(@PathVariable("userId") Long userId) {
+//        return AjaxResult.success(userRoleService.getUserVo(userId));
+//    }
+//    @GetMapping(value = "/role/detail/{roleId}")
+//    public AjaxResult detailRoleVo(@PathVariable("roleId") Long roleId) {
+//        return AjaxResult.success(userRoleService.getRoleVo(roleId));
+//    }
 }

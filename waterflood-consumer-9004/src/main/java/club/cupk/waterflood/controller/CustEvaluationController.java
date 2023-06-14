@@ -39,16 +39,16 @@ public class CustEvaluationController{
     public AjaxResult detail(@PathVariable("evalId") Long evalId) {
         return AjaxResult.success(custEvaluationService.getById(evalId));
     }
-    @GetMapping("/vo/page")
-    public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
-        return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
-    }
-    @GetMapping("/vo/list")
-    public AjaxResult listVo(CustEvaluation custEvaluation){
-        return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
-    }
-    @GetMapping(value = "/vo/detail/{evalId}")
-    public AjaxResult detailVo(@PathVariable("evalId") Long evalId) {
-        return AjaxResult.success(custEvaluationService.getOneVo(evalId));
-    }
+//    @GetMapping("/vo/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
+//        return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
+//    }
+//    @GetMapping("/vo/list")
+//    public AjaxResult listVo(CustEvaluation custEvaluation){
+//        return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
+//    }
+//    @GetMapping(value = "/vo/detail/{evalId}")
+//    public AjaxResult detailVo(@PathVariable("evalId") Long evalId) {
+//        return AjaxResult.success(custEvaluationService.getOneVo(evalId));
+//    }
 }

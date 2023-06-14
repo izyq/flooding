@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "water_flooding_plan")
-public class WaterFloodingPlan{
+public class WaterFloodingPlan implements Serializable{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "注水计划", position = 2)
     private String floodingPlan;

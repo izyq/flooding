@@ -15,30 +15,33 @@ import xin.altitude.cms.common.util.EntityUtils;
 import xin.altitude.cms.common.util.SpringUtils;
 
 public interface IIndicatorService extends IService<Indicator>{
-    /** 通过方法调用来解决循环依赖问题 */
-    default ICustEvaluationService getCustEvaluationService() {
-        return SpringUtils.getBean(ICustEvaluationService.class);
-    }
-    /**查询用户实体类Vo*/    default IndicatorVo getOneVo(Long indicatorId) {
-        IndicatorVo indicatorVo = EntityUtils.toObj(getById(indicatorId), IndicatorVo::new);
-        List<CustEvaluation> custEvaluationList = getCustEvaluationService().list(Wrappers.lambdaQuery(CustEvaluation.class).eq(CustEvaluation::getIndicatorId, indicatorVo.getIndicatorId()));
-        indicatorVo.setCustEvaluationList(custEvaluationList);
-        return indicatorVo;
-    }
-    /**查询实体类Vo列表*/    default List<IndicatorVo> listVo(Indicator indicator) {
-        List<IndicatorVo> indicatorVoList = EntityUtils.toList(list(Wrappers.lambdaQuery(indicator)), IndicatorVo::new);
-        Set<Long> indicatorIds = EntityUtils.toSet(indicatorVoList, IndicatorVo::getIndicatorId);
-        List<CustEvaluation> custEvaluationList = getCustEvaluationService().list(Wrappers.lambdaQuery(CustEvaluation.class).in(CustEvaluation::getIndicatorId, indicatorIds));
-        Map<Long, List<CustEvaluation>> map = custEvaluationList.stream().collect(Collectors.groupingBy(CustEvaluation::getIndicatorId));
-        indicatorVoList.forEach(e -> e.setCustEvaluationList(map.get(e.getIndicatorId())));
-        return indicatorVoList;
-    }
-    /**分页查询实体类Vo*/    default IPage<IndicatorVo> pageVo(IPage<Indicator> page, Indicator indicator) {
-        IPage<IndicatorVo> indicatorVoPage = EntityUtils.toPage(page(page, Wrappers.lambdaQuery(indicator)), IndicatorVo::new);
-        Set<Long> indicatorIds = EntityUtils.toSet(indicatorVoPage.getRecords(), IndicatorVo::getIndicatorId);
-        List<CustEvaluation> custEvaluationList = getCustEvaluationService().list(Wrappers.lambdaQuery(CustEvaluation.class).in(CustEvaluation::getIndicatorId, indicatorIds));
-        Map<Long, List<CustEvaluation>> map = custEvaluationList.stream().collect(Collectors.groupingBy(CustEvaluation::getIndicatorId));
-        indicatorVoPage.getRecords().forEach(e -> e.setCustEvaluationList(map.get(e.getIndicatorId())));
-        return indicatorVoPage;
-    }
+//    /** 通过方法调用来解决循环依赖问题 */
+//    default ICustEvaluationService getCustEvaluationService() {
+//        return SpringUtils.getBean(ICustEvaluationService.class);
+//    }
+//    /**查询用户实体类Vo*/
+//    default IndicatorVo getOneVo(Long indicatorId) {
+//        IndicatorVo indicatorVo = EntityUtils.toObj(getById(indicatorId), IndicatorVo::new);
+//        List<CustEvaluation> custEvaluationList = getCustEvaluationService().list(Wrappers.lambdaQuery(CustEvaluation.class).eq(CustEvaluation::getIndicatorId, indicatorVo.getIndicatorId()));
+//        indicatorVo.setCustEvaluationList(custEvaluationList);
+//        return indicatorVo;
+//    }
+//    /**查询实体类Vo列表*/
+//    default List<IndicatorVo> listVo(Indicator indicator) {
+//        List<IndicatorVo> indicatorVoList = EntityUtils.toList(list(Wrappers.lambdaQuery(indicator)), IndicatorVo::new);
+//        Set<Long> indicatorIds = EntityUtils.toSet(indicatorVoList, IndicatorVo::getIndicatorId);
+//        List<CustEvaluation> custEvaluationList = getCustEvaluationService().list(Wrappers.lambdaQuery(CustEvaluation.class).in(CustEvaluation::getIndicatorId, indicatorIds));
+//        Map<Long, List<CustEvaluation>> map = custEvaluationList.stream().collect(Collectors.groupingBy(CustEvaluation::getIndicatorId));
+//        indicatorVoList.forEach(e -> e.setCustEvaluationList(map.get(e.getIndicatorId())));
+//        return indicatorVoList;
+//    }
+//    /**分页查询实体类Vo*/
+//    default IPage<IndicatorVo> pageVo(IPage<Indicator> page, Indicator indicator) {
+//        IPage<IndicatorVo> indicatorVoPage = EntityUtils.toPage(page(page, Wrappers.lambdaQuery(indicator)), IndicatorVo::new);
+//        Set<Long> indicatorIds = EntityUtils.toSet(indicatorVoPage.getRecords(), IndicatorVo::getIndicatorId);
+//        List<CustEvaluation> custEvaluationList = getCustEvaluationService().list(Wrappers.lambdaQuery(CustEvaluation.class).in(CustEvaluation::getIndicatorId, indicatorIds));
+//        Map<Long, List<CustEvaluation>> map = custEvaluationList.stream().collect(Collectors.groupingBy(CustEvaluation::getIndicatorId));
+//        indicatorVoPage.getRecords().forEach(e -> e.setCustEvaluationList(map.get(e.getIndicatorId())));
+//        return indicatorVoPage;
+//    }
 }

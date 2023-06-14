@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "user")
-public class User{
+public class User implements Serializable{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户邮箱", position = 3)
     private String userEmail;

@@ -16,12 +16,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
+
 import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 @TableName(value = "field")
-public class Field{
+public class Field implements Serializable{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "创建时间", position = 7)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
