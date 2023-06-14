@@ -52,6 +52,6 @@ public class FieldController{
     }
     @GetMapping("/list")
     public AjaxResult list(Field field){
-        return AjaxResult.success(fieldService.list(Wrappers.lambdaQuery(field)));
+        return AjaxResult.success(fieldService.getList(field));
     }
 }

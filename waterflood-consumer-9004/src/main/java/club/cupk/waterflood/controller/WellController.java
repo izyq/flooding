@@ -1,35 +1,61 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.ResponseVO;
 import club.cupk.waterflood.domain.Well;
+import club.cupk.waterflood.dto.well.WellDTO;
 import club.cupk.waterflood.service.IWellService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
 @RestController
-@RequestMapping("/waterflood/well")
+@RequestMapping("/api/asset/well")
 public class WellController{
-    @DubboReference(check = false)
+    @DubboReference
     private IWellService wellService;
+
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,Well well){
-        return AjaxResult.success(wellService.page(pageEntity.toPage(), Wrappers.lambdaQuery(well)));
+    public Object page(PageEntity pageEntity,Well well){
+        return wellService.page(pageEntity.toPage(), Wrappers.lambdaQuery(well));
     }
     @GetMapping("/list")
-    public AjaxResult list(Well well){
-        return AjaxResult.success(wellService.list(Wrappers.lambdaQuery(well)));
+    public Object list(Well well){
+        return wellService.list(Wrappers.lambdaQuery(well));
     }
     @PostMapping("/push")
-    public AjaxResult add(@RequestBody Well well) {
-        return AjaxResult.success(wellService.save(well));
+    public Object add(@RequestBody WellDTO wellDTO) {
+        return wellService.save(Well.builder()
+                        .wellName(wellDTO.getName())
+                        .wellAddress(wellDTO.getAddress())
+                        .wellCoordinate(wellDTO.getCoordinate())
+                        .wellDepth(wellDTO.getDepth())
+                        .wellDia(wellDTO.getDia())
+                        .wellMiningStartTime(wellDTO.getStartTime())
+                        .wellMiningEndTime(wellDTO.getEndTime())
+                        .wellPeriod(wellDTO.getPeriod())
+                        .fieldId(wellDTO.getField())
+                        .factory(wellDTO.getFactory())
+                        .build()
+        );
     }
     @PutMapping("/edit")
-    public AjaxResult edit(@RequestBody Well well) {
-        return AjaxResult.success(wellService.updateById(well));
+    public Object edit(@RequestBody WellDTO wellDTO) {
+        return wellService.updateById(Well.builder()
+                .wellName(wellDTO.getName())
+                .wellAddress(wellDTO.getAddress())
+                .wellCoordinate(wellDTO.getCoordinate())
+                .wellDepth(wellDTO.getDepth())
+                .wellDia(wellDTO.getDia())
+                .wellMiningStartTime(wellDTO.getStartTime())
+                .wellMiningEndTime(wellDTO.getEndTime())
+                .wellPeriod(wellDTO.getPeriod())
+                .fieldId(wellDTO.getField())
+                .factory(wellDTO.getFactory())
+                .build()
+        );
     }
     @DeleteMapping("/delete/{wellIds}")
     public AjaxResult delete(@PathVariable Long[] wellIds) {

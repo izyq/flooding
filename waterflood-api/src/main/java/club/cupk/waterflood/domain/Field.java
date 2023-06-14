@@ -1,7 +1,5 @@
 package club.cupk.waterflood.domain;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -27,8 +25,10 @@ import java.io.Serializable;
 public class Field implements Serializable{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "创建时间", position = 7)
+    @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建人员", position = 6)
     private Long createUser;
     @ApiModelProperty(value = "油田地址", position = 3)
@@ -42,9 +42,11 @@ public class Field implements Serializable{
     private Long fieldId;
     @ApiModelProperty(value = "油田名", position = 2)
     private String fieldName;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间", position = 9)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新人员", position = 8)
     private Long updateUser;
     

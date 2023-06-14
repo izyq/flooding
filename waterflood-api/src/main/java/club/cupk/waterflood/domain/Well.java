@@ -1,26 +1,24 @@
 package club.cupk.waterflood.domain;
+import club.cupk.waterflood.common.GeoPoint;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
+
 import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "well")
+@SuperBuilder
 public class Well implements Serializable{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "创建时间", position = 13)
@@ -40,7 +38,7 @@ public class Well implements Serializable{
     @ApiModelProperty(value = "注水井位置", position = 3)
     private String wellAddress;
     @ApiModelProperty(value = "注水井经纬度", position = 4)
-    private String wellCoordinate;
+    private GeoPoint wellCoordinate;
     @ApiModelProperty(value = "注水井深度", position = 5)
     private Float wellDepth;
     @ApiModelProperty(value = "注水井直径", position = 6)
