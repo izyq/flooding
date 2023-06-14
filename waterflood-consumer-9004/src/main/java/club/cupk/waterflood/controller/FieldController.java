@@ -51,7 +51,7 @@ public class FieldController{
         return AjaxResult.success(fieldService.getById(fieldId));
     }
     @GetMapping("/list")
-    public AjaxResult list(Field field){
-        return AjaxResult.success(fieldService.getList(field));
+    public AjaxResult list(String name){
+        return AjaxResult.success(fieldService.getList(Field.builder().fieldName(name).build()));
     }
 }
