@@ -16,9 +16,9 @@ import java.util.List;
 public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements IFieldService{
 
     @Autowired
-    BaseMapper<Field> fieldBaseMapper;
+    FieldMapper fieldMapper;
     @Override
     public List<Field> getList(Field field) {
-        return fieldBaseMapper.selectList(Wrappers.lambdaQuery(field));
+        return fieldMapper.selectList(Wrappers.lambdaQuery(field));
     }
 }
