@@ -16,11 +16,11 @@ public class UserController{
     private IUserService userService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, User user){
-        return AjaxResult.success(userService.page(pageEntity.toPage(), Wrappers.lambdaQuery(user)));
+        return AjaxResult.success(userService.getPage(pageEntity.toPage(),user));
     }
     @GetMapping("/list")
     public AjaxResult list(User user){
-        return AjaxResult.success(userService.list(Wrappers.lambdaQuery(user)));
+        return AjaxResult.success(userService.getList(user));
     }
     @PostMapping("/push")
     public AjaxResult add(@RequestBody User user) {
