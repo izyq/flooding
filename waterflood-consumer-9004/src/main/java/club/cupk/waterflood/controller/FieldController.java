@@ -17,8 +17,8 @@ public class FieldController{
     @DubboReference
     private IFieldService fieldService;
     @GetMapping("/page")
-    public Object page(PageEntity pageEntity,String name){
-        return fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName(name).build());
+    public AjaxResult page(PageEntity pageEntity,String name){
+        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName(name).build()));
     }
     @PutMapping("/add")
     public AjaxResult add(@RequestBody FieldDTO field) {
@@ -44,8 +44,8 @@ public class FieldController{
                 .build()));
     }
     @DeleteMapping("/delete/{id}")
-    public AjaxResult delete(@PathVariable Long fieldId) {
-        return AjaxResult.success(fieldService.removeById(fieldId));
+    public AjaxResult delete(@PathVariable Long id) {
+        return AjaxResult.success(fieldService.removeById(id));
     }
     @GetMapping(value = "/detail/{fieldId}")
     public AjaxResult detail(@PathVariable("fieldId") Long fieldId) {
