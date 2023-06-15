@@ -20,31 +20,31 @@ public class FieldController{
         return fieldService.page(pageEntity.toPage(), Wrappers.lambdaQuery(Field.builder().fieldName(name).build()));
     }
     @PutMapping("/add")
-    public Object add(@RequestBody FieldDTO field) {
+    public AjaxResult add(@RequestBody FieldDTO field) {
 
-        return fieldService.save(Field
+        return AjaxResult.success(fieldService.save(Field
                 .builder()
                 .fieldName(field.getName())
                 .fieldDesc(field.getDesc())
                 .fieldArea(field.getArea())
                 .fieldAddress(field.getAddress())
                 .build()
-        );
+        ));
     }
     @PostMapping("/edit")
-    public Object edit(@RequestBody EditFieldDTO field) {
-        return fieldService.updateById(Field
+    public AjaxResult edit(@RequestBody EditFieldDTO field) {
+        return AjaxResult.success(fieldService.updateById(Field
                 .builder()
                 .fieldId(field.getId())
                 .fieldName(field.getName())
                 .fieldDesc(field.getDesc())
                 .fieldArea(field.getArea())
                 .fieldAddress(field.getAddress())
-                .build());
+                .build()));
     }
     @DeleteMapping("/delete/{id}")
-    public Object delete(@PathVariable Long fieldId) {
-        return fieldService.removeById(fieldId);
+    public AjaxResult delete(@PathVariable Long fieldId) {
+        return AjaxResult.success(fieldService.removeById(fieldId));
     }
     @GetMapping(value = "/detail/{fieldId}")
     public AjaxResult detail(@PathVariable("fieldId") Long fieldId) {
