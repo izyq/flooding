@@ -47,7 +47,7 @@ public class FieldController{
     public AjaxResult delete(@PathVariable Long id) {
         Object result = null;
         try {
-            fieldService.deleteField(id);
+            result = fieldService.deleteField(id);
         }catch (Exception e){
             result = e.getMessage();
         }
