@@ -1,18 +1,20 @@
 package club.cupk.waterflood.service;
+
+
 import club.cupk.waterflood.domain.WaterFloodingPlan;
 import club.cupk.waterflood.domain.Well;
 import club.cupk.waterflood.entity.vo.WellVo;
 import club.cupk.waterflood.util.DubboBean;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import xin.altitude.cms.common.util.EntityUtils;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import xin.altitude.cms.common.util.BeanCopyUtils;
-import xin.altitude.cms.common.util.EntityUtils;
-import xin.altitude.cms.common.util.SpringUtils;
 
 public interface IWellService extends IService<Well>{
     /** 通过方法调用来解决循环依赖问题 */
@@ -43,4 +45,7 @@ public interface IWellService extends IService<Well>{
     }
 
     Object deleteWell(Long[] wellIds);
+
+    Page<Well> getPage(Page page, Well well);
+    List<Well> getList(Well well);
 }

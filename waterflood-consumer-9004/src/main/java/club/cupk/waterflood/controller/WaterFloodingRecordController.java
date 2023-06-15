@@ -1,14 +1,10 @@
 package club.cupk.waterflood.controller;
 
-import club.cupk.waterflood.domain.Indicator;
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.WaterFloodingRecord;
-import club.cupk.waterflood.domain.Well;
 import club.cupk.waterflood.service.IWaterFloodingRecordService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
@@ -18,12 +14,12 @@ public class WaterFloodingRecordController{
     @DubboReference(check = false)
     private IWaterFloodingRecordService waterFloodingRecordService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,WaterFloodingRecord waterFloodingRecord){
-        return AjaxResult.success(waterFloodingRecordService.page(pageEntity.toPage(), Wrappers.lambdaQuery(waterFloodingRecord)));
+    public AjaxResult page(PageEntity pageEntity, WaterFloodingRecord waterFloodingRecord){
+        return AjaxResult.success(waterFloodingRecordService.getPage(pageEntity.toPage(), waterFloodingRecord));
     }
     @GetMapping("/list")
     public AjaxResult list(WaterFloodingRecord waterFloodingRecord){
-        return AjaxResult.success(waterFloodingRecordService.list(Wrappers.lambdaQuery(waterFloodingRecord)));
+        return AjaxResult.success(waterFloodingRecordService.getList(waterFloodingRecord));
     }
     @PostMapping("/push")
     public AjaxResult add(@RequestBody WaterFloodingRecord waterFloodingRecord) {

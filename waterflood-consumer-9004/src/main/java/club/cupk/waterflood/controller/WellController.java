@@ -1,17 +1,12 @@
 package club.cupk.waterflood.controller;
 
-import club.cupk.waterflood.common.vo.ResponseVO;
-import club.cupk.waterflood.domain.Field;
 import club.cupk.waterflood.domain.Well;
 import club.cupk.waterflood.dto.well.WellDTO;
 import club.cupk.waterflood.service.IWellService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
-
-import java.util.Arrays;
 @RestController
 @RequestMapping("/api/asset/well")
 public class WellController{
@@ -21,11 +16,11 @@ public class WellController{
 
     @GetMapping("/page")
     public Object page(PageEntity pageEntity,Well well){
-        return AjaxResult.success(wellService.page(pageEntity.toPage(), Wrappers.lambdaQuery(well)));
+        return wellService.getPage(pageEntity.toPage(), well);
     }
     @GetMapping("/list")
     public Object list(Well well){
-        return AjaxResult.success(wellService.list(Wrappers.lambdaQuery(well)));
+        return wellService.getList(well);
     }
     @PostMapping("/add")
     public Object add(@RequestBody WellDTO wellDTO) {

@@ -2,9 +2,7 @@ package club.cupk.waterflood.controller;
 
 import club.cupk.waterflood.domain.WaterFloodingPlan;
 import club.cupk.waterflood.service.IWaterFloodingPlanService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,10 +15,10 @@ public class WaterFloodingPlanController{
     private IWaterFloodingPlanService waterFloodingPlanService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,WaterFloodingPlan waterFloodingPlan){
-        return AjaxResult.success(waterFloodingPlanService.page(pageEntity.toPage(), Wrappers.lambdaQuery(waterFloodingPlan)));
+        return AjaxResult.success(waterFloodingPlanService.getPage(pageEntity.toPage(), waterFloodingPlan));
     }
     @GetMapping("/list")
     public AjaxResult list(WaterFloodingPlan waterFloodingPlan){
-        return AjaxResult.success(waterFloodingPlanService.list(Wrappers.lambdaQuery(waterFloodingPlan)));
+        return AjaxResult.success(waterFloodingPlanService.getList(waterFloodingPlan));
     }
 }
