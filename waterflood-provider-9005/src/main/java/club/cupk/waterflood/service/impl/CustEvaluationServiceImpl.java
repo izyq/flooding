@@ -27,6 +27,7 @@ public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,
     @Autowired
     IIndicatorService indicatorService;
     /**查询用户实体类Vo*/
+    @Override
     public CustEvaluationVo getOneVo(Long evalId) {
         CustEvaluationVo custEvaluationVo = EntityUtils.toObj(getById(evalId), CustEvaluationVo::new);
         Indicator indicator = indicatorService.getById(custEvaluationVo.getIndicatorId());
@@ -34,6 +35,7 @@ public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,
         return custEvaluationVo;
     }
     /**查询实体类Vo列表*/
+    @Override
     public List<CustEvaluationVo> listVo(CustEvaluation custEvaluation) {
         List<CustEvaluationVo> custEvaluationVoList = EntityUtils.toList(list(Wrappers.lambdaQuery(custEvaluation)), CustEvaluationVo::new);
         Set<Long> indicatorIds = EntityUtils.toSet(custEvaluationVoList, CustEvaluationVo::getIndicatorId);
@@ -42,6 +44,7 @@ public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,
         return custEvaluationVoList;
     }
     /**分页查询实体类Vo*/
+    @Override
     public IPage<CustEvaluationVo> pageVo(IPage<CustEvaluation> page, CustEvaluation custEvaluation) {
         IPage<CustEvaluationVo> custEvaluationVoPage = EntityUtils.toPage(page(page, Wrappers.lambdaQuery(custEvaluation)), CustEvaluationVo::new);
         Set<Long> indicatorIds = EntityUtils.toSet(custEvaluationVoPage.getRecords(), CustEvaluationVo::getIndicatorId);
