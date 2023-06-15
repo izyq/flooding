@@ -1,22 +1,17 @@
 package club.cupk.waterflood.domain;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Objects;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,7 +26,7 @@ public class Indicator implements Serializable{
     @ApiModelProperty(value = "默认权重", position = 7)
     private Float defaultWeight;
     @ApiModelProperty(value = "其他描述，例如该条指标的推荐范围", position = 9)
-    private String desc;
+    private String description;
     @ApiModelProperty(value = "指标所属注水计划", position = 3)
     private String floodingPlan;
     @ApiModelProperty(value = "是否为重要指标", position = 6)
@@ -58,7 +53,7 @@ public class Indicator implements Serializable{
             this.createTime=indicator.createTime;
             this.createUser=indicator.createUser;
             this.defaultWeight=indicator.defaultWeight;
-            this.desc=indicator.desc;
+            this.description=indicator.description;
             this.floodingPlan=indicator.floodingPlan;
             this.important=indicator.important;
             this.indicatorId=indicator.indicatorId;

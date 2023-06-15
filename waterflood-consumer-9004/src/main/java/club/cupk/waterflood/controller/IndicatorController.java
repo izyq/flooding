@@ -1,12 +1,10 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.Indicator;
 import club.cupk.waterflood.service.IIndicatorService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import club.cupk.waterflood.common.vo.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
@@ -17,11 +15,11 @@ public class IndicatorController{
     private IIndicatorService indicatorService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,Indicator indicator){
-        return AjaxResult.success(indicatorService.page(pageEntity.toPage(), Wrappers.lambdaQuery(indicator)));
+        return AjaxResult.success(indicatorService.getPage(pageEntity.toPage(),indicator));
     }
     @GetMapping("/list")
     public AjaxResult list(Indicator indicator){
-        return AjaxResult.success(indicatorService.list(Wrappers.lambdaQuery(indicator)));
+        return AjaxResult.success(indicatorService.getList(indicator));
     }
     @PostMapping("/push")
     public AjaxResult add(@RequestBody Indicator indicator) {
