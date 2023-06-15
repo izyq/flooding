@@ -41,4 +41,6 @@ public interface IWellService extends IService<Well>{
         wellVoPage.getRecords().forEach(e -> e.setWaterFloodingPlanList(map.get(e.getWellId())));
         return wellVoPage;
     }
+
+    Object deleteWell(Long[] wellIds);
 }
