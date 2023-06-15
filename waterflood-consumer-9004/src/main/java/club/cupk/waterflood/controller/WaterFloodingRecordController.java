@@ -29,6 +29,7 @@ public class WaterFloodingRecordController{
     public AjaxResult add(@RequestBody WaterFloodingRecord waterFloodingRecord) {
         return AjaxResult.success(waterFloodingRecordService.save(waterFloodingRecord));
     }
+    // 批量添加
     @PutMapping("/add")
     public AjaxResult add(@RequestBody List<WaterFloodingRecord> waterFloodingRecords) {
         return AjaxResult.success(waterFloodingRecordService.saveBatch(waterFloodingRecords));
@@ -55,13 +56,13 @@ public class WaterFloodingRecordController{
     }
 
     /**
-     * 根据井下查找注水记录和指标
+     * 根据注水井id查找注水记录和指标
      * @author izyq
      * @param well
      * @return club.cupk.waterflood.common.vo.AjaxResult
      **/
     @GetMapping("/well/list")
-    public AjaxResult listVo(Well well){
+    public AjaxResult wellIndicator(Well well){
         return AjaxResult.success(waterFloodingRecordService.listVo(well));
     }
 
