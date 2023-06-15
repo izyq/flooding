@@ -1,12 +1,12 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.Role;
 import club.cupk.waterflood.domain.User;
 import club.cupk.waterflood.domain.UserRole;
 import club.cupk.waterflood.service.IUserRoleService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class UserRoleController{
     @DubboReference(check = false)
     private IUserRoleService userRoleService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,UserRole userRole){
+    public AjaxResult page(PageEntity pageEntity, UserRole userRole){
         return AjaxResult.success(userRoleService.getPage(pageEntity.toPage(), userRole));
     }
     @GetMapping("/list")

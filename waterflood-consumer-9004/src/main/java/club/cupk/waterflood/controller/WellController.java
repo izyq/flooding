@@ -1,11 +1,11 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.Well;
 import club.cupk.waterflood.dto.well.WellDTO;
 import club.cupk.waterflood.service.IWellService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 @RestController
 @RequestMapping("/api/asset/well")
