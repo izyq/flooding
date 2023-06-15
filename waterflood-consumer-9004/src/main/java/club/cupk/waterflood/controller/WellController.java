@@ -15,15 +15,15 @@ public class WellController{
 
 
     @GetMapping("/page")
-    public Object page(PageEntity pageEntity,Well well){
-        return wellService.getPage(pageEntity.toPage(), well);
+    public AjaxResult page(PageEntity pageEntity,Well well){
+        return AjaxResult.success(wellService.getPage(pageEntity.toPage(), well));
     }
     @GetMapping("/list")
-    public Object list(Well well){
-        return wellService.getList(well);
+    public AjaxResult list(Well well){
+        return AjaxResult.success(wellService.getList(well));
     }
     @PostMapping("/add")
-    public Object add(@RequestBody WellDTO wellDTO) {
+    public AjaxResult add(@RequestBody WellDTO wellDTO) {
         return AjaxResult.success(wellService.save(Well.builder()
                 .wellName(wellDTO.getName())
                 .wellAddress(wellDTO.getAddress())
@@ -39,7 +39,7 @@ public class WellController{
         ));
     }
     @PutMapping("/edit")
-    public Object edit(@RequestBody WellDTO wellDTO) {
+    public AjaxResult edit(@RequestBody WellDTO wellDTO) {
         return AjaxResult.success(wellService.updateById(Well.builder()
                 .wellName(wellDTO.getName())
                 .wellAddress(wellDTO.getAddress())
@@ -56,13 +56,11 @@ public class WellController{
     }
     @DeleteMapping("/delete/{wellIds}")
     public AjaxResult delete(@PathVariable Long[] wellIds) {
-        Object result = null;
         try {
-            result = wellService.deleteWell(wellIds);
+            return AjaxResult.success(wellService.deleteWell(wellIds));
         }catch (Exception e){
-            result = e.getMessage();
+            return AjaxResult.error(e.getMessage());
         }
-        return AjaxResult.success(result);
     }
     @GetMapping(value = "/detail/{wellId}")
     public AjaxResult detail(@PathVariable("wellId") Long wellId) {
