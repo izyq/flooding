@@ -40,7 +40,8 @@ public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,
         List<CustEvaluationVo> custEvaluationVoList = EntityUtils.toList(list(Wrappers.lambdaQuery(custEvaluation)), CustEvaluationVo::new);
         Set<Long> indicatorIds = EntityUtils.toSet(custEvaluationVoList, CustEvaluationVo::getIndicatorId);
         Map<Long, Indicator> map = EntityUtils.toMap(indicatorService.listByIds(indicatorIds), Indicator::getIndicatorId, e -> e);
-        custEvaluationVoList.forEach(e -> BeanCopyUtils.copyProperties(map.get(e.getIndicatorId()), e));
+//        custEvaluationVoList.forEach(e -> BeanCopyUtils.copyProperties(map.get(e.getIndicatorId()), e));
+        custEvaluationVoList.forEach(e -> e.setIndicator(map.get(e.getIndicatorId())));
         return custEvaluationVoList;
     }
     /**分页查询实体类Vo*/

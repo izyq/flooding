@@ -37,16 +37,16 @@ public class IndicatorController{
     public AjaxResult detail(@PathVariable("indicatorId") Long indicatorId) {
         return AjaxResult.success(indicatorService.getById(indicatorId));
     }
-    @GetMapping("/vo/page")
-    public AjaxResult pageVo(PageEntity pageEntity,Indicator indicator){
-        return AjaxResult.success(indicatorService.pageVo(pageEntity.toPage(), indicator));
-    }
-    @GetMapping("/vo/list")
-    public AjaxResult listVo(Indicator indicator){
-        return AjaxResult.success(indicatorService.listVo(indicator));
-    }
-    @GetMapping(value = "/vo/detail/{indicatorId}")
-    public AjaxResult detailVo(@PathVariable("indicatorId") Long indicatorId) {
-        return AjaxResult.success(indicatorService.getOneVo(indicatorId));
-    }
+//    @GetMapping("/vo/page")
+//    public AjaxResult pageVo(PageEntity pageEntity,Indicator indicator){
+//        return AjaxResult.success(indicatorService.pageVo(pageEntity.toPage(), indicator));
+//    }
+//    @GetMapping("/vo/list")
+//    public AjaxResult listVo(Indicator indicator){
+//        return AjaxResult.success(indicatorService.listVo(indicator));
+//    }
+//    @GetMapping(value = "/vo/detail/{indicatorId}")
+//    public AjaxResult detailVo(@PathVariable("indicatorId") Long indicatorId) {
+//        return AjaxResult.success(indicatorService.getOneVo(indicatorId));
+//    }
 }
