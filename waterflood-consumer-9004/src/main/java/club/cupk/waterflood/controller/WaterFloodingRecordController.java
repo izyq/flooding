@@ -25,7 +25,7 @@ public class WaterFloodingRecordController{
     public AjaxResult list(WaterFloodingRecord waterFloodingRecord){
         return AjaxResult.success(waterFloodingRecordService.getList(waterFloodingRecord));
     }
-    @PutMapping("/add")
+    @PutMapping("/addSingle")
     public AjaxResult add(@RequestBody WaterFloodingRecord waterFloodingRecord) {
         return AjaxResult.success(waterFloodingRecordService.save(waterFloodingRecord));
     }
