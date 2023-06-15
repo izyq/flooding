@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
+import java.util.List;
+
 @RestController
-@RequestMapping("/waterflood/water/flooding/record")
+@RequestMapping("/data/record")
 public class WaterFloodingRecordController{
     @DubboReference(check = false)
     private IWaterFloodingRecordService waterFloodingRecordService;
@@ -23,9 +25,13 @@ public class WaterFloodingRecordController{
     public AjaxResult list(WaterFloodingRecord waterFloodingRecord){
         return AjaxResult.success(waterFloodingRecordService.getList(waterFloodingRecord));
     }
-    @PostMapping("/push")
+    @PutMapping("/add")
     public AjaxResult add(@RequestBody WaterFloodingRecord waterFloodingRecord) {
         return AjaxResult.success(waterFloodingRecordService.save(waterFloodingRecord));
+    }
+    @PutMapping("/add")
+    public AjaxResult add(@RequestBody List<WaterFloodingRecord> waterFloodingRecords) {
+        return AjaxResult.success(waterFloodingRecordService.saveBatch(waterFloodingRecords));
     }
     @PutMapping("/edit")
     public AjaxResult edit(@RequestBody WaterFloodingRecord waterFloodingRecord) {
