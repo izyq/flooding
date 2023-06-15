@@ -9,6 +9,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.Exceptions;
 
 import java.util.List;
 
@@ -30,10 +31,10 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public Object deleteField(Long id){
-        fieldMapper.deleteRecordByFieldId(id);
-        fieldMapper.deletePlanByFieldId(id);
-        fieldMapper.deleteWellByFieldId(id);
-        fieldMapper.deleteFieldByFieldId(id);
-        return null;
+            fieldMapper.deleteRecordByFieldId(id);
+            fieldMapper.deletePlanByFieldId(id);
+            fieldMapper.deleteWellByFieldId(id);
+            fieldMapper.deleteFieldByFieldId(id);
+            return null;
     }
 }
