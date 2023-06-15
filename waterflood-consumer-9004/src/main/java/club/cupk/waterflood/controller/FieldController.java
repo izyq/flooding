@@ -17,7 +17,7 @@ public class FieldController{
     private IFieldService fieldService;
     @GetMapping("/page")
     public Object page(PageEntity pageEntity,String name){
-        return fieldService.page(pageEntity.toPage(), Wrappers.lambdaQuery(Field.builder().fieldName(name).build()));
+        return fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName(name).build());
     }
     @PutMapping("/add")
     public AjaxResult add(@RequestBody FieldDTO field) {
