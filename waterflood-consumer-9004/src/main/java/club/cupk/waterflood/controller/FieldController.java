@@ -1,14 +1,15 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.Field;
 import club.cupk.waterflood.dto.filed.EditFieldDTO;
 import club.cupk.waterflood.dto.filed.FieldDTO;
 import club.cupk.waterflood.service.IFieldService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/asset/field/")
@@ -52,6 +53,7 @@ public class FieldController{
     }
     @GetMapping("/list")
     public AjaxResult list(String name){
-        return AjaxResult.success(fieldService.getList(Field.builder().fieldName(name).build()));
+        List<Field> list = fieldService.getList(Field.builder().fieldName(name).build());
+        return AjaxResult.success(list);
     }
 }
