@@ -17,12 +17,12 @@ import java.util.Objects;
 public class Indicator implements Serializable{
     private static final long serialVersionUID = 1L;
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", position = 11)
+    @ApiModelProperty(value = "创建时间", position = 11, hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建人员", position = 10)
+    @ApiModelProperty(value = "创建人员", position = 10, hidden = true)
     private Long createUser;
 
     @ApiModelProperty(value = "默认权重", position = 7)
@@ -54,12 +54,12 @@ public class Indicator implements Serializable{
     private Float rmdValue;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value = "更新时间", position = 13)
+    @ApiModelProperty(value = "更新时间", position = 13, hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value = "更新人员", position = 12)
+    @ApiModelProperty(value = "更新人员", position = 12, hidden = true)
     private Long updateUser;
     
     public Indicator(Indicator indicator) {

@@ -18,12 +18,12 @@ public class CustEvaluation implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建时间", position = 6)
+    @ApiModelProperty(value = "创建时间", position = 6, hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建人员", position = 5)
+    @ApiModelProperty(value = "创建人员", position = 5, hidden = true)
     private Long createUser;
 
     @ApiModelProperty(value = "客制化指标权重", position = 4)
@@ -40,12 +40,12 @@ public class CustEvaluation implements Serializable{
     private Long schemeId;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value = "更新时间", position = 8)
+    @ApiModelProperty(value = "更新时间", position = 8, hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value = "更新人员", position = 7)
+    @ApiModelProperty(value = "更新人员", position = 7, hidden = true)
     private Long updateUser;
     
     public CustEvaluation(CustEvaluation custEvaluation) {

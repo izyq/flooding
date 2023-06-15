@@ -19,13 +19,13 @@ import java.util.Objects;
 public class Field implements Serializable{
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "创建时间", position = 7)
+    @ApiModelProperty(value = "创建时间", position = 7, hidden = true)
     @TableField(fill = FieldFill.INSERT)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
     @TableField(fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "创建人员", position = 6)
+    @ApiModelProperty(value = "创建人员", position = 6, hidden = true)
     private Long createUser;
 
     @ApiModelProperty(value = "油田地址", position = 3)
@@ -45,12 +45,12 @@ public class Field implements Serializable{
     private String fieldName;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value = "更新时间", position = 9)
+    @ApiModelProperty(value = "更新时间", position = 9, hidden = true)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @ApiModelProperty(value = "更新人员", position = 8)
+    @ApiModelProperty(value = "更新人员", position = 8, hidden = true)
     private Long updateUser;
     
     public Field(Field field) {

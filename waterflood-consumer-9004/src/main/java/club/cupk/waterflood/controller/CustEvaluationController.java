@@ -9,7 +9,7 @@ import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
 @RestController
-@RequestMapping("/waterflood/cust/evaluation")
+@RequestMapping("/evaluation/scheme")
 public class CustEvaluationController{
     @DubboReference(check = false)
     private ICustEvaluationService custEvaluationService;
@@ -49,8 +49,14 @@ public class CustEvaluationController{
     public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
         return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
     }
+    /**
+     * 获取一个评价方案的具体信息
+     * @author izyq
+     * @param custEvaluation
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
     @GetMapping("/vo/list")
-    public AjaxResult listVo(CustEvaluation custEvaluation){
+    public AjaxResult getDetailScheme(CustEvaluation custEvaluation){
         return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
     }
     @GetMapping(value = "/vo/detail/{evalId}")
