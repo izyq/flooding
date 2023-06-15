@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import xin.altitude.cms.common.entity.PageEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,5 +26,14 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements 
     @Override
     public Page<Field> getPage(Page page, Field field) {
         return page(page,Wrappers.lambdaQuery(field));
+    }
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Object deleteField(Long id){
+        fieldMapper.deleteRecordByFieldId(id);
+        fieldMapper.deletePlanByFieldId(id);
+        fieldMapper.deleteWellByFieldId(id);
+        fieldMapper.deleteFieldByFieldId(id);
+        return null;
     }
 }

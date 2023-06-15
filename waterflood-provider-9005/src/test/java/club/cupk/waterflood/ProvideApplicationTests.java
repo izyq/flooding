@@ -19,4 +19,12 @@ public class ProvideApplicationTests {
     public void testFieldMapper(){
         fieldMapper.findAllFields().forEach(System.out::println);
     }
+
+    @Test
+    public void deleteField(Long id){
+        fieldMapper.deleteRecordByFieldId(id);
+        fieldMapper.deletePlanByFieldId(id);
+        fieldMapper.deleteWellByFieldId(id);
+        fieldMapper.deleteFieldByFieldId(id);
+    }
 }

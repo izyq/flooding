@@ -10,4 +10,12 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public interface FieldMapper extends BaseMapper<Field>{
     List<Field> findAllFields();
+
+    void deletePlanByFieldId(Long fieldId);
+
+    void deleteRecordByFieldId(Long fieldId);
+
+    void deleteWellByFieldId(Long fieldId);
+
+    void deleteFieldByFieldId(Long fieldId);
 }

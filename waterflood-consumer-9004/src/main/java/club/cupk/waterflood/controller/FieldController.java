@@ -45,7 +45,7 @@ public class FieldController{
     }
     @DeleteMapping("/delete/{id}")
     public AjaxResult delete(@PathVariable Long id) {
-        return AjaxResult.success(fieldService.removeById(id));
+        return AjaxResult.success(fieldService.deleteField(id));
     }
     @GetMapping(value = "/detail/{fieldId}")
     public AjaxResult detail(@PathVariable("fieldId") Long fieldId) {
