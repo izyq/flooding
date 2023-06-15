@@ -1,19 +1,17 @@
 package club.cupk.waterflood.domain;
+
 import club.cupk.waterflood.common.GeoPoint;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.time.LocalDateTime;
-import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,18 +19,22 @@ import java.io.Serializable;
 @SuperBuilder
 public class Well implements Serializable{
     private static final long serialVersionUID = 1L;
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间", position = 13)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建人员", position = 12)
     private Long createUser;
     @ApiModelProperty(value = "注水井的负责单位", position = 10)
     private String factory;
     @ApiModelProperty(value = "注水井所属油田id", position = 11)
     private Long fieldId;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新时间", position = 15)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "更新人员", position = 14)
     private Long updateUser;
     @ApiModelProperty(value = "注水井位置", position = 3)
