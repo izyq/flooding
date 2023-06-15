@@ -73,7 +73,7 @@ public class WaterFloodingRecordController{
      * @return club.cupk.waterflood.common.vo.AjaxResult
      **/
     @GetMapping("/indicator/list")
-    public AjaxResult listVo(Indicator indicator){
+    public AjaxResult indicatorWell(Indicator indicator){
         return AjaxResult.success(waterFloodingRecordService.listVo(indicator));
     }
     @GetMapping(value = "/well/detail/{wellId}")
