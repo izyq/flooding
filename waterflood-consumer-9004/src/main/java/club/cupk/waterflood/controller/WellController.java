@@ -70,6 +70,12 @@ public class WellController{
     public AjaxResult pageVo(PageEntity pageEntity,Well well){
         return AjaxResult.success(wellService.pageVo(pageEntity.toPage(), well));
     }
+    /**
+     * 井的所有注水计划
+     * @author izyq
+     * @param well
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
     @GetMapping("/vo/list")
     public AjaxResult listVo(Well well){
         return AjaxResult.success(wellService.listVo(well));

@@ -47,10 +47,24 @@ public class WaterFloodingRecordController{
     public AjaxResult pageVo(PageEntity pageEntity, Indicator indicator){
         return AjaxResult.success(waterFloodingRecordService.pageVo(pageEntity.toPage(), indicator));
     }
+
+    /**
+     * 根据井下查找注水记录和指标
+     * @author izyq
+     * @param well
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
     @GetMapping("/well/list")
     public AjaxResult listVo(Well well){
         return AjaxResult.success(waterFloodingRecordService.listVo(well));
     }
+
+    /**
+     * 查找使用该指标的所有井和对应的注水记录
+     * @author izyq
+     * @param indicator
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
     @GetMapping("/indicator/list")
     public AjaxResult listVo(Indicator indicator){
         return AjaxResult.success(waterFloodingRecordService.listVo(indicator));

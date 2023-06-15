@@ -1,15 +1,12 @@
 package club.cupk.waterflood.entity.vo;
+
 import club.cupk.waterflood.domain.CustEvaluation;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+/**
+ * cust_evaluation和indicator
+ * @author izyq
+ **/
 @Data
 public class CustEvaluationVo extends CustEvaluation{
     private static final long serialVersionUID = 1L;

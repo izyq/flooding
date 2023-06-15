@@ -37,6 +37,14 @@ public class CustEvaluationController{
     public AjaxResult detail(@PathVariable("evalId") Long evalId) {
         return AjaxResult.success(custEvaluationService.getById(evalId));
     }
+
+    /**
+     * cust_evaluation和indicator连表
+     * @author izyq
+     * @param pageEntity
+     * @param custEvaluation
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
     @GetMapping("/vo/page")
     public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
         return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
