@@ -31,10 +31,10 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public Object deleteField(Long id){
-            fieldMapper.deleteRecordByFieldId(id);
-            fieldMapper.deletePlanByFieldId(id);
-            fieldMapper.deleteWellByFieldId(id);
-            fieldMapper.deleteFieldByFieldId(id);
-            return null;
+        fieldMapper.deleteRecordByFieldId(id);
+        fieldMapper.deletePlanByFieldId(id);
+        fieldMapper.deleteWellByFieldId(id);
+        fieldMapper.deleteFieldByFieldId(id);
+        return null;
     }
 }

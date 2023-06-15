@@ -45,6 +45,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     IUserService userService;
     @Autowired
     IRoleService roleService;
+    @Override
     public UserVo getUserVo(Long userId) {
         UserVo userVo = EntityUtils.toObj(userService.getById(userId), UserVo::new);
         List<UserRole> userRoles = list(Wrappers.lambdaQuery(UserRole.class).eq(UserRole::getUserId, userId));
