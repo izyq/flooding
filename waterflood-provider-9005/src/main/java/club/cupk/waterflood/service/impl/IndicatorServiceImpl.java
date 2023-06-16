@@ -6,18 +6,15 @@ import club.cupk.waterflood.domain.WaterFloodingRecord;
 import club.cupk.waterflood.mapper.IndicatorMapper;
 import club.cupk.waterflood.mapper.WaterFloodingRecordMapper;
 import club.cupk.waterflood.service.IIndicatorService;
-import club.cupk.waterflood.service.IWaterFloodingRecordService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 @DubboService
@@ -38,6 +35,9 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper,Indicator>
 
     @Override
     public AjaxResult getIndicatorByName(Page page, Indicator indicator) {
+        if (indicator.getIndicatorName() == null){
+            return AjaxResult.success(page(page));
+        }
         try{
             return AjaxResult.success(
                     page(page,Wrappers.lambdaQuery(Indicator.class).like(Indicator::getIndicatorName,indicator.getIndicatorName()))
