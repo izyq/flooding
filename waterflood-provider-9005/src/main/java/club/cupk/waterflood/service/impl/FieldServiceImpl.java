@@ -26,7 +26,7 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements 
 
     @Override
     public Page<Field> getPage(Page page, Field field) {
-        return page(page, lambdaQuery().like(Field::getFieldName,field.getFieldName()));
+        return page(page,Wrappers.lambdaQuery(Field.class).like(Field::getFieldName,field.getFieldName()));
     }
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
