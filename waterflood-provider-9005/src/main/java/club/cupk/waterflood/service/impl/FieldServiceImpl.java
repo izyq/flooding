@@ -1,4 +1,5 @@
 package club.cupk.waterflood.service.impl;
+
 import club.cupk.waterflood.domain.Field;
 import club.cupk.waterflood.mapper.FieldMapper;
 import club.cupk.waterflood.service.IFieldService;
@@ -9,7 +10,6 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import reactor.core.Exceptions;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements 
 
     @Override
     public Page<Field> getPage(Page page, Field field) {
-        return page(page,Wrappers.lambdaQuery(field));
+        return page(page, lambdaQuery().like(Field::getFieldName,field.getFieldName()));
     }
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
