@@ -1,14 +1,15 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.Field;
 import club.cupk.waterflood.dto.filed.EditFieldDTO;
 import club.cupk.waterflood.dto.filed.FieldDTO;
 import club.cupk.waterflood.service.IFieldService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/asset/field/")
@@ -16,35 +17,39 @@ public class FieldController{
     @DubboReference
     private IFieldService fieldService;
     @GetMapping("/page")
-    public Object page(PageEntity pageEntity,String name){
-        return fieldService.page(pageEntity.toPage(), Wrappers.lambdaQuery(Field.builder().fieldName(name).build()));
+    public AjaxResult page(PageEntity pageEntity,String name){
+        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName(name).build()));
     }
-    @PutMapping("/add")
-    public Object add(@RequestBody FieldDTO field) {
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody FieldDTO field) {
 
-        return fieldService.save(Field
+        return AjaxResult.success(fieldService.save(Field
                 .builder()
                 .fieldName(field.getName())
                 .fieldDesc(field.getDesc())
                 .fieldArea(field.getArea())
                 .fieldAddress(field.getAddress())
                 .build()
-        );
+        ));
     }
-    @PostMapping("/edit")
-    public Object edit(@RequestBody EditFieldDTO field) {
-        return fieldService.updateById(Field
+    @PutMapping("/edit")
+    public AjaxResult edit(@RequestBody EditFieldDTO field) {
+        return AjaxResult.success(fieldService.updateById(Field
                 .builder()
                 .fieldId(field.getId())
                 .fieldName(field.getName())
                 .fieldDesc(field.getDesc())
                 .fieldArea(field.getArea())
                 .fieldAddress(field.getAddress())
-                .build());
+                .build()));
     }
     @DeleteMapping("/delete/{id}")
-    public Object delete(@PathVariable Long fieldId) {
-        return fieldService.removeById(fieldId);
+    public AjaxResult delete(@PathVariable Long id) {
+        try {
+            return AjaxResult.success(fieldService.deleteField(id));
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
     }
     @GetMapping(value = "/detail/{fieldId}")
     public AjaxResult detail(@PathVariable("fieldId") Long fieldId) {
@@ -52,6 +57,7 @@ public class FieldController{
     }
     @GetMapping("/list")
     public AjaxResult list(String name){
-        return AjaxResult.success(fieldService.getList(Field.builder().fieldName(name).build()));
+        List<Field> list = fieldService.getList(Field.builder().fieldName(name).build());
+        return AjaxResult.success(list);
     }
 }

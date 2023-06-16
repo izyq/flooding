@@ -1,12 +1,11 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.User;
 import club.cupk.waterflood.service.IUserService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
@@ -16,12 +15,12 @@ public class UserController{
     @DubboReference(check = false)
     private IUserService userService;
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,User user){
-        return AjaxResult.success(userService.page(pageEntity.toPage(), Wrappers.lambdaQuery(user)));
+    public AjaxResult page(PageEntity pageEntity, User user){
+        return AjaxResult.success(userService.getPage(pageEntity.toPage(),user));
     }
     @GetMapping("/list")
     public AjaxResult list(User user){
-        return AjaxResult.success(userService.list(Wrappers.lambdaQuery(user)));
+        return AjaxResult.success(userService.getList(user));
     }
     @PostMapping("/push")
     public AjaxResult add(@RequestBody User user) {

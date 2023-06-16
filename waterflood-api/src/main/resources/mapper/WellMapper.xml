@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.cupk.waterflood.mapper.WellMapper">
+
+    <delete id="deletePlanByWellIds" parameterType="Long">
+        DELETE wp FROM well AS w
+        JOIN water_flooding_plan AS wp
+        ON w.well_id = wp.well_id WHERE w.well_id IN
+        <foreach collection="wellIds" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteRecordByWellIds" parameterType="Long">
+        DELETE wr FROM well AS w
+        JOIN water_flooding_record AS wr
+        ON w.well_id = wr.well_id WHERE w.well_id IN
+        <foreach collection="wellIds" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteWellByWellIds" parameterType="Long">
+        DELETE w FROM well AS w
+        WHERE w.well_id IN
+        <foreach collection="wellIds" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

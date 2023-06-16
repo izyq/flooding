@@ -1,8 +1,6 @@
 package club.cupk.waterflood.dto.well;
 
 import club.cupk.waterflood.common.GeoPoint;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -21,6 +19,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WellDTO {
+    @ApiModelProperty(value = "注水井id", position = 1)
+    private Long id;
     @ApiModelProperty(value = "注水井名", position = 2)
     private String name;
     @ApiModelProperty(value = "注水井位置", position = 3)

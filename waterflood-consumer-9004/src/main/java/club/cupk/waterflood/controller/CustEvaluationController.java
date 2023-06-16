@@ -1,31 +1,31 @@
 package club.cupk.waterflood.controller;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.CustEvaluation;
 import club.cupk.waterflood.service.ICustEvaluationService;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import xin.altitude.cms.common.entity.AjaxResult;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
+import java.util.List;
+
 @RestController
-@RequestMapping("/waterflood/cust/evaluation")
+@RequestMapping("/evaluation/scheme")
 public class CustEvaluationController{
     @DubboReference(check = false)
     private ICustEvaluationService custEvaluationService;
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity,CustEvaluation custEvaluation){
-        return AjaxResult.success(custEvaluationService.page(pageEntity.toPage(), Wrappers.lambdaQuery(custEvaluation)));
+        return AjaxResult.success(custEvaluationService.getPage(pageEntity.toPage(), custEvaluation));
     }
     @GetMapping("/list")
     public AjaxResult list(CustEvaluation custEvaluation){
-        return AjaxResult.success(custEvaluationService.list(Wrappers.lambdaQuery(custEvaluation)));
+        return AjaxResult.success(custEvaluationService.getList(custEvaluation));
     }
-    @PostMapping("/push")
-    public AjaxResult add(@RequestBody CustEvaluation custEvaluation) {
-        return AjaxResult.success(custEvaluationService.save(custEvaluation));
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody List<CustEvaluation> custEvaluationList) {
+        return custEvaluationService.addCustEvaluationList(custEvaluationList);
     }
     @PutMapping("/edit")
     public AjaxResult edit(@RequestBody CustEvaluation custEvaluation) {
@@ -39,16 +39,30 @@ public class CustEvaluationController{
     public AjaxResult detail(@PathVariable("evalId") Long evalId) {
         return AjaxResult.success(custEvaluationService.getById(evalId));
     }
-//    @GetMapping("/vo/page")
-//    public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
-//        return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
-//    }
-//    @GetMapping("/vo/list")
-//    public AjaxResult listVo(CustEvaluation custEvaluation){
-//        return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
-//    }
-//    @GetMapping(value = "/vo/detail/{evalId}")
-//    public AjaxResult detailVo(@PathVariable("evalId") Long evalId) {
-//        return AjaxResult.success(custEvaluationService.getOneVo(evalId));
-//    }
+
+    /**
+     * cust_evaluation和indicator连表
+     * @author izyq
+     * @param pageEntity
+     * @param custEvaluation
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
+    @GetMapping("/vo/page")
+    public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
+        return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
+    }
+    /**
+     * 获取一个评价方案的具体信息
+     * @author izyq
+     * @param custEvaluation
+     * @return club.cupk.waterflood.common.vo.AjaxResult
+     **/
+    @GetMapping("/get")
+    public AjaxResult getDetailScheme(CustEvaluation custEvaluation){
+        return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
+    }
+    @GetMapping(value = "/vo/detail/{evalId}")
+    public AjaxResult detailVo(@PathVariable("evalId") Long evalId) {
+        return AjaxResult.success(custEvaluationService.getOneVo(evalId));
+    }
 }

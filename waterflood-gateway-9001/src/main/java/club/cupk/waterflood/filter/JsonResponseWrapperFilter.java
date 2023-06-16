@@ -64,9 +64,9 @@ public class JsonResponseWrapperFilter implements ComplexFilter {
             try {
                 //只能parse出JSONObject、JSONArray、Integer、Boolean等类型，当是一个string但是非json格式则抛出异常
                 Object jsonObject = JSON.parse(originalBody);
-                //如果响应内容已经包含了errcode字段，则表示下游的响应体本身已经是统一结果体了，无需再包装
-                if ((jsonObject instanceof JSONObject) && ((JSONObject) jsonObject).containsKey("errcode")) {
-                    log.debug("服务响应体已经是统一结果体，无需包装");
+                //如果响应内容已经包含了msg字段，则表示下游的响应体本身已经是统一结果体了，无需再包装
+                if ((jsonObject instanceof JSONObject) && ((JSONObject) jsonObject).containsKey("msg")) {
+                    log.info("服务响应体已经是统一结果体，无需包装");
                     return Mono.just(originalBody);
                 } else {
                     return makeMono(ResponseVO.ok(jsonObject));
