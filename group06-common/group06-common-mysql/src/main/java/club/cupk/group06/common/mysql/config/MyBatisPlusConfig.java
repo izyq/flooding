@@ -1,4 +1,4 @@
-package club.cupk.waterflood.config;
+package club.cupk.group06.common.mysql.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
