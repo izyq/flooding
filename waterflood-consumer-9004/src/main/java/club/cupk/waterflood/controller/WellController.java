@@ -7,6 +7,7 @@ import club.cupk.waterflood.service.IWellService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
+
 @RestController
 @RequestMapping("/asset/well")
 public class WellController{
@@ -54,10 +55,12 @@ public class WellController{
                 .build()
         ));
     }
-    @DeleteMapping("/delete/{wellIds}")
-    public AjaxResult delete(@PathVariable Long[] wellIds) {
+    @DeleteMapping("/delete/{id }")
+    public AjaxResult delete(@PathVariable Long id) {
         try {
-            return AjaxResult.success(wellService.deleteWell(wellIds));
+            Long[] ids = new Long[1];
+            ids[0] = id;
+            return AjaxResult.success(wellService.deleteWell(ids));
         }catch (Exception e){
             return AjaxResult.error(e.getMessage());
         }
