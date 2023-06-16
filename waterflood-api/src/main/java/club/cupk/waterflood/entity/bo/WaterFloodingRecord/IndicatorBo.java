@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class IndicatorBo extends Indicator{
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "指标值", position = 5)
-    private String data;
+    private Float recordValue;
     @ApiModelProperty(value = "单条指标记录的id", position = 1)
     private Long recordId;
     @ApiModelProperty(value = "该条指标的产生时间（旧数据）", position = 2)
