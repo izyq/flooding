@@ -46,7 +46,6 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper,Indicator>
         }catch (Exception e){
             return AjaxResult.error(e.getMessage());
         }
-
     }
 
     @Override

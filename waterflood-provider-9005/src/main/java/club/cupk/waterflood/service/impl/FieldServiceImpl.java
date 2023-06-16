@@ -1,5 +1,6 @@
 package club.cupk.waterflood.service.impl;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.Field;
 import club.cupk.waterflood.mapper.FieldMapper;
 import club.cupk.waterflood.service.IFieldService;
@@ -39,5 +40,16 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper,Field> implements 
         fieldMapper.deleteWellByFieldId(id);
         fieldMapper.deleteFieldByFieldId(id);
         return null;
+    }
+
+    @Override
+    public AjaxResult getFieldByName(Page page, Field field) {
+        try{
+            return AjaxResult.success(
+                    page(page,Wrappers.lambdaQuery(Field.class).like(Field::getFieldName,field.getFieldName()))
+            );
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
     }
 }

@@ -60,6 +60,7 @@ public class IndicatorController{
     public AjaxResult detail(@PathVariable("indicatorId") Long indicatorId) {
         return AjaxResult.success(indicatorService.getById(indicatorId));
     }
+
 //    @GetMapping("/vo/page")
 //    public AjaxResult pageVo(PageEntity pageEntity,Indicator indicator){
 //        return AjaxResult.success(indicatorService.pageVo(pageEntity.toPage(), indicator));

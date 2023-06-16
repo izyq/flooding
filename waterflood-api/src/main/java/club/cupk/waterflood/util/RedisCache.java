@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisCache
 {
-    @Autowired
+    @Resource
     public RedisTemplate redisTemplate;
 
     /**
@@ -154,11 +155,10 @@ public class RedisCache
 
     /**
      * 缓存Map
-     *
-     * @param key
+     *  @param key
      * @param dataMap
      */
-    public <T> void setCacheMap(final String key, final Map<String, T> dataMap)
+    public <T> void setCacheMap(final String key, final HashMap<Integer, String> dataMap)
     {
         if (dataMap != null) {
             redisTemplate.opsForHash().putAll(key, dataMap);
@@ -234,5 +234,13 @@ public class RedisCache
     public Collection<String> keys(final String pattern)
     {
         return redisTemplate.keys(pattern);
+    }
+
+    /**
+     *
+     */
+    public Set<String> getFuzzy(String prefix){
+        // 获取所有的key
+        return redisTemplate.keys(prefix+"*");
     }
 }
