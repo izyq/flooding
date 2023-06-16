@@ -6,10 +6,13 @@ import club.cupk.waterflood.mapper.IndicatorMapper;
 import club.cupk.waterflood.service.IGraphService;
 import club.cupk.waterflood.util.RedisCache;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import xin.altitude.cms.common.entity.PageEntity;
 
 import javax.annotation.Resource;
+import java.time.Year;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -52,4 +55,12 @@ public class GraphServiceImpl implements IGraphService {
             return AjaxResult.error();
         }
     }
+
+    @Override
+    public AjaxResult getGraph(Page page, Year year, String factory) {
+
+        return null;
+    }
+
+
 }

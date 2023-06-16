@@ -1,6 +1,9 @@
 package club.cupk.waterflood.service;
 
 import club.cupk.waterflood.common.vo.AjaxResult;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
+import java.time.Year;
 
 /**
  * @author wangdaff
@@ -10,4 +13,5 @@ import club.cupk.waterflood.common.vo.AjaxResult;
 public interface IGraphService {
     AjaxResult addVisualIndicator(Integer indicator);
     AjaxResult getVisualIndicator();
+    AjaxResult getGraph(Page page, Year year, String factory);
 }

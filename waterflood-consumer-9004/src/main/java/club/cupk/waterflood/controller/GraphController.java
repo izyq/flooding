@@ -2,8 +2,12 @@ package club.cupk.waterflood.controller;
 
 import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.service.IGraphService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
+import xin.altitude.cms.common.entity.PageEntity;
+
+import java.time.Year;
 
 /**
  * @author wangdaff
@@ -11,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @description
  */
 @RestController
-@RequestMapping("/graph/get-indicator")
+@RequestMapping("/graph")
 public class GraphController {
 
     @DubboReference
@@ -22,8 +26,13 @@ public class GraphController {
         return graphService.addVisualIndicator(indicatorId);
     }
 
-    @GetMapping("/indicator/get")
+    @GetMapping("/get-indicator")
     public AjaxResult getVisualIndicator(){
         return graphService.getVisualIndicator();
+    }
+
+    @GetMapping("/get")
+    public AjaxResult getGraph(PageEntity pageEntity, Year year, String factory){
+        return graphService.getGraph(pageEntity.toPage(),year,factory);
     }
 }
