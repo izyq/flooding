@@ -16,8 +16,8 @@ public class WellController{
 
 
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,Well well){
-        return AjaxResult.success(wellService.getPage(pageEntity.toPage(), well));
+    public AjaxResult page(PageEntity pageEntity,String name){
+        return AjaxResult.success(wellService.getPage(pageEntity.toPage(), Well.builder().wellName(name).build()));
     }
     @GetMapping("/list")
     public AjaxResult list(Well well){
@@ -42,6 +42,7 @@ public class WellController{
     @PutMapping("/edit")
     public AjaxResult edit(@RequestBody WellDTO wellDTO) {
         return AjaxResult.success(wellService.updateById(Well.builder()
+                        .wellId(wellDTO.getId())
                 .wellName(wellDTO.getName())
                 .wellAddress(wellDTO.getAddress())
                 .wellCoordinate(wellDTO.getCoordinate())
@@ -55,7 +56,7 @@ public class WellController{
                 .build()
         ));
     }
-    @DeleteMapping("/delete/{id }")
+    @DeleteMapping("/delete/{id}")
     public AjaxResult delete(@PathVariable Long id) {
         try {
             Long[] ids = new Long[1];
