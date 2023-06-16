@@ -22,14 +22,14 @@
     <delete id="deletePlanByFieldId">
         DELETE wp FROM field AS f JOIN well AS w
         ON f.field_id = w.field_id
-        JOIN water_flooding_plan AS wp
+        JOIN plan AS wp
         ON w.well_id = wp.well_id WHERE w.field_id = #{fieldId};
     </delete>
 
     <delete id="deleteRecordByFieldId">
         DELETE wr FROM field AS f JOIN well AS w
         ON f.field_id = w.field_id
-        JOIN water_flooding_record AS wr
+        JOIN record AS wr
         ON w.well_id = wr.well_id WHERE w.field_id = #{fieldId};
     </delete>
 

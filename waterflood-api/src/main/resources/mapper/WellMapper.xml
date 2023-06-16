@@ -4,7 +4,7 @@
 
     <delete id="deletePlanByWellIds" parameterType="Long">
         DELETE wp FROM well AS w
-        JOIN water_flooding_plan AS wp
+        JOIN plan AS wp
         ON w.well_id = wp.well_id WHERE w.well_id IN
         <foreach collection="wellIds" item="item" open="(" separator="," close=")">
             #{item}
@@ -13,7 +13,7 @@
 
     <delete id="deleteRecordByWellIds" parameterType="Long">
         DELETE wr FROM well AS w
-        JOIN water_flooding_record AS wr
+        JOIN record AS wr
         ON w.well_id = wr.well_id WHERE w.well_id IN
         <foreach collection="wellIds" item="item" open="(" separator="," close=")">
             #{item}

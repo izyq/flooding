@@ -41,7 +41,7 @@ public class CustEvaluationController{
     }
 
     /**
-     * cust_evaluation和indicator连表
+     * valuation和indicator连表
      * @author izyq
      * @param pageEntity
      * @param custEvaluation

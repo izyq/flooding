@@ -13,7 +13,7 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "water_flooding_record")
+@TableName(value = "record")
 public class WaterFloodingRecord implements Serializable{
     private static final long serialVersionUID = 1L;
     @TableField(fill = FieldFill.INSERT)

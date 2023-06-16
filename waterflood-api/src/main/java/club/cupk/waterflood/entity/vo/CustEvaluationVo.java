@@ -4,7 +4,7 @@ import club.cupk.waterflood.domain.CustEvaluation;
 import club.cupk.waterflood.domain.Indicator;
 import lombok.Data;
 /**
- * cust_evaluation和indicator
+ * evaluation和indicator
  * @author izyq
  **/
 @Data

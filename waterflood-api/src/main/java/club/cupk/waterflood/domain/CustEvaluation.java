@@ -13,7 +13,7 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "cust_evaluation")
+@TableName(value = "evaluation")
 public class CustEvaluation implements Serializable{
     private static final long serialVersionUID = 1L;
 

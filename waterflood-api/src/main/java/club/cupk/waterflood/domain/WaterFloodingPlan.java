@@ -11,7 +11,7 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "water_flooding_plan")
+@TableName(value = "plan")
 public class WaterFloodingPlan implements Serializable{
     private static final long serialVersionUID = 1L;
 

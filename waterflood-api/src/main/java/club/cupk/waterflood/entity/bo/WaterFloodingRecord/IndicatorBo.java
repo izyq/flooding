@@ -9,7 +9,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- *indicator 和 water_flooding_record
+ *indicator 和 record
  **/
 @Data
 @AllArgsConstructor
