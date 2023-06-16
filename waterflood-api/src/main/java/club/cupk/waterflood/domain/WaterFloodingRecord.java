@@ -26,7 +26,7 @@ public class WaterFloodingRecord implements Serializable{
     private Long createUser;
 
     @ApiModelProperty(value = "指标值", position = 5)
-    private Float data;
+    private Float recordValue;
 
     @ApiModelProperty(value = "该条指标的id", position = 4)
     private Long indicatorId;
@@ -55,7 +55,7 @@ public class WaterFloodingRecord implements Serializable{
         if (Objects.nonNull(waterFloodingRecord)) {
             this.createTime=waterFloodingRecord.createTime;
             this.createUser=waterFloodingRecord.createUser;
-            this.data=waterFloodingRecord.data;
+            this.recordValue=waterFloodingRecord.recordValue;
             this.indicatorId=waterFloodingRecord.indicatorId;
             this.recordId=waterFloodingRecord.recordId;
             this.recordTime=waterFloodingRecord.recordTime;
