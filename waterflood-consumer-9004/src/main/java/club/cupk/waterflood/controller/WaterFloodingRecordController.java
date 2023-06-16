@@ -25,12 +25,12 @@ public class WaterFloodingRecordController{
     public AjaxResult list(WaterFloodingRecord waterFloodingRecord){
         return AjaxResult.success(waterFloodingRecordService.getList(waterFloodingRecord));
     }
-    @PutMapping("/addSingle")
+    @PostMapping("/addSingle")
     public AjaxResult add(@RequestBody WaterFloodingRecord waterFloodingRecord) {
         return AjaxResult.success(waterFloodingRecordService.save(waterFloodingRecord));
     }
     // 批量添加
-    @PutMapping("/add")
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody List<WaterFloodingRecord> waterFloodingRecords) {
         return AjaxResult.success(waterFloodingRecordService.saveBatch(waterFloodingRecords));
     }

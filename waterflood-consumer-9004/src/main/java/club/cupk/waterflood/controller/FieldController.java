@@ -20,7 +20,7 @@ public class FieldController{
     public AjaxResult page(PageEntity pageEntity,String name){
         return AjaxResult.success(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName(name).build()));
     }
-    @PutMapping("/add")
+    @PostMapping("/add")
     public AjaxResult add(@RequestBody FieldDTO field) {
 
         return AjaxResult.success(fieldService.save(Field
@@ -32,7 +32,7 @@ public class FieldController{
                 .build()
         ));
     }
-    @PostMapping("/edit")
+    @PutMapping("/edit")
     public AjaxResult edit(@RequestBody EditFieldDTO field) {
         return AjaxResult.success(fieldService.updateById(Field
                 .builder()
