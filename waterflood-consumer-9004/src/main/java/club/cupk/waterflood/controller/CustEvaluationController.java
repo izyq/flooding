@@ -57,7 +57,7 @@ public class CustEvaluationController{
      * @param custEvaluation
      * @return club.cupk.waterflood.common.vo.AjaxResult
      **/
-    @GetMapping("/vo/list")
+    @GetMapping("/get")
     public AjaxResult getDetailScheme(CustEvaluation custEvaluation){
         return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
     }
