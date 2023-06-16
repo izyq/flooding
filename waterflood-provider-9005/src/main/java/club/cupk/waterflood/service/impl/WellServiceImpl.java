@@ -28,6 +28,9 @@ public class WellServiceImpl extends ServiceImpl<WellMapper,Well> implements IWe
 
     @Override
     public Page<Well> getPage(Page page, Well well) {
+        if (well.getWellName() == null) {
+            return page(page);
+        }
         return page(page, Wrappers.lambdaQuery(Well.class).like(Well::getWellName, well.getWellName()));
     }
 
