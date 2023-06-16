@@ -1,4 +1,5 @@
 package club.cupk.waterflood.service.impl;
+
 import club.cupk.waterflood.domain.Indicator;
 import club.cupk.waterflood.domain.WaterFloodingRecord;
 import club.cupk.waterflood.domain.Well;
@@ -10,7 +11,6 @@ import club.cupk.waterflood.mapper.WaterFloodingRecordMapper;
 import club.cupk.waterflood.service.IIndicatorService;
 import club.cupk.waterflood.service.IWaterFloodingRecordService;
 import club.cupk.waterflood.service.IWellService;
-import club.cupk.waterflood.util.DubboBean;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -57,7 +57,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
             subBoList.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellId, e.getIndicatorId()), e));
             wellVo.setIndicatorBoList(subBoList);
         }
-        return wellVo;
+        return fillterWell(wellVo);
     }
     @Override
     public List<WellVo> listVo(Well well) {
@@ -80,7 +80,25 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
             list.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellVo.getWellId(), e.getIndicatorId()), e));
             wellVo.setIndicatorBoList(list);
         }
+        return fillterWell(wellVoList);
+    }
+
+    @Override
+    public List<WellVo> fillterWell(List<WellVo> wellVoList) {
+        wellVoList.forEach(wellVo -> {
+            wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
+                            && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
+                    .collect(Collectors.toList()));
+        });
         return wellVoList;
+    }
+
+    @Override
+    public WellVo fillterWell(WellVo wellVo) {
+        wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
+                        && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
+                .collect(Collectors.toList()));
+        return wellVo;
     }
     @Override
     public IPage<WellVo> pageVo(IPage<Well> page, Well well) {
