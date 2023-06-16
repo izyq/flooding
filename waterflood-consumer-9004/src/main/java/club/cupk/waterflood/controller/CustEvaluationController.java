@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/evaluation/scheme")
 public class CustEvaluationController{
@@ -21,9 +23,9 @@ public class CustEvaluationController{
     public AjaxResult list(CustEvaluation custEvaluation){
         return AjaxResult.success(custEvaluationService.getList(custEvaluation));
     }
-    @PostMapping("/push")
-    public AjaxResult add(@RequestBody CustEvaluation custEvaluation) {
-        return AjaxResult.success(custEvaluationService.save(custEvaluation));
+    @PostMapping("/add")
+    public AjaxResult add(@RequestBody List<CustEvaluation> custEvaluationList) {
+        return custEvaluationService.addCustEvaluationList(custEvaluationList);
     }
     @PutMapping("/edit")
     public AjaxResult edit(@RequestBody CustEvaluation custEvaluation) {

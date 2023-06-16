@@ -1,16 +1,19 @@
 package club.cupk.waterflood.service.impl;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.CustEvaluation;
 import club.cupk.waterflood.domain.Indicator;
 import club.cupk.waterflood.entity.vo.CustEvaluationVo;
 import club.cupk.waterflood.mapper.CustEvaluationMapper;
 import club.cupk.waterflood.service.ICustEvaluationService;
 import club.cupk.waterflood.service.IIndicatorService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xin.altitude.cms.common.util.BeanCopyUtils;
@@ -18,6 +21,7 @@ import xin.altitude.cms.common.util.EntityUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -26,6 +30,9 @@ import java.util.Set;
 public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,CustEvaluation> implements ICustEvaluationService{
     @Autowired
     IIndicatorService indicatorService;
+
+    @Autowired
+    CustEvaluationMapper custEvaluationMapper;
     /**查询用户实体类Vo*/
     @Override
     public CustEvaluationVo getOneVo(Long evalId) {
@@ -62,6 +69,22 @@ public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper,
     @Override
     public List<CustEvaluation> getList(CustEvaluation custEvaluation) {
         return list(Wrappers.lambdaQuery(custEvaluation));
+    }
+
+    @Override
+    public AjaxResult addCustEvaluationList(List<CustEvaluation> custEvaluationList){
+        //如果前端传的scheme_id已经有了,return
+        QueryWrapper<CustEvaluation> queryWrapper=new QueryWrapper<>();
+        queryWrapper.select("scheme_id").eq("scheme_id",custEvaluationList.get(0).getSchemeId());
+        if (!Objects.isNull(custEvaluationMapper.selectList(queryWrapper))){
+            return new AjaxResult(HttpStatus.SC_METHOD_FAILURE,"该schemeId已存在");
+        }
+        try{
+            custEvaluationList.forEach(this::save);
+            return AjaxResult.success();
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package club.cupk.waterflood.service;
 
+import club.cupk.waterflood.common.vo.AjaxResult;
 import club.cupk.waterflood.domain.CustEvaluation;
 import club.cupk.waterflood.entity.vo.CustEvaluationVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -15,6 +16,8 @@ public interface ICustEvaluationService extends IService<CustEvaluation>{
     List<CustEvaluationVo> listVo(CustEvaluation custEvaluation);
 
     IPage<CustEvaluationVo> pageVo(IPage<CustEvaluation> page, CustEvaluation custEvaluation);
+
+    AjaxResult addCustEvaluationList(List<CustEvaluation> custEvaluationList);
 
     Page getPage(Page page, CustEvaluation custEvaluation);
     List<CustEvaluation> getList(CustEvaluation custEvaluation);
