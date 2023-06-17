@@ -4,6 +4,7 @@ import club.cupk.group06.api.core.service.CustEvaluationService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.CustEvaluation;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CustEvaluationController {
 
+    @Autowired
     private CustEvaluationService custEvaluationService;
 
     @GetMapping("/page")

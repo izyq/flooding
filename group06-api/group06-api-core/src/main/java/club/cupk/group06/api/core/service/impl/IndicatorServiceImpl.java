@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator> implements IndicatorService {
 
+    @Resource
     private WaterFloodingRecordMapper waterFloodingRecordMapper;
 
     @Override

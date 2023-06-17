@@ -13,11 +13,13 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,8 +30,10 @@ import java.util.Set;
 @AllArgsConstructor
 public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper, CustEvaluation> implements CustEvaluationService {
 
+    @Autowired
     private IndicatorService indicatorService;
 
+    @Resource
     private CustEvaluationMapper custEvaluationMapper;
 
     /**

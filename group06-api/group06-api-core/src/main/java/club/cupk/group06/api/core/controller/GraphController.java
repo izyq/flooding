@@ -31,7 +31,7 @@ public class GraphController {
     }
 
     @GetMapping("/get")
-    public AjaxResult getGraph(PageEntity pageEntity, Year year, String factory) {
-        return graphService.getGraph(pageEntity.toPage(), year, factory);
+    public AjaxResult getGraph(PageEntity pageEntity,Long indicatorId, Long year, String factory) {
+        return graphService.getGraph(pageEntity.toPage(),indicatorId, year, factory);
     }
 }

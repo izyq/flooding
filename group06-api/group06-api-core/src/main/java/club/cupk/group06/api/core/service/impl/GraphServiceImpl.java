@@ -3,14 +3,19 @@ package club.cupk.group06.api.core.service.impl;
 import club.cupk.group06.api.core.service.GraphService;
 import club.cupk.group06.common.core.util.RedisUtil;
 import club.cupk.group06.common.web.response.AjaxResult;
+import club.cupk.group06.data.core.dto.graph.GraphDTO;
+import club.cupk.group06.data.core.entity.vo.GraphVo;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
+import club.cupk.group06.data.core.mapper.WaterFloodingRecordMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,7 +29,11 @@ public class GraphServiceImpl implements GraphService {
     @Resource
     private RedisUtil redisUtil;
 
+    @Resource
     private IndicatorMapper indicatorMapper;
+
+    @Resource
+    private WaterFloodingRecordMapper waterFloodingRecordMapper;
 
     @Override
     public AjaxResult addVisualIndicator(Integer indicatorId) {
@@ -51,9 +60,30 @@ public class GraphServiceImpl implements GraphService {
     }
 
     @Override
-    public AjaxResult getGraph(Page page, Year year, String factory) {
+    public AjaxResult getGraph(Page page, Long indicatorId, Long year, String factory) {
 
-        return null;
+        try{
+            List<GraphVo> thisYear = waterFloodingRecordMapper.getRecordByYearAndFactory(GraphDTO.builder()
+                    .current(page.getCurrent())
+                    .size(page.getSize())
+                    .indicatorId(indicatorId)
+                    .year(year)
+                    .factory(factory)
+                    .build());
+            List<GraphVo> beforeYear = waterFloodingRecordMapper.getRecordByYearAndFactory(GraphDTO.builder()
+                    .current(page.getCurrent())
+                    .size(page.getSize())
+                    .indicatorId(indicatorId)
+                    .year(year-1L)
+                    .factory(factory)
+                    .build());
+            List<List<GraphVo>> res=new ArrayList<>();
+            res.add(thisYear);
+            res.add(beforeYear);
+            return AjaxResult.success(res);
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
     }
 
 
