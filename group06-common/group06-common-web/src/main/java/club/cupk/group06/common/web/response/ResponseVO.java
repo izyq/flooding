@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 @Data
 @Builder
@@ -17,6 +18,12 @@ public class ResponseVO {
     private String msg;
 
     private Object data;
+
+    public ResponseVO(@NotNull ResultCode code) {
+        this.success = code.getCode() == 200;
+        this.code = code.getCode();
+        this.msg = code.getMsg();
+    }
 
     public static ResponseVO ok() {
         return ResponseVO.builder()

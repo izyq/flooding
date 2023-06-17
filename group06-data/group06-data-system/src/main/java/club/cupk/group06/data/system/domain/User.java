@@ -1,45 +1,79 @@
 package club.cupk.group06.data.system.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
-import java.util.Objects;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Icyの模块
+ *
+ * @author Icy
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@TableName(value = "user")
-public class User implements Serializable{
-    private static final long serialVersionUID = 1L;
+public class User implements UserDetails {
 
-    @ApiModelProperty(value = "用户邮箱", position = 3)
-    private String userEmail;
+    private static final long serialVersionUID = -6634318190888926617L;
 
-    @TableId(type = IdType.AUTO)
-    @ApiModelProperty(value = "用户id", position = 1)
-    private Long userId;
+    private UserPo user;
 
-    @ApiModelProperty(value = "用户名", position = 2)
-    private String userName;
+    private List<UserRole> roleList;
 
-    @ApiModelProperty(value = "账号密码", position = 5)
-    private String userPassword;
+    // 只需序列化roleList即可，否则存入redis出现异常
+    @JSONField(serialize = false)
+    private List<SimpleGrantedAuthority> authorities;
 
-    @ApiModelProperty(value = "用户手机号码", position = 4)
-    private String userPhone;
-    
-    public User(User user) {
-        if (Objects.nonNull(user)) {
-            this.userEmail=user.userEmail;
-            this.userId=user.userId;
-            this.userName=user.userName;
-            this.userPassword=user.userPassword;
-            this.userPhone=user.userPhone;
+    public User(UserPo user, List<UserRole> roleList) {
+        this.user = user;
+        this.roleList = roleList;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (authorities != null) {
+            return authorities;
         }
+
+        // 将roleList中String类型权限信息封装成SimpleGrantedAuthority对象
+        authorities = roleList.stream().map(item -> new SimpleGrantedAuthority(item.toString())).collect(Collectors.toList());
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return user.getUserPassword();
+    }
+
+    // 使用Spring-Security框架的“用户名”实际上是手机号
+    @Override
+    public String getUsername() {
+        return user.getUserPhone();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

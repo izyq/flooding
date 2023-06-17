@@ -1,7 +1,7 @@
 package club.cupk.group06.api.system.service.impl;
 
 import club.cupk.group06.api.system.service.UserService;
-import club.cupk.group06.data.system.domain.User;
+import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,14 +13,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserPo> implements UserService {
     @Override
-    public Page getPage(Page page, User user) {
-        return page(page, Wrappers.lambdaQuery(user));
+    public Page getPage(Page page, UserPo userPo) {
+        return page(page, Wrappers.lambdaQuery(userPo));
     }
 
     @Override
-    public List<User> getList(User user) {
-        return list(Wrappers.lambdaQuery(user));
+    public List<UserPo> getList(UserPo userPo) {
+        return list(Wrappers.lambdaQuery(userPo));
     }
 }

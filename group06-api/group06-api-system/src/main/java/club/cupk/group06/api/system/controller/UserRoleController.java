@@ -3,7 +3,7 @@ package club.cupk.group06.api.system.controller;
 import club.cupk.group06.api.system.service.UserRoleService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.system.domain.Role;
-import club.cupk.group06.data.system.domain.User;
+import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.domain.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -48,8 +48,8 @@ public class UserRoleController {
     }
 
     @GetMapping("/user/page")
-    public AjaxResult pageVo(PageEntity pageEntity, User user) {
-        return AjaxResult.success(userRoleService.pageVo(pageEntity.toPage(), user));
+    public AjaxResult pageVo(PageEntity pageEntity, UserPo userPo) {
+        return AjaxResult.success(userRoleService.pageVo(pageEntity.toPage(), userPo));
     }
 
     @GetMapping("/role/page")
@@ -58,8 +58,8 @@ public class UserRoleController {
     }
 
     @GetMapping("/user/list")
-    public AjaxResult listVo(User user) {
-        return AjaxResult.success(userRoleService.listVo(user));
+    public AjaxResult listVo(UserPo userPo) {
+        return AjaxResult.success(userRoleService.listVo(userPo));
     }
 
     @GetMapping("/role/list")

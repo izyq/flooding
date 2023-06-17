@@ -4,7 +4,7 @@ import club.cupk.group06.api.system.service.RoleService;
 import club.cupk.group06.api.system.service.UserRoleService;
 import club.cupk.group06.api.system.service.UserService;
 import club.cupk.group06.data.system.domain.Role;
-import club.cupk.group06.data.system.domain.User;
+import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.domain.UserRole;
 import club.cupk.group06.data.system.entity.RoleBo;
 import club.cupk.group06.data.system.entity.UserBo;
@@ -59,9 +59,9 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return userVo;
     }
 
-    public List<UserVo> listVo(User user) {
-        List<UserVo> userVoList = EntityUtils.toList(userService.list(Wrappers.lambdaQuery(user)), UserVo::new);
-        Set<Long> userIds = EntityUtils.toSet(userVoList, User::getUserId);
+    public List<UserVo> listVo(UserPo userPo) {
+        List<UserVo> userVoList = EntityUtils.toList(userService.list(Wrappers.lambdaQuery(userPo)), UserVo::new);
+        Set<Long> userIds = EntityUtils.toSet(userVoList, UserPo::getUserId);
         if (userIds.size() == 0) {
             return userVoList;
         }
@@ -82,9 +82,9 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return userVoList;
     }
 
-    public IPage<UserVo> pageVo(IPage<User> page, User user) {
-        IPage<UserVo> userVoPage = EntityUtils.toPage(userService.page(page, Wrappers.lambdaQuery(user)), UserVo::new);
-        Set<Long> userIds = EntityUtils.toSet(userVoPage.getRecords(), User::getUserId);
+    public IPage<UserVo> pageVo(IPage<UserPo> page, UserPo userPo) {
+        IPage<UserVo> userVoPage = EntityUtils.toPage(userService.page(page, Wrappers.lambdaQuery(userPo)), UserVo::new);
+        Set<Long> userIds = EntityUtils.toSet(userVoPage.getRecords(), UserPo::getUserId);
         if (userIds.size() == 0) {
             return userVoPage;
         }
@@ -109,7 +109,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         List<UserRole> userRoles = list(Wrappers.lambdaQuery(UserRole.class).eq(UserRole::getRoleId, roleId));
         Set<Long> userIds = EntityUtils.toSet(userRoles, UserRole::getUserId);
         if (roleVo != null && userIds.size() > 0) {
-            LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery(User.class).in(User::getUserId, userIds);
+            LambdaQueryWrapper<UserPo> queryWrapper = Wrappers.lambdaQuery(UserPo.class).in(UserPo::getUserId, userIds);
             List<UserBo> subBoList = EntityUtils.toList(userService.list(queryWrapper), UserBo::new);
             Table<Long, Long, UserRole> table = TableUtils.createHashTable(userRoles, UserRole::getRoleId, UserRole::getUserId);
             subBoList.forEach(e -> BeanCopyUtils.copyProperties(table.get(roleId, e.getUserId()), e));
@@ -131,7 +131,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
             return roleVoList;
         }
         Table<Long, Long, UserRole> table = TableUtils.createHashTable(userRoles, UserRole::getRoleId, UserRole::getUserId);
-        LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery(User.class).in(User::getUserId, userIds);
+        LambdaQueryWrapper<UserPo> queryWrapper = Wrappers.lambdaQuery(UserPo.class).in(UserPo::getUserId, userIds);
         List<UserBo> userBoList = EntityUtils.toList(userService.list(queryWrapper), UserBo::new);
         for (RoleVo roleVo : roleVoList) {
             List<UserBo> list = userBoList.stream().filter(e -> map.get(roleVo.getRoleId()) != null && map.get(roleVo.getRoleId()).contains(e.getUserId())).collect(Collectors.toList());
@@ -154,7 +154,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         }
         Table<Long, Long, UserRole> table = TableUtils.createHashTable(userRoles, UserRole::getRoleId, UserRole::getUserId);
         Map<Long, List<Long>> map = userRoles.stream().collect(Collectors.groupingBy(UserRole::getRoleId, Collectors.mapping(UserRole::getUserId, Collectors.toList())));
-        List<UserBo> userBoList = EntityUtils.toList(userService.list(Wrappers.lambdaQuery(User.class).in(User::getUserId, userIds)), UserBo::new);
+        List<UserBo> userBoList = EntityUtils.toList(userService.list(Wrappers.lambdaQuery(UserPo.class).in(UserPo::getUserId, userIds)), UserBo::new);
         for (RoleVo roleVo : roleVoPage.getRecords()) {
             List<UserBo> list = userBoList.stream().filter(e -> map.get(roleVo.getRoleId()) != null && map.get(roleVo.getRoleId()).contains(e.getUserId())).collect(Collectors.toList());
             list.forEach(e -> BeanCopyUtils.copyProperties(table.get(roleVo.getRoleId(), e.getUserId()), e));

@@ -1,7 +1,7 @@
 package club.cupk.group06.api.system.service;
 
 import club.cupk.group06.data.system.domain.Role;
-import club.cupk.group06.data.system.domain.User;
+import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.domain.UserRole;
 import club.cupk.group06.data.system.vo.RoleVo;
 import club.cupk.group06.data.system.vo.UserVo;
@@ -18,9 +18,9 @@ public interface UserRoleService extends IService<UserRole> {
 
     UserVo getUserVo(Long userId);
 
-    List<UserVo> listVo(User user);
+    List<UserVo> listVo(UserPo userPo);
 
-    IPage<UserVo> pageVo(IPage<User> page, User user);
+    IPage<UserVo> pageVo(IPage<UserPo> page, UserPo userPo);
 
     RoleVo getRoleVo(Long roleId);
 

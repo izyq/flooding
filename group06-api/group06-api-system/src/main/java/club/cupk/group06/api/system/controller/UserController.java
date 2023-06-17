@@ -2,7 +2,7 @@ package club.cupk.group06.api.system.controller;
 
 import club.cupk.group06.api.system.service.UserService;
 import club.cupk.group06.common.web.response.AjaxResult;
-import club.cupk.group06.data.system.domain.User;
+import club.cupk.group06.data.system.domain.UserPo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
@@ -16,23 +16,23 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, User user) {
-        return AjaxResult.success(userService.getPage(pageEntity.toPage(), user));
+    public AjaxResult page(PageEntity pageEntity, UserPo userPo) {
+        return AjaxResult.success(userService.getPage(pageEntity.toPage(), userPo));
     }
 
     @GetMapping("/list")
-    public AjaxResult list(User user) {
-        return AjaxResult.success(userService.getList(user));
+    public AjaxResult list(UserPo userPo) {
+        return AjaxResult.success(userService.getList(userPo));
     }
 
     @PostMapping("/push")
-    public AjaxResult add(@RequestBody User user) {
-        return AjaxResult.success(userService.save(user));
+    public AjaxResult add(@RequestBody UserPo userPo) {
+        return AjaxResult.success(userService.save(userPo));
     }
 
     @PutMapping("/edit")
-    public AjaxResult edit(@RequestBody User user) {
-        return AjaxResult.success(userService.updateById(user));
+    public AjaxResult edit(@RequestBody UserPo userPo) {
+        return AjaxResult.success(userService.updateById(userPo));
     }
 
     @DeleteMapping("/delete/{userIds}")
