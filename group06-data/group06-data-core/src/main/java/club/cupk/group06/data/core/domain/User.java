@@ -1,4 +1,4 @@
-package club.cupk.waterflood.domain;
+package club.cupk.group06.data.core.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

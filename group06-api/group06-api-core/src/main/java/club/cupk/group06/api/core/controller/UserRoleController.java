@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.controller;
 
-import club.cupk.group06.common.web.vo.AjaxResult;
+import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.waterflood.domain.Role;
 import club.cupk.waterflood.domain.User;
 import club.cupk.waterflood.domain.UserRole;

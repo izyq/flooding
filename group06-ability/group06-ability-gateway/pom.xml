@@ -50,6 +50,8 @@
             <artifactId>annotations</artifactId>
             <version>20.1.0</version>
         </dependency>
+
+
         <dependency>
             <groupId>club.cupk.group06</groupId>
             <artifactId>group06-common-web</artifactId>

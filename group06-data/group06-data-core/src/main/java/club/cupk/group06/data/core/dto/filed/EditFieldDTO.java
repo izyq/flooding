@@ -1,6 +1,7 @@
-package club.cupk.waterflood.dto.filed;
+package club.cupk.group06.data.core.dto.filed;
 
 import io.swagger.annotations.ApiModelProperty;
+import club.cupk.waterflood.dto.filed.FieldDTO;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;

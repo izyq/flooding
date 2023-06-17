@@ -1,9 +1,8 @@
 package club.cupk.group06.api.core.controller;
 
-import club.cupk.group06.common.web.vo.AjaxResult;
-import club.cupk.waterflood.domain.CustEvaluation;
-import club.cupk.waterflood.service.ICustEvaluationService;
-import org.apache.dubbo.config.annotation.DubboReference;
+import club.cupk.group06.api.core.service.ICustEvaluationService;
+import club.cupk.group06.common.web.response.AjaxResult;
+import club.cupk.group06.data.core.domain.CustEvaluation;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -12,29 +11,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/evaluation/scheme")
-public class CustEvaluationController{
-    @DubboReference(check = false)
+public class CustEvaluationController {
+
     private ICustEvaluationService custEvaluationService;
+
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity,CustEvaluation custEvaluation){
+    public AjaxResult page(PageEntity pageEntity, CustEvaluation custEvaluation) {
         return AjaxResult.success(custEvaluationService.getPage(pageEntity.toPage(), custEvaluation));
     }
+
     @GetMapping("/list")
-    public AjaxResult list(CustEvaluation custEvaluation){
+    public AjaxResult list(CustEvaluation custEvaluation) {
         return AjaxResult.success(custEvaluationService.getList(custEvaluation));
     }
+
     @PostMapping("/add")
     public AjaxResult add(@RequestBody List<CustEvaluation> custEvaluationList) {
         return custEvaluationService.addCustEvaluationList(custEvaluationList);
     }
+
     @PutMapping("/edit")
     public AjaxResult edit(@RequestBody CustEvaluation custEvaluation) {
         return AjaxResult.success(custEvaluationService.updateById(custEvaluation));
     }
+
     @DeleteMapping("/delete/{evalIds}")
     public AjaxResult delete(@PathVariable Long[] evalIds) {
         return AjaxResult.success(custEvaluationService.removeByIds(Arrays.asList(evalIds)));
     }
+
     @GetMapping(value = "/detail/{evalId}")
     public AjaxResult detail(@PathVariable("evalId") Long evalId) {
         return AjaxResult.success(custEvaluationService.getById(evalId));
@@ -42,25 +47,29 @@ public class CustEvaluationController{
 
     /**
      * valuation和indicator连表
-     * @author izyq
+     *
      * @param pageEntity
      * @param custEvaluation
      * @return club.cupk.group06.common.web.vo.AjaxResult
+     * @author izyq
      **/
     @GetMapping("/vo/page")
-    public AjaxResult pageVo(PageEntity pageEntity,CustEvaluation custEvaluation){
+    public AjaxResult pageVo(PageEntity pageEntity, CustEvaluation custEvaluation) {
         return AjaxResult.success(custEvaluationService.pageVo(pageEntity.toPage(), custEvaluation));
     }
+
     /**
      * 获取一个评价方案的具体信息
-     * @author izyq
+     *
      * @param custEvaluation
      * @return club.cupk.group06.common.web.vo.AjaxResult
+     * @author izyq
      **/
     @GetMapping("/get")
-    public AjaxResult getDetailScheme(CustEvaluation custEvaluation){
+    public AjaxResult getDetailScheme(CustEvaluation custEvaluation) {
         return AjaxResult.success(custEvaluationService.listVo(custEvaluation));
     }
+
     @GetMapping(value = "/vo/detail/{evalId}")
     public AjaxResult detailVo(@PathVariable("evalId") Long evalId) {
         return AjaxResult.success(custEvaluationService.getOneVo(evalId));

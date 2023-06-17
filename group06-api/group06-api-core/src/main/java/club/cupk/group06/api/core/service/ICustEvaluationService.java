@@ -1,7 +1,7 @@
 package club.cupk.group06.api.core.service;
 
-import club.cupk.group06.common.web.vo.AjaxResult;
-import club.cupk.waterflood.domain.CustEvaluation;
+import club.cupk.group06.common.web.response.AjaxResult;
+import club.cupk.group06.data.core.domain.CustEvaluation;
 import club.cupk.waterflood.entity.vo.CustEvaluationVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
