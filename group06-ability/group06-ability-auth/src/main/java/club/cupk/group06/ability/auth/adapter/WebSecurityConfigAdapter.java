@@ -1,5 +1,6 @@
-package club.cupk.group06.config;
+package club.cupk.group06.ability.auth.adapter;
 
+import club.cupk.group06.ability.auth.provider.SmsAuthenticationProvider;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import club.cupk.group06.ability.auth.filter.JwtAuthenticationTokenFilter;
-import club.cupk.group06.ability.auth.provider.SmsAuthenticationProvider;
+
 
 /**
  * Spring-Security配置
@@ -29,7 +30,7 @@ import club.cupk.group06.ability.auth.provider.SmsAuthenticationProvider;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;

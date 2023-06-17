@@ -1,6 +1,6 @@
-package club.cupk.group06.common.core.util;
+package club.cupk.group06.common.mysql.converter;
 
-import club.cupk.waterflood.common.GeoPoint;
+import club.cupk.group06.data.core.common.GeoPoint;
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.geom.impl.CoordinateArraySequence;
 import com.vividsolutions.jts.geom.impl.CoordinateArraySequenceFactory;
@@ -20,19 +20,15 @@ public class GeoPointConverter {
     /**
      * Little endian or Big endian
      */
-    private int byteOrder = ByteOrderValues.LITTLE_ENDIAN;
+    private final int byteOrder = ByteOrderValues.LITTLE_ENDIAN;
     /**
      * Precision model
      */
-    private PrecisionModel precisionModel = new PrecisionModel();
+    private final PrecisionModel precisionModel = new PrecisionModel();
     /**
      * Coordinate sequence factory
      */
-    private CoordinateSequenceFactory coordinateSequenceFactory = CoordinateArraySequenceFactory.instance();
-    /**
-     * Output dimension
-     */
-    private int outputDimension = 2;
+    private final CoordinateSequenceFactory coordinateSequenceFactory = CoordinateArraySequenceFactory.instance();
 
     /**
      * Convert byte array containing SRID + WKB Geometry into Geometry object
@@ -55,8 +51,7 @@ public class GeoPointConverter {
             Geometry geometry = wkbReader.read(new InputStreamInStream(inputStream));
             Point point = (Point) geometry;
             // convert to GeoPoint
-            GeoPoint geoPoint = new GeoPoint(point.getX(), point.getY());
-            return geoPoint;
+            return new GeoPoint(point.getX(), point.getY());
         } catch (IOException | ParseException e) {
             throw new IllegalArgumentException(e);
         }
@@ -78,6 +73,10 @@ public class GeoPointConverter {
             ByteOrderValues.putInt(point.getSRID(), sridBytes, byteOrder);
             outputStream.write(sridBytes);
             // Write Geometry
+            /*
+              Output dimension
+             */
+            int outputDimension = 2;
             WKBWriter wkbWriter = new WKBWriter(outputDimension, byteOrder);
             wkbWriter.write(point, new OutputStreamOutStream(outputStream));
             return outputStream.toByteArray();

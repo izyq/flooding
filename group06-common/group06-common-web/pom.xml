@@ -41,11 +41,7 @@
             <artifactId>hutool-all</artifactId>
             <version>5.8.5</version>
         </dependency>
-        <dependency>
-            <groupId>club.cupk.group06</groupId>
-            <artifactId>group06-common-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <dependency>
             <groupId>club.cupk.group06</groupId>
             <artifactId>group06-data-system</artifactId>

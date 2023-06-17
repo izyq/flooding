@@ -1,7 +1,7 @@
 package club.cupk.group06.common.mysql.handler;
 
-import club.cupk.waterflood.common.GeoPoint;
-import club.cupk.group06.common.core.util.GeoPointConverter;
+import club.cupk.group06.common.mysql.converter.GeoPointConverter;
+import club.cupk.group06.data.core.common.GeoPoint;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
