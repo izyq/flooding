@@ -10,7 +10,11 @@
     <description>group06-cloud</description>
 
     <modules>
-
+        <module>group06-ability</module>
+        <module>group06-api</module>
+        <module>group06-common</module>
+        <module>group06-config</module>
+        <module>group06-data</module>
     </modules>
 
 </project>
