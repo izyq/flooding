@@ -8,15 +8,18 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements FieldService {
 
+    @Resource
     private FieldMapper fieldMapper;
 
     @Override

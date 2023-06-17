@@ -17,11 +17,11 @@
         <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>club.cupk.group06</groupId>
-            <artifactId>group06-common-mysql</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>club.cupk.group06</groupId>-->
+<!--            <artifactId>group06-common-mysql</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
