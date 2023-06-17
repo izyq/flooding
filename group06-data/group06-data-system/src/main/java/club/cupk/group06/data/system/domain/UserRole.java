@@ -18,6 +18,7 @@ public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户代表的油田/注水井", position = 3)
+    @TableField("asset_id")
     private Long assetId;
 
     @TableField("role_id")

@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import club.cupk.group06.common.web.exception.ServiceException;
 import club.cupk.group06.common.web.exception.DbException;
@@ -132,6 +133,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
     }
 
     @Override
+    @Transactional
     public LoginVo register(String token, String name, String password) throws ServiceException, DbException {
         String phone = verifyToken(token);
         String code = passwordEncoder.encode(password);
@@ -151,6 +153,7 @@ public class AuthServiceImpl implements AuthService, UserDetailsService {
                     UserRole.builder()
                             .userId(user.getUserId())
                             .roleId(4L)
+                            .assetId(0L)
                             .build()
             );
         } catch (Exception e) {
