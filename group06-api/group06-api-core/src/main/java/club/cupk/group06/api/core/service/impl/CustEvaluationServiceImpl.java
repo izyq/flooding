@@ -27,9 +27,10 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper, CustEvaluation> implements CustEvaluationService {
-    IndicatorService indicatorService;
 
-    CustEvaluationMapper custEvaluationMapper;
+    private IndicatorService indicatorService;
+
+    private CustEvaluationMapper custEvaluationMapper;
 
     /**
      * 查询用户实体类Vo

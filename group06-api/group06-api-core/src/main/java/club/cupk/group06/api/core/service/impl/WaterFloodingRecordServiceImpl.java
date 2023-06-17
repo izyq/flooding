@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper, WaterFloodingRecord> implements WaterFloodingRecordService {
 
-    WellService wellService;
+    private WellService wellService;
 
     IndicatorService indicatorService;
     @Override
@@ -63,7 +63,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
 
     @Override
     public List<WellRecordVo> listVo(Well well) {
-        List<WellVo> wellVoList = EntityUtils.toList(wellService.list(Wrappers.lambdaQuery(well)), WellVo::new);
+        List<WellRecordVo> wellVoList = EntityUtils.toList(wellService.list(Wrappers.lambdaQuery(well)), WellRecordVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoList, Well::getWellId);
         if (wellIds.size() == 0) {
             return wellVoList;
@@ -77,7 +77,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
         Table<Long, Long, WaterFloodingRecord> table = TableUtils.createHashTable(waterFloodingRecords, WaterFloodingRecord::getWellId, WaterFloodingRecord::getIndicatorId);
         LambdaQueryWrapper<Indicator> queryWrapper = Wrappers.lambdaQuery(Indicator.class).in(Indicator::getIndicatorId, indicatorIds);
         List<IndicatorBo> indicatorBoList = EntityUtils.toList(indicatorService.list(queryWrapper), IndicatorBo::new);
-        for (WellVo wellVo : wellVoList) {
+        for (WellRecordVo wellVo : wellVoList) {
             List<IndicatorBo> list = indicatorBoList.stream().filter(e -> map.get(wellVo.getWellId()) != null && map.get(wellVo.getWellId()).contains(e.getIndicatorId())).collect(Collectors.toList());
             list.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellVo.getWellId(), e.getIndicatorId()), e));
             wellVo.setIndicatorBoList(list);
@@ -86,13 +86,13 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
     }
 
     @Override
-    public List<WellRecordVo> fillterWell(List<WellVo> wellVoList) {
-        wellVoList.forEach(wellVo -> {
+    public List<WellRecordVo> fillterWell(List<WellRecordVo> list) {
+        list.forEach(wellVo -> {
             wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
                             && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
                     .collect(Collectors.toList()));
         });
-        return wellVoList;
+        return list;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
 
     @Override
     public IPage<WellRecordVo> pageVo(IPage<Well> page, Well well) {
-        IPage<WellVo> wellVoPage = EntityUtils.toPage(wellService.page(page, Wrappers.lambdaQuery(well)), WellVo::new);
+        IPage<WellRecordVo> wellVoPage = EntityUtils.toPage(wellService.page(page, Wrappers.lambdaQuery(well)), WellRecordVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoPage.getRecords(), Well::getWellId);
         if (wellIds.size() == 0) {
             return wellVoPage;
@@ -118,7 +118,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
         Table<Long, Long, WaterFloodingRecord> table = TableUtils.createHashTable(waterFloodingRecords, WaterFloodingRecord::getWellId, WaterFloodingRecord::getIndicatorId);
         Map<Long, List<Long>> map = waterFloodingRecords.stream().collect(Collectors.groupingBy(WaterFloodingRecord::getWellId, Collectors.mapping(WaterFloodingRecord::getIndicatorId, Collectors.toList())));
         List<IndicatorBo> indicatorBoList = EntityUtils.toList(indicatorService.list(Wrappers.lambdaQuery(Indicator.class).in(Indicator::getIndicatorId, indicatorIds)), IndicatorBo::new);
-        for (WellVo wellVo : wellVoPage.getRecords()) {
+        for (WellRecordVo wellVo : wellVoPage.getRecords()) {
             List<IndicatorBo> list = indicatorBoList.stream().filter(e -> map.get(wellVo.getWellId()) != null && map.get(wellVo.getWellId()).contains(e.getIndicatorId())).collect(Collectors.toList());
             list.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellVo.getWellId(), e.getIndicatorId()), e));
             wellVo.setIndicatorBoList(list);

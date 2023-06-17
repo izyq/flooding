@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements WellService {
 
-    WellMapper wellMapper;
+    private WellMapper wellMapper;
 
     @Override
     public Page<Well> getPage(Page page, Well well) {

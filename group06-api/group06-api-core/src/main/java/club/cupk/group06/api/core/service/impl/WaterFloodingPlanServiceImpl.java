@@ -22,7 +22,8 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class WaterFloodingPlanServiceImpl extends ServiceImpl<WaterFloodingPlanMapper, WaterFloodingPlan> implements WaterFloodingPlanService {
-    WellService wellService;
+
+    private WellService wellService;
 
     @Override
     public Page<WaterFloodingPlan> getPage(Page page, WaterFloodingPlan waterFloodingPlan) {

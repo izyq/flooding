@@ -12,6 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WellRecordVo extends Well {
+
     private List<IndicatorBo> indicatorBoList;
 
     public WellRecordVo(Well well) {

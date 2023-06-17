@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements FieldService {
 
-    FieldMapper fieldMapper;
+    private FieldMapper fieldMapper;
 
     @Override
     public List<Field> getList(Field field) {

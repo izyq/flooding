@@ -19,9 +19,9 @@ public interface WaterFloodingRecordService extends IService<WaterFloodingRecord
 
     List<WellRecordVo> fillterWell(List<WellRecordVo> wellVoList);
 
-    WellRecordVo fillterWell(WellVo wellVo);
+    WellRecordVo fillterWell(WellRecordVo wellVo);
 
-    IPage<WellVo> pageVo(IPage<Well> page, Well wellVoList);
+    IPage<WellRecordVo> pageVo(IPage<Well> page, Well wellVoList);
 
     IndicatorVo getIndicatorVo(Long indicatorId);
 
