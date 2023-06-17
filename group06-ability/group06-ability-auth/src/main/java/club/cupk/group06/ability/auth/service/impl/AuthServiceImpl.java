@@ -13,8 +13,8 @@ import club.cupk.group06.data.system.mapper.UserMapper;
 import club.cupk.group06.data.system.mapper.UserRoleMapper;
 import club.cupk.group06.data.system.vo.LoginVo;
 import cn.hutool.jwt.JWTUtil;
-import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -42,17 +42,21 @@ import java.util.concurrent.TimeUnit;
  * @since 1.0.0
  */
 @Service
-@AllArgsConstructor
 public class AuthServiceImpl implements AuthService, UserDetailsService {
 
+    @Autowired
     private UserMapper userMapper;
 
+    @Autowired
     private UserRoleMapper userRoleMapper;
 
+    @Autowired
     private RedisUtil redisUtil;
 
+    @Autowired
     private SmsUtil smsUtil;
 
+    @Autowired
     private JwtConfig jwtConfig;
 
     @Resource

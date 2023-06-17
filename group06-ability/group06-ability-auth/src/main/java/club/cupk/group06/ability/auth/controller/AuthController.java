@@ -46,7 +46,6 @@ public class AuthController {
             @ApiParam(value = "手机号", required = true)
             @Pattern(regexp = "^1[3-9]\\d{9}$")
             @RequestParam("phone") String phone) {
-        System.out.println(phone);
         authService.codeSend(phone);
     }
 

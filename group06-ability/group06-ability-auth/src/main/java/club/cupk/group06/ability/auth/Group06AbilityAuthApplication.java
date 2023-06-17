@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @MapperScan(value = "club.cupk.group06.data.system")
-@ComponentScan(value = {"club.cupk.group06.ability.auth", "club.cupk.group06.common.core", "club.cupk.group06.config"})
+@ComponentScan(value = {"club.cupk.group06.ability.auth", "club.cupk.group06.common.core", "club.cupk.group06.config", "club.cupk.group06.data.system"})
 public class Group06AbilityAuthApplication {
 
     public static void main(String[] args) {
