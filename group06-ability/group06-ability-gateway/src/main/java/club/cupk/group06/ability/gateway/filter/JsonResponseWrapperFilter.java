@@ -1,14 +1,13 @@
 package club.cupk.group06.ability.gateway.filter;
 
 import club.cupk.group06.ability.gateway.helper.ServerHttpResponseDecoratorHelper;
-import club.cupk.group06.common.web.enums.ResultCode;
-import club.cupk.group06.common.web.vo.ResponseVO;
-import club.cupk.waterflood.helper.ServerHttpResponseDecoratorHelper;
+import club.cupk.group06.common.web.response.ResultCode;
+import club.cupk.group06.common.web.response.ResponseVO;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.NettyWriteResponseFilter;
 import org.springframework.http.HttpStatus;
