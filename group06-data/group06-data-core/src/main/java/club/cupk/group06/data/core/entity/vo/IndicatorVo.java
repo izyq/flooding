@@ -1,24 +1,24 @@
-package club.cupk.waterflood.entity.vo;
-import club.cupk.waterflood.domain.CustEvaluation;
-import club.cupk.waterflood.domain.Indicator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
+package club.cupk.group06.data.core.entity.vo;
+
+import club.cupk.group06.data.core.domain.CustEvaluation;
+import club.cupk.group06.data.core.domain.Indicator;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class IndicatorVo extends Indicator{
+@NoArgsConstructor
+@AllArgsConstructor
+public class IndicatorVo extends Indicator {
+
     private static final long serialVersionUID = 1L;
+
     private List<CustEvaluation> custEvaluationList;
-    
-    public IndicatorVo() {
-    }
-    
+
     public IndicatorVo(Indicator indicator) {
         super(indicator);
     }

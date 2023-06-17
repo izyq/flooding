@@ -1,17 +1,21 @@
-package club.cupk.waterflood.entity.vo.Well;
-import club.cupk.waterflood.domain.Field;
-import club.cupk.waterflood.entity.bo.Well.WaterFloodingRecordBo;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
+package club.cupk.group06.data.core.entity.vo.Well;
+
+import club.cupk.group06.data.core.domain.Field;
+import club.cupk.group06.data.core.entity.bo.Well.WaterFloodingRecordBo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class FieldVo extends Field {
     private List<WaterFloodingRecordBo> waterFloodingRecordBoList;
-    
+
     public FieldVo(Field field) {
         super(field);
     }

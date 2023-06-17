@@ -1,7 +1,6 @@
 package club.cupk.group06.data.core.dto.filed;
 
 import io.swagger.annotations.ApiModelProperty;
-import club.cupk.waterflood.dto.filed.FieldDTO;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
  * @Date: 2023/6/13
  * @Vertion 1.0
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @With
 @NoArgsConstructor
