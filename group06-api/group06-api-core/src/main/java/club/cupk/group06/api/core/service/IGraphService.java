@@ -12,6 +12,8 @@ import java.time.Year;
  */
 public interface IGraphService {
     AjaxResult addVisualIndicator(Integer indicator);
+
     AjaxResult getVisualIndicator();
+
     AjaxResult getGraph(Page page, Year year, String factory);
 }

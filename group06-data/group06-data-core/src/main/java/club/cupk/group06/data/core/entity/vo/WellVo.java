@@ -1,24 +1,21 @@
-package club.cupk.waterflood.entity.vo;
-import club.cupk.waterflood.domain.WaterFloodingPlan;
-import club.cupk.waterflood.domain.Well;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+package club.cupk.group06.data.core.entity.vo;
+
+import club.cupk.group06.data.core.domain.WaterFloodingPlan;
+import club.cupk.group06.data.core.domain.Well;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class WellVo extends Well{
+@NoArgsConstructor
+public class WellVo extends Well {
     private static final long serialVersionUID = 1L;
+
     private List<WaterFloodingPlan> waterFloodingPlanList;
-    
-    public WellVo() {
-    }
-    
+
     public WellVo(Well well) {
         super(well);
     }

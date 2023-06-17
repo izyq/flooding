@@ -3,6 +3,7 @@ package club.cupk.group06.api.core.controller;
 import club.cupk.group06.api.core.service.IUserService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -10,6 +11,7 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/waterflood/user")
+@RequiredArgsConstructor
 public class UserController {
     private IUserService userService;
 

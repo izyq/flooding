@@ -5,6 +5,7 @@ import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.WaterFloodingRecord;
 import club.cupk.group06.data.core.domain.Well;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/data/record")
+@RequiredArgsConstructor
 public class WaterFloodingRecordController {
     private IWaterFloodingRecordService waterFloodingRecordService;
 

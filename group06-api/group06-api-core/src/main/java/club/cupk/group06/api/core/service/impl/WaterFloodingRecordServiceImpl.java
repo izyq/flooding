@@ -1,25 +1,25 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.waterflood.domain.Indicator;
-import club.cupk.waterflood.domain.WaterFloodingRecord;
-import club.cupk.waterflood.domain.Well;
-import club.cupk.waterflood.entity.bo.WaterFloodingRecord.IndicatorBo;
-import club.cupk.waterflood.entity.bo.WaterFloodingRecord.WellBo;
-import club.cupk.waterflood.entity.vo.WaterFloodingRecord.IndicatorVo;
-import club.cupk.waterflood.entity.vo.WaterFloodingRecord.WellVo;
+import club.cupk.group06.api.core.service.IIndicatorService;
+import club.cupk.group06.api.core.service.IWaterFloodingRecordService;
+import club.cupk.group06.api.core.service.IWellService;
+import club.cupk.group06.data.core.domain.Indicator;
+import club.cupk.group06.data.core.domain.WaterFloodingRecord;
+import club.cupk.group06.data.core.domain.Well;
+import club.cupk.group06.data.core.entity.bo.WaterFloodingRecord.IndicatorBo;
+import club.cupk.group06.data.core.entity.bo.WaterFloodingRecord.WellBo;
+import club.cupk.group06.data.core.entity.vo.WaterFloodingRecord.IndicatorVo;
+import club.cupk.group06.data.core.entity.vo.WaterFloodingRecord.WellRecordVo;
+import club.cupk.group06.data.core.entity.vo.WellVo;
 import club.cupk.group06.data.core.mapper.WaterFloodingRecordMapper;
-import club.cupk.waterflood.service.IIndicatorService;
-import club.cupk.waterflood.service.IWaterFloodingRecordService;
-import club.cupk.waterflood.service.IWellService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Table;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
 import xin.altitude.cms.common.util.TableUtils;
@@ -29,9 +29,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@DubboService
-@Component
-public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper,WaterFloodingRecord> implements IWaterFloodingRecordService{
+@Service
+@RequiredArgsConstructor
+public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper, WaterFloodingRecord> implements IWaterFloodingRecordService {
+
+    IWellService wellService;
+
+    IIndicatorService indicatorService;
     @Override
     public Page getPage(Page page, WaterFloodingRecord waterFloodingRecord) {
         return page(page, Wrappers.lambdaQuery(waterFloodingRecord));
@@ -41,13 +45,10 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
     public List<WaterFloodingRecord> getList(WaterFloodingRecord waterFloodingRecord) {
         return list(Wrappers.lambdaQuery(waterFloodingRecord));
     }
-    @Autowired
-    IWellService wellService;
-    @Autowired
-    IIndicatorService indicatorService;
+
     @Override
-    public WellVo getWellVo(Long wellId) {
-        WellVo wellVo = EntityUtils.toObj(wellService.getById(wellId), WellVo::new);
+    public WellRecordVo getWellVo(Long wellId) {
+        WellRecordVo wellVo = EntityUtils.toObj(wellService.getById(wellId), WellRecordVo::new);
         List<WaterFloodingRecord> waterFloodingRecords = list(Wrappers.lambdaQuery(WaterFloodingRecord.class).eq(WaterFloodingRecord::getWellId, wellId));
         Set<Long> indicatorIds = EntityUtils.toSet(waterFloodingRecords, WaterFloodingRecord::getIndicatorId);
         if (wellVo != null && indicatorIds.size() > 0) {
@@ -59,8 +60,9 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
         }
         return fillterWell(wellVo);
     }
+
     @Override
-    public List<WellVo> listVo(Well well) {
+    public List<WellRecordVo> listVo(Well well) {
         List<WellVo> wellVoList = EntityUtils.toList(wellService.list(Wrappers.lambdaQuery(well)), WellVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoList, Well::getWellId);
         if (wellIds.size() == 0) {
@@ -84,7 +86,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
     }
 
     @Override
-    public List<WellVo> fillterWell(List<WellVo> wellVoList) {
+    public List<WellRecordVo> fillterWell(List<WellVo> wellVoList) {
         wellVoList.forEach(wellVo -> {
             wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
                             && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
@@ -94,14 +96,15 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
     }
 
     @Override
-    public WellVo fillterWell(WellVo wellVo) {
+    public WellRecordVo fillterWell(WellRecordVo wellVo) {
         wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
                         && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
                 .collect(Collectors.toList()));
         return wellVo;
     }
+
     @Override
-    public IPage<WellVo> pageVo(IPage<Well> page, Well well) {
+    public IPage<WellRecordVo> pageVo(IPage<Well> page, Well well) {
         IPage<WellVo> wellVoPage = EntityUtils.toPage(wellService.page(page, Wrappers.lambdaQuery(well)), WellVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoPage.getRecords(), Well::getWellId);
         if (wellIds.size() == 0) {
@@ -122,6 +125,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
         }
         return wellVoPage;
     }
+
     @Override
     public IndicatorVo getIndicatorVo(Long indicatorId) {
         IndicatorVo indicatorVo = EntityUtils.toObj(indicatorService.getById(indicatorId), IndicatorVo::new);
@@ -136,6 +140,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
         }
         return indicatorVo;
     }
+
     @Override
     public List<IndicatorVo> listVo(Indicator indicator) {
         List<IndicatorVo> indicatorVoList = EntityUtils.toList(indicatorService.list(Wrappers.lambdaQuery(indicator)), IndicatorVo::new);
@@ -159,6 +164,7 @@ public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRec
         }
         return indicatorVoList;
     }
+
     @Override
     public IPage<IndicatorVo> pageVo(IPage<Indicator> page, Indicator indicator) {
         IPage<IndicatorVo> indicatorVoPage = EntityUtils.toPage(indicatorService.page(page, Wrappers.lambdaQuery(indicator)), IndicatorVo::new);

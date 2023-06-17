@@ -1,6 +1,6 @@
 package club.cupk.group06.data.core.domain;
 
-import club.cupk.waterflood.common.GeoPoint;
+import club.cupk.group06.data.core.common.GeoPoint;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,12 +12,13 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName(value = "well")
 @SuperBuilder
-public class Well implements Serializable{
+public class Well implements Serializable {
     private static final long serialVersionUID = 1L;
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间", position = 13, hidden = true)
@@ -70,24 +71,24 @@ public class Well implements Serializable{
 
     @ApiModelProperty(value = "注水井的开发阶段", position = 9)
     private String wellPeriod;
-    
+
     public Well(Well well) {
         if (Objects.nonNull(well)) {
-            this.createTime=well.createTime;
-            this.createUser=well.createUser;
-            this.factory=well.factory;
-            this.fieldId=well.fieldId;
-            this.updateTime=well.updateTime;
-            this.updateUser=well.updateUser;
-            this.wellAddress=well.wellAddress;
-            this.wellCoordinate=well.wellCoordinate;
-            this.wellDepth=well.wellDepth;
-            this.wellDia=well.wellDia;
-            this.wellId=well.wellId;
-            this.wellMiningEndTime=well.wellMiningEndTime;
-            this.wellMiningStartTime=well.wellMiningStartTime;
-            this.wellName=well.wellName;
-            this.wellPeriod=well.wellPeriod;
+            this.createTime = well.createTime;
+            this.createUser = well.createUser;
+            this.factory = well.factory;
+            this.fieldId = well.fieldId;
+            this.updateTime = well.updateTime;
+            this.updateUser = well.updateUser;
+            this.wellAddress = well.wellAddress;
+            this.wellCoordinate = well.wellCoordinate;
+            this.wellDepth = well.wellDepth;
+            this.wellDia = well.wellDia;
+            this.wellId = well.wellId;
+            this.wellMiningEndTime = well.wellMiningEndTime;
+            this.wellMiningStartTime = well.wellMiningStartTime;
+            this.wellName = well.wellName;
+            this.wellPeriod = well.wellPeriod;
         }
     }
 }

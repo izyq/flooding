@@ -4,11 +4,13 @@ import club.cupk.group06.api.core.service.IWellService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.waterflood.dto.well.WellDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
 @RestController
 @RequestMapping("/asset/well")
+@RequiredArgsConstructor
 public class WellController {
     private IWellService wellService;
 

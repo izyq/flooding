@@ -3,6 +3,7 @@ package club.cupk.group06.api.core.controller;
 import club.cupk.group06.api.core.service.IIndicatorService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Indicator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -10,6 +11,7 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/data/indicator")
+@RequiredArgsConstructor
 public class IndicatorController {
     private IIndicatorService indicatorService;
 

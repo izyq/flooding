@@ -1,25 +1,24 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.waterflood.domain.Role;
-import club.cupk.waterflood.domain.User;
-import club.cupk.waterflood.domain.UserRole;
-import club.cupk.waterflood.entity.bo.UserRole.RoleBo;
-import club.cupk.waterflood.entity.bo.UserRole.UserBo;
-import club.cupk.waterflood.entity.vo.UserRole.RoleVo;
-import club.cupk.waterflood.entity.vo.UserRole.UserVo;
+import club.cupk.group06.api.core.service.IRoleService;
+import club.cupk.group06.api.core.service.IUserRoleService;
+import club.cupk.group06.api.core.service.IUserService;
+import club.cupk.group06.data.core.domain.Role;
+import club.cupk.group06.data.core.domain.User;
+import club.cupk.group06.data.core.domain.UserRole;
+import club.cupk.group06.data.core.entity.bo.UserRole.RoleBo;
+import club.cupk.group06.data.core.entity.bo.UserRole.UserBo;
+import club.cupk.group06.data.core.entity.vo.UserRole.RoleVo;
+import club.cupk.group06.data.core.entity.vo.UserRole.UserVo;
 import club.cupk.group06.data.core.mapper.UserRoleMapper;
-import club.cupk.waterflood.service.IRoleService;
-import club.cupk.waterflood.service.IUserRoleService;
-import club.cupk.waterflood.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Table;
-import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
 import xin.altitude.cms.common.util.TableUtils;
@@ -29,9 +28,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@DubboService
-@Component
-public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> implements IUserRoleService{
+@Service
+@RequiredArgsConstructor
+public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
     @Override
     public Page getPage(Page page, UserRole userRole) {
         return page(page, Wrappers.lambdaQuery(userRole));
@@ -41,10 +40,10 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
     public List<UserRole> getList(UserRole userRole) {
         return list(Wrappers.lambdaQuery(userRole));
     }
-    @Autowired
+
     IUserService userService;
-    @Autowired
     IRoleService roleService;
+
     @Override
     public UserVo getUserVo(Long userId) {
         UserVo userVo = EntityUtils.toObj(userService.getById(userId), UserVo::new);
@@ -59,6 +58,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         }
         return userVo;
     }
+
     public List<UserVo> listVo(User user) {
         List<UserVo> userVoList = EntityUtils.toList(userService.list(Wrappers.lambdaQuery(user)), UserVo::new);
         Set<Long> userIds = EntityUtils.toSet(userVoList, User::getUserId);
@@ -81,6 +81,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         }
         return userVoList;
     }
+
     public IPage<UserVo> pageVo(IPage<User> page, User user) {
         IPage<UserVo> userVoPage = EntityUtils.toPage(userService.page(page, Wrappers.lambdaQuery(user)), UserVo::new);
         Set<Long> userIds = EntityUtils.toSet(userVoPage.getRecords(), User::getUserId);
@@ -102,6 +103,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         }
         return userVoPage;
     }
+
     public RoleVo getRoleVo(Long roleId) {
         RoleVo roleVo = EntityUtils.toObj(roleService.getById(roleId), RoleVo::new);
         List<UserRole> userRoles = list(Wrappers.lambdaQuery(UserRole.class).eq(UserRole::getRoleId, roleId));
@@ -115,6 +117,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         }
         return roleVo;
     }
+
     public List<RoleVo> listVo(Role role) {
         List<RoleVo> roleVoList = EntityUtils.toList(roleService.list(Wrappers.lambdaQuery(role)), RoleVo::new);
         Set<Long> roleIds = EntityUtils.toSet(roleVoList, Role::getRoleId);
@@ -137,6 +140,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper,UserRole> im
         }
         return roleVoList;
     }
+
     public IPage<RoleVo> pageVo(IPage<Role> page, Role role) {
         IPage<RoleVo> roleVoPage = EntityUtils.toPage(roleService.page(page, Wrappers.lambdaQuery(role)), RoleVo::new);
         Set<Long> roleIds = EntityUtils.toSet(roleVoPage.getRecords(), Role::getRoleId);

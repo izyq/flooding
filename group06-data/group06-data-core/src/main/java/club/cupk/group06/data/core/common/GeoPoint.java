@@ -1,4 +1,4 @@
-package club.cupk.waterflood.common;
+package club.cupk.group06.data.core.common;
 
 import java.io.Serializable;
 

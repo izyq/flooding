@@ -3,8 +3,9 @@ package club.cupk.group06.api.core.service;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.WaterFloodingRecord;
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.waterflood.entity.vo.WaterFloodingRecord.IndicatorVo;
-import club.cupk.waterflood.entity.vo.WaterFloodingRecord.WellVo;
+import club.cupk.group06.data.core.entity.vo.WaterFloodingRecord.IndicatorVo;
+import club.cupk.group06.data.core.entity.vo.WaterFloodingRecord.WellRecordVo;
+import club.cupk.group06.data.core.entity.vo.WellVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -12,13 +13,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 public interface IWaterFloodingRecordService extends IService<WaterFloodingRecord> {
-    WellVo getWellVo(Long wellId);
+    WellRecordVo getWellVo(Long wellId);
 
-    List<WellVo> listVo(Well well);
+    List<WellRecordVo> listVo(Well well);
 
-    List<WellVo> fillterWell(List<WellVo> wellVoList);
+    List<WellRecordVo> fillterWell(List<WellRecordVo> wellVoList);
 
-    WellVo fillterWell(WellVo wellVo);
+    WellRecordVo fillterWell(WellVo wellVo);
 
     IPage<WellVo> pageVo(IPage<Well> page, Well wellVoList);
 

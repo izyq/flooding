@@ -2,6 +2,7 @@ package club.cupk.group06.api.core.controller;
 
 import club.cupk.group06.api.core.service.IGraphService;
 import club.cupk.group06.common.web.response.AjaxResult;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -14,6 +15,7 @@ import java.time.Year;
  */
 @RestController
 @RequestMapping("/graph")
+@RequiredArgsConstructor
 public class GraphController {
 
     IGraphService graphService;

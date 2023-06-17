@@ -2,7 +2,7 @@ package club.cupk.group06.api.core.service;
 
 
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.waterflood.entity.vo.WellVo;
+import club.cupk.group06.data.core.entity.vo.WellVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
