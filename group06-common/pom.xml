@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>group06-common</name>
     <description>group06-common</description>
-
+    <packaging>pom</packaging>
     <modules>
         <module>group06-common-core</module>
         <module>group06-common-mysql</module>

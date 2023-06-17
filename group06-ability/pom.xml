@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>group06-ability</name>
     <description>group06-ability</description>
-
+    <packaging>pom</packaging>
     <modules>
         <module>group06-ability-auth</module>
         <module>group06-ability-gateway</module>
