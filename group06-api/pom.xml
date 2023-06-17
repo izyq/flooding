@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>group06-api</name>
     <description>group06-api</description>
-
+    <packaging>pom</packaging>
     <modules>
         <module>group06-api-core</module>
         <module>group06-api-system</module>

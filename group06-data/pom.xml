@@ -7,6 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>group06-data</name>
     <description>group06-data</description>
+    <packaging>pom</packaging>
 
     <modules>
         <module>group06-data-core</module>
