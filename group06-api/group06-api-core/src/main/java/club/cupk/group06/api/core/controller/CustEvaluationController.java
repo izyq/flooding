@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.controller;
 
-import club.cupk.group06.api.core.service.ICustEvaluationService;
+import club.cupk.group06.api.core.service.CustEvaluationService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.CustEvaluation;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustEvaluationController {
 
-    private ICustEvaluationService custEvaluationService;
+    private CustEvaluationService custEvaluationService;
 
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, CustEvaluation custEvaluation) {

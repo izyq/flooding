@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.controller;
 
-import club.cupk.group06.api.core.service.IWaterFloodingPlanService;
+import club.cupk.group06.api.core.service.WaterFloodingPlanService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.WaterFloodingPlan;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import xin.altitude.cms.common.entity.PageEntity;
 @RequestMapping("/waterflood/water/flooding/plan")
 @RequiredArgsConstructor
 public class WaterFloodingPlanController {
-    private IWaterFloodingPlanService waterFloodingPlanService;
+    private WaterFloodingPlanService waterFloodingPlanService;
 
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, WaterFloodingPlan waterFloodingPlan) {

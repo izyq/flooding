@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.IGraphService;
+import club.cupk.group06.api.core.service.GraphService;
 import club.cupk.group06.common.core.util.RedisCache;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
@@ -20,7 +20,7 @@ import java.util.Set;
  */
 @Service
 @RequiredArgsConstructor
-public class GraphServiceImpl implements IGraphService {
+public class GraphServiceImpl implements GraphService {
     @Resource
     private RedisCache redisCache;
 

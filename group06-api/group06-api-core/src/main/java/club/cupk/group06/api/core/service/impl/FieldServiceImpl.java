@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.IFieldService;
+import club.cupk.group06.api.core.service.FieldService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Field;
 import club.cupk.group06.data.core.mapper.FieldMapper;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements IFieldService {
+public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements FieldService {
 
     FieldMapper fieldMapper;
 

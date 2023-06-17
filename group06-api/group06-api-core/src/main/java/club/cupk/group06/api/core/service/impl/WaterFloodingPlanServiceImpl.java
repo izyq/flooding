@@ -1,7 +1,7 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.IWaterFloodingPlanService;
-import club.cupk.group06.api.core.service.IWellService;
+import club.cupk.group06.api.core.service.WaterFloodingPlanService;
+import club.cupk.group06.api.core.service.WellService;
 import club.cupk.group06.data.core.domain.WaterFloodingPlan;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.entity.vo.WaterFloodingPlanVo;
@@ -21,8 +21,8 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class WaterFloodingPlanServiceImpl extends ServiceImpl<WaterFloodingPlanMapper, WaterFloodingPlan> implements IWaterFloodingPlanService {
-    IWellService wellService;
+public class WaterFloodingPlanServiceImpl extends ServiceImpl<WaterFloodingPlanMapper, WaterFloodingPlan> implements WaterFloodingPlanService {
+    WellService wellService;
 
     @Override
     public Page<WaterFloodingPlan> getPage(Page page, WaterFloodingPlan waterFloodingPlan) {

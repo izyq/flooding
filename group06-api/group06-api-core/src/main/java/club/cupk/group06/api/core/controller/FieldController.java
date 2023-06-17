@@ -1,10 +1,10 @@
 package club.cupk.group06.api.core.controller;
 
-import club.cupk.group06.api.core.service.IFieldService;
+import club.cupk.group06.api.core.service.FieldService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Field;
 import club.cupk.group06.data.core.dto.filed.EditFieldDTO;
-import club.cupk.waterflood.dto.filed.FieldDTO;
+import club.cupk.group06.data.core.dto.filed.FieldDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/asset/field/")
 @RequiredArgsConstructor
 public class FieldController {
-    private IFieldService fieldService;
+    private FieldService fieldService;
 
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, String name) {

@@ -1,7 +1,7 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.ICustEvaluationService;
-import club.cupk.group06.api.core.service.IIndicatorService;
+import club.cupk.group06.api.core.service.CustEvaluationService;
+import club.cupk.group06.api.core.service.IndicatorService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.CustEvaluation;
 import club.cupk.group06.data.core.domain.Indicator;
@@ -26,8 +26,8 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper, CustEvaluation> implements ICustEvaluationService {
-    IIndicatorService indicatorService;
+public class CustEvaluationServiceImpl extends ServiceImpl<CustEvaluationMapper, CustEvaluation> implements CustEvaluationService {
+    IndicatorService indicatorService;
 
     CustEvaluationMapper custEvaluationMapper;
 

@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.controller;
 
-import club.cupk.group06.api.core.service.IWaterFloodingRecordService;
+import club.cupk.group06.api.core.service.WaterFloodingRecordService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.WaterFloodingRecord;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/data/record")
 @RequiredArgsConstructor
 public class WaterFloodingRecordController {
-    private IWaterFloodingRecordService waterFloodingRecordService;
+    private WaterFloodingRecordService waterFloodingRecordService;
 
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, WaterFloodingRecord waterFloodingRecord) {

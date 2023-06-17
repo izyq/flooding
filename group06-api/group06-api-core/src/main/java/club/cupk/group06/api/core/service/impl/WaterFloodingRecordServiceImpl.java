@@ -1,8 +1,8 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.IIndicatorService;
-import club.cupk.group06.api.core.service.IWaterFloodingRecordService;
-import club.cupk.group06.api.core.service.IWellService;
+import club.cupk.group06.api.core.service.IndicatorService;
+import club.cupk.group06.api.core.service.WaterFloodingRecordService;
+import club.cupk.group06.api.core.service.WellService;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.WaterFloodingRecord;
 import club.cupk.group06.data.core.domain.Well;
@@ -31,11 +31,11 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper, WaterFloodingRecord> implements IWaterFloodingRecordService {
+public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper, WaterFloodingRecord> implements WaterFloodingRecordService {
 
-    IWellService wellService;
+    WellService wellService;
 
-    IIndicatorService indicatorService;
+    IndicatorService indicatorService;
     @Override
     public Page getPage(Page page, WaterFloodingRecord waterFloodingRecord) {
         return page(page, Wrappers.lambdaQuery(waterFloodingRecord));

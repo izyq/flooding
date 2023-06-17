@@ -1,6 +1,6 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.IIndicatorService;
+import club.cupk.group06.api.core.service.IndicatorService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.WaterFloodingRecord;
@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator> implements IIndicatorService {
+public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator> implements IndicatorService {
 
     private WaterFloodingRecordMapper waterFloodingRecordMapper;
 

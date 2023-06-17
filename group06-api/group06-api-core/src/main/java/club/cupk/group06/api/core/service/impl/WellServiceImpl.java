@@ -1,7 +1,7 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.IWaterFloodingPlanService;
-import club.cupk.group06.api.core.service.IWellService;
+import club.cupk.group06.api.core.service.WaterFloodingPlanService;
+import club.cupk.group06.api.core.service.WellService;
 import club.cupk.group06.data.core.domain.WaterFloodingPlan;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.entity.vo.WellVo;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements IWellService {
+public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements WellService {
 
     WellMapper wellMapper;
 
@@ -49,8 +49,8 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements IW
         return null;
     }
 
-    public IWaterFloodingPlanService getWaterFloodingPlanService() {
-        return SpringUtils.getBean(IWaterFloodingPlanService.class);
+    public WaterFloodingPlanService getWaterFloodingPlanService() {
+        return SpringUtils.getBean(WaterFloodingPlanService.class);
     }
 
     /**
