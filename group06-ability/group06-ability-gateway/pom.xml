@@ -37,6 +37,11 @@
             <version>1.2.83</version>
         </dependency>
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.5</version>
@@ -51,6 +56,16 @@
         <dependency>
             <groupId>club.cupk.group06</groupId>
             <artifactId>group06-common-web</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>club.cupk.group06</groupId>
+            <artifactId>group06-common-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>club.cupk.group06</groupId>
+            <artifactId>group06-config</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

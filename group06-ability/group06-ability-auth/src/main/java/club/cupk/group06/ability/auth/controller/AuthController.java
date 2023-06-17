@@ -30,7 +30,7 @@ import javax.validation.constraints.Pattern;
 @CrossOrigin
 @RestController
 @AllArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping
 public class AuthController {
 
     private final AuthService authService;

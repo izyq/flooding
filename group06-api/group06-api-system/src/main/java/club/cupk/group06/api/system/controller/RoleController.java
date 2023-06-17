@@ -10,7 +10,7 @@ import xin.altitude.cms.common.entity.PageEntity;
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("/waterflood/role")
+@RequestMapping("/role")
 @AllArgsConstructor
 public class RoleController {
 
