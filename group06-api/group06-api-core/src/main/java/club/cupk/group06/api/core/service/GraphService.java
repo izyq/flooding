@@ -15,5 +15,5 @@ public interface GraphService {
 
     AjaxResult getVisualIndicator();
 
-    AjaxResult getGraph(Page page, Year year, String factory);
+    AjaxResult getGraph(Page page, Long indicatorId, Long year, String factory);
 }

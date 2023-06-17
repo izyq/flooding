@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club.cupk.group06.data.core.mapper.WaterFloodingRecordMapper">
+    
+    <resultMap id="graphMap" type="club.cupk.group06.data.core.entity.vo.GraphVo">
+        <result column="well_id" property="wellId"/>
+        <result column="well_name" property="wellName"/>
+        <result column="factory" property="factory"/>
+        <result column="indicator_id" property="indicatorId"/>
+        <result column="indicator_name" property="indicatorName"/>
+        <result column="indicator_unit" property="indicatorUnit"/>
+        <result column="the_year" property="theYear"/>
+        <result column="mon" property="mon"/>
+        <result column="mon_avg" property="monAvg"/>
+    </resultMap>
+
+    <select id="getRecordByYearAndFactory" resultMap="graphMap" parameterType="club.cupk.group06.data.core.dto.graph.GraphDTO">
+        SELECT
+            w.well_id,
+            w.well_name,
+            w.factory,
+            i.indicator_id,
+            i.indicator_name,
+            i.indicator_unit,
+            YEAR(r.record_time) AS the_year,
+            MONTH(r.record_time) AS mon,
+            AVG(r.record_value) AS mon_avg
+        FROM
+            record r
+            JOIN
+            indicator i ON r.indicator_id = i.indicator_id
+            JOIN
+            well w ON r.well_id = w.well_id
+        WHERE
+            YEAR(r.record_time) =#{year}
+            AND r.indicator_id = #{indicatorId}
+            AND w.factory=#{factory}
+        GROUP BY
+            w.well_id,
+            w.well_name,
+            w.factory,
+            i.indicator_id,
+            i.indicator_name,
+            i.indicator_unit,
+            YEAR(r.record_time),
+            MONTH(r.record_time)
+        LIMIT ${(current-1)*size},${size}
+    </select>
 
 </mapper>
