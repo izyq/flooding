@@ -1,5 +1,7 @@
 package club.cupk.group06.common.core.util;
 
+import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
@@ -13,7 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 @Component
+@RequiredArgsConstructor
 public class RedisUtil {
+
     @Resource
     public RedisTemplate redisTemplate;
 
@@ -121,7 +125,7 @@ public class RedisUtil {
      * @param dataSet 缓存的数据
      * @return 缓存数据的对象
      */
-    public <T> BoundSetOperations<String, T> setCacheSet(final String key, final Set<T> dataSet) {
+    public <T> BoundSetOperations<String, T> setCacheSet(final String key, final @NotNull Set<T> dataSet) {
         BoundSetOperations<String, T> setOperation = redisTemplate.boundSetOps(key);
         Iterator<T> it = dataSet.iterator();
         while (it.hasNext()) {
