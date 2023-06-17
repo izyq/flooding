@@ -3,7 +3,7 @@ package club.cupk.group06.api.system.controller;
 import club.cupk.group06.api.system.service.RoleService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.system.domain.Role;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/waterflood/role")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RoleController {
 
     private RoleService roleService;

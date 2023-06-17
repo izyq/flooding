@@ -10,7 +10,6 @@ import club.cupk.group06.data.core.entity.bo.WaterFloodingRecord.IndicatorBo;
 import club.cupk.group06.data.core.entity.bo.WaterFloodingRecord.WellBo;
 import club.cupk.group06.data.core.entity.vo.WaterFloodingRecord.IndicatorVo;
 import club.cupk.group06.data.core.entity.vo.WaterFloodingRecord.WellRecordVo;
-import club.cupk.group06.data.core.entity.vo.WellVo;
 import club.cupk.group06.data.core.mapper.WaterFloodingRecordMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -18,7 +17,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Table;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
@@ -30,12 +29,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class WaterFloodingRecordServiceImpl extends ServiceImpl<WaterFloodingRecordMapper, WaterFloodingRecord> implements WaterFloodingRecordService {
 
     private WellService wellService;
 
-    IndicatorService indicatorService;
+    private IndicatorService indicatorService;
+
     @Override
     public Page getPage(Page page, WaterFloodingRecord waterFloodingRecord) {
         return page(page, Wrappers.lambdaQuery(waterFloodingRecord));

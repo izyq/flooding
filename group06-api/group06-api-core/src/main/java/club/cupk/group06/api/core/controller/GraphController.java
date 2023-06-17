@@ -2,7 +2,7 @@ package club.cupk.group06.api.core.controller;
 
 import club.cupk.group06.api.core.service.GraphService;
 import club.cupk.group06.common.web.response.AjaxResult;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -15,10 +15,10 @@ import java.time.Year;
  */
 @RestController
 @RequestMapping("/graph")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class GraphController {
 
-    GraphService graphService;
+    private GraphService graphService;
 
     @PostMapping("/indicator/add")
     public AjaxResult addVisualIndicator(@RequestParam Integer indicatorId) {

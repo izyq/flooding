@@ -3,7 +3,7 @@ package club.cupk.group06.api.core.controller;
 import club.cupk.group06.api.core.service.CustEvaluationService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.CustEvaluation;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/evaluation/scheme")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class CustEvaluationController {
 
     private CustEvaluationService custEvaluationService;

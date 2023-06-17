@@ -17,7 +17,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Table;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
@@ -29,8 +29,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {
+
+    private UserService userService;
+
+    private RoleService roleService;
+
     @Override
     public Page getPage(Page page, UserRole userRole) {
         return page(page, Wrappers.lambdaQuery(userRole));
@@ -39,10 +44,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
     @Override
     public List<UserRole> getList(UserRole userRole) {
         return list(Wrappers.lambdaQuery(userRole));
-    }
-
-    UserService userService;
-    RoleService roleService;
+    };
 
     @Override
     public UserVo getUserVo(Long userId) {

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class WaterFloodingPlanServiceImpl extends ServiceImpl<WaterFloodingPlanMapper, WaterFloodingPlan> implements WaterFloodingPlanService {
 
     private WellService wellService;

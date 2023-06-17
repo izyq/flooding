@@ -13,7 +13,7 @@ import club.cupk.group06.data.system.mapper.UserMapper;
 import club.cupk.group06.data.system.mapper.UserRoleMapper;
 import club.cupk.group06.data.system.vo.LoginVo;
 import cn.hutool.jwt.JWTUtil;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  * @since 1.0.0
  */
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthServiceImpl implements AuthService, UserDetailsService {
 
     private UserMapper userMapper;

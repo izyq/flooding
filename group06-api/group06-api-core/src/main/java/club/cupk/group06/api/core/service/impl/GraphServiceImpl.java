@@ -5,7 +5,7 @@ import club.cupk.group06.common.core.util.RedisUtil;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,7 +19,7 @@ import java.util.Set;
  * @description
  */
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class GraphServiceImpl implements GraphService {
     @Resource
     private RedisUtil redisUtil;

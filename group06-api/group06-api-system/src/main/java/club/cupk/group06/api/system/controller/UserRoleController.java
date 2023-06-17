@@ -5,7 +5,7 @@ import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.system.domain.Role;
 import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.domain.UserRole;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -13,8 +13,9 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/waterflood/user/role")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserRoleController {
+
     private UserRoleService userRoleService;
 
     @GetMapping("/page")

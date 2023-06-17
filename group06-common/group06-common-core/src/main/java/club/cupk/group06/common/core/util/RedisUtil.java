@@ -1,6 +1,6 @@
 package club.cupk.group06.common.core.util;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.data.redis.core.BoundSetOperations;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings(value = {"unchecked", "rawtypes"})
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class RedisUtil {
 
     @Resource

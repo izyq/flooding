@@ -5,7 +5,7 @@ import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Field;
 import club.cupk.group06.data.core.dto.filed.EditFieldDTO;
 import club.cupk.group06.data.core.dto.filed.FieldDTO;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -13,8 +13,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/asset/field/")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class FieldController {
+
     private FieldService fieldService;
 
     @GetMapping("/page")
