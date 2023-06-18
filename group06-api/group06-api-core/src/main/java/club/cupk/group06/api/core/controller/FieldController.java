@@ -53,10 +53,10 @@ public class FieldController {
                 .build()));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public AjaxResult delete(@PathVariable Long id) {
+    @DeleteMapping("/delete/{fieldId}")
+    public AjaxResult delete(@PathVariable Long fieldId) {
         try {
-            return AjaxResult.success(fieldService.deleteField(id));
+            return AjaxResult.success(fieldService.deleteField(fieldId));
         } catch (Exception e) {
             return AjaxResult.error(e.getMessage());
         }
@@ -68,7 +68,9 @@ public class FieldController {
     }
 
     @GetMapping("/list")
-    public AjaxResult list(String name,String fieldAddress) {
+    public AjaxResult list(@RequestBody Map<String, Object> data) {
+        String name = data.get("name").toString();
+        String fieldAddress = data.get("fieldAddress").toString();
         List<Field> list = fieldService.getList(Field.builder().fieldAddress(fieldAddress).fieldName(name).build());
         return AjaxResult.success(list);
     }

@@ -40,4 +40,35 @@ public class FieldServiceTest {
         PageEntity pageEntity = new PageEntity(1L, 10L);
         System.out.println(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName("北下关呀").build()));
     }
+
+    @Test
+    /*修改油田的信息*/
+    public void updataField(){
+        fieldService.updateById(Field
+                .builder()
+                .fieldId(32l)
+                .fieldName("北京交通大学")
+                .fieldDesc("北京交通大学")
+                .fieldArea(7200F)
+                .fieldAddress("北京交通大学")
+                .build());
+    }
+
+    @Test
+    /*删除油田*/
+    public void deleteField(){
+        fieldService.deleteField(30L);
+    }
+
+    @Test
+    /*获取油田的详情*/
+    public void detail(){
+        fieldService.getById(29);
+    }
+
+    @Test
+    /*批量获得油田列表*/
+    public void list(){
+        System.out.println(fieldService.getList(Field.builder().fieldAddress("").fieldName("").build()));
+    }
 }
