@@ -32,12 +32,16 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
         if (well.getWellName() == null) {
             return page(page);
         }
-        return page(page, Wrappers.lambdaQuery(Well.class).like(Well::getWellName, well.getWellName()));
+        return page(page, Wrappers.lambdaQuery(Well.class)
+                .like(well.getWellName() != null,Well::getWellName, well.getWellName())
+                .like(well.getWellAddress() != null, Well::getWellAddress, well.getWellAddress())
+                .like(well.getWellFactory() != null, Well::getWellFactory, well.getWellFactory()));
     }
 
     @Override
     public List<Well> getList(Well well) {
-        return list(Wrappers.lambdaQuery(well));
+        return list(Wrappers.lambdaQuery(well).like(well.getWellName() != null,
+                Well::getWellName, well.getWellName()));
     }
 
     @Override
