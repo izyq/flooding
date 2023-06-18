@@ -17,8 +17,8 @@ public class IndicatorController {
     private IndicatorService indicatorService;
 
     @GetMapping("/page")
-    public AjaxResult pageName(PageEntity pageEntity, String name) {
-        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder().indicatorName(name).build());
+    public AjaxResult pageName(PageEntity pageEntity, String indicatorName, String floodingPlan) {
+        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder().indicatorName(indicatorName).build());
     }
 
     @GetMapping("/pageAll")
