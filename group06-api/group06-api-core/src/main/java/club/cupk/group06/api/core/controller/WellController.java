@@ -17,8 +17,8 @@ public class WellController {
 
 
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, String name) {
-        return AjaxResult.success(wellService.getPage(pageEntity.toPage(), Well.builder().wellName(name).build()));
+    public AjaxResult page(PageEntity pageEntity, String wellName, String wellAddress, String wellFactory) {
+        return AjaxResult.success(wellService.getPage(pageEntity.toPage(), Well.builder().wellName(wellName).build()));
     }
 
     @GetMapping("/list")
