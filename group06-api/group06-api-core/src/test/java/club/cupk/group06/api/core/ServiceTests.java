@@ -1,8 +1,11 @@
 package club.cupk.group06.api.core;
 
+import club.cupk.group06.api.core.service.EvalResultService;
 import club.cupk.group06.api.core.service.WellService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Well;
+import club.cupk.group06.data.core.dto.indicator.EvalResDTO;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +36,15 @@ public class ServiceTests {
                 .factory("wellDTO.getFactory()")
                 .build()
         );
+    }
+
+    @Autowired
+    EvalResultService evalResultService;
+    @Test
+    public void getEvalResultTest(){
+        System.out.println(evalResultService.getEvaluationResult(new Page(1, 2), EvalResDTO.builder()
+                .year(2023L)
+                .schemeId(6L)
+                .wellName("一").build()));
     }
 }

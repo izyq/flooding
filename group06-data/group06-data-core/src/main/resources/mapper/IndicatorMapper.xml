@@ -2,14 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club.cupk.group06.data.core.mapper.IndicatorMapper">
 
-<!--    SELECT indicator.indicator_id, indicator.indicator_name, evaluation.cust_weight, AVG(record.record_value * evaluation.cust_weight) AS weighted_average-->
-<!--    FROM record-->
-<!--    JOIN evaluation ON record.indicator_id = evaluation.indicator_id-->
-<!--    JOIN indicator ON evaluation.indicator_id = indicator.indicator_id-->
-<!--    WHERE YEAR(record.record_time) = 2023-->
-<!--    &#45;&#45; AND MONTH(record.record_time) = 5-->
-<!--    AND evaluation.scheme_id = 6-->
-<!--    AND record.well_id = 21-->
-<!--    GROUP BY indicator.indicator_id, indicator.indicator_name, evaluation.cust_weight;-->
+    <resultMap id="evalResMap" type="club.cupk.group06.data.core.entity.vo.EvalResultVo">
+        <result column="well_name" property="wellName"/>
+        <result column="indicator_id" property="indicatorId"/>
+        <result column="indicator_name" property="indicatorName"/>
+        <result column="cust_weight" property="custWeight"/>
+        <result column="weight_avg" property="weightAvg"/>
+        <result column="rmd_value" property="rmdValue"/>
+    </resultMap>
+
+    
+    <select id="getEvaluationResult" resultMap="evalResMap" parameterType="club.cupk.group06.data.core.dto.indicator.EvalResDTO">
+        SELECT well.well_name,
+               indicator.indicator_id,
+               indicator.indicator_name,
+               evaluation.cust_weight,
+               AVG(record.record_value * evaluation.cust_weight) AS weight_avg,
+               (indicator.rmd_value * evaluation.cust_weight) AS rmd_value
+        FROM record
+                 JOIN evaluation ON record.indicator_id = evaluation.indicator_id
+                 JOIN indicator ON evaluation.indicator_id = indicator.indicator_id
+                 JOIN well ON record.well_id = well.well_id
+        WHERE YEAR(record.record_time) = #{year}
+          AND evaluation.scheme_id = #{schemeId}
+          AND well.well_name LIKE concat('%',#{wellName},'%')
+        GROUP BY
+                 well.well_name,
+                 indicator.indicator_id,
+                 indicator.indicator_name,
+                 evaluation.cust_weight
+        LIMIT ${(current-1)*size},${size};
+    </select>
+    
+    <select id="getEvalResCount" resultType="java.lang.Long" parameterType="club.cupk.group06.data.core.dto.indicator.EvalResDTO">
+        SELECT COUNT(*)
+        FROM (
+                 SELECT well.well_name,
+                        indicator.indicator_id,
+                        indicator.indicator_name,
+                        evaluation.cust_weight,
+                        AVG(record.record_value * evaluation.cust_weight) AS weight_avg,
+                        (indicator.rmd_value * evaluation.cust_weight) AS rmd_value
+                 FROM record
+                          JOIN evaluation ON record.indicator_id = evaluation.indicator_id
+                          JOIN indicator ON evaluation.indicator_id = indicator.indicator_id
+                          JOIN well ON record.well_id = well.well_id
+                 WHERE YEAR(record.record_time) = #{year}
+                   AND evaluation.scheme_id = #{schemeId}
+                   AND well.well_name LIKE CONCAT('%', #{wellName}, '%')
+                 GROUP BY
+                     well.well_name,
+                     indicator.indicator_id,
+                     indicator.indicator_name,
+                     evaluation.cust_weight
+             ) AS subquery;
+    </select>
 
 </mapper>
