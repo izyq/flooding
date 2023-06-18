@@ -1,6 +1,7 @@
 package club.cupk.group06.data.core.domain;
 
 import club.cupk.group06.data.core.common.GeoPoint;
+import club.cupk.group06.data.core.handler.GeoPointTypeHandler;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.apache.ibatis.type.TypeHandler;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -46,6 +48,7 @@ public class Well implements Serializable {
     private String wellAddress;
 
     @ApiModelProperty(value = "注水井经纬度", position = 4)
+    @TableField(typeHandler = GeoPointTypeHandler.class)
     private GeoPoint wellCoordinate;
 
     @ApiModelProperty(value = "注水井深度", position = 5)
