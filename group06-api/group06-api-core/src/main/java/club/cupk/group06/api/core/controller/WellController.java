@@ -26,9 +26,6 @@ public class WellController {
         String wellName = data.get("wellName").toString();
         String wellAddress = data.get("wellAddress").toString();
         String wellFactory = data.get("wellFactory").toString();
-        wellName = wellName.equals("") ? null:wellName;
-        wellAddress = wellAddress.equals("") ? null:wellAddress;
-        wellFactory = wellName.equals("") ? null:wellFactory;
         return AjaxResult.success(wellService.getPage(pageEntity.toPage(),
                 Well.builder().wellName(wellName)
                         .wellAddress(wellAddress)
@@ -39,7 +36,6 @@ public class WellController {
     @GetMapping("/list")
     public AjaxResult list(@RequestBody Map<String, Object>data) {
         String wellName = data.get("wellName").toString();
-        wellName = wellName.equals("") ? null:wellName;
         return AjaxResult.success(wellService.getList(Well.builder().wellName(wellName).build()));
     }
 

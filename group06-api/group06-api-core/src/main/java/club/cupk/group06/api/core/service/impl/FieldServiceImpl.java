@@ -25,12 +25,14 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
 
     @Override
     public List<Field> getList(Field field) {
-        return list(Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null, Field::getFieldName, field.getFieldName()).like(field.getFieldAddress() != null,Field::getFieldAddress, field.getFieldAddress()));
+        return list(Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null && !field.getFieldName().equals(""), Field::getFieldName, field.getFieldName())
+                .like(field.getFieldAddress() != null && !field.getFieldAddress().equals(""),Field::getFieldAddress, field.getFieldAddress()));
     }
 
     @Override
     public Page<Field> getPage(Page page, Field field) {
-        return page(page, Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null, Field::getFieldName, field.getFieldName()).like(field.getFieldAddress() != null,Field::getFieldAddress, field.getFieldAddress()));
+        return page(page, Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null && !field.getFieldName().equals(""), Field::getFieldName, field.getFieldName())
+                .like(field.getFieldAddress() != null && !field.getFieldAddress().equals(""),Field::getFieldAddress, field.getFieldAddress()));
     }
 
     @Override

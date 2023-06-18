@@ -33,14 +33,14 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
             return page(page);
         }
         return page(page, Wrappers.lambdaQuery(Well.class)
-                .like(well.getWellName() != null,Well::getWellName, well.getWellName())
-                .like(well.getWellAddress() != null, Well::getWellAddress, well.getWellAddress())
-                .like(well.getWellFactory() != null, Well::getWellFactory, well.getWellFactory()));
+                .like(well.getWellName() != null && !well.getWellName().equals(""),Well::getWellName, well.getWellName())
+                .like(well.getWellAddress() != null && !well.getWellAddress().equals(""), Well::getWellAddress, well.getWellAddress())
+                .like(well.getWellFactory() != null&& !well.getWellFactory().equals(""), Well::getWellFactory, well.getWellFactory()));
     }
 
     @Override
     public List<Well> getList(Well well) {
-        return list(Wrappers.lambdaQuery(well).like(well.getWellName() != null,
+        return list(Wrappers.lambdaQuery(well).like(well.getWellName() != null && !well.getWellName().equals(""),
                 Well::getWellName, well.getWellName()));
     }
 
