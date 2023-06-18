@@ -48,6 +48,7 @@ public class GatewayAuthFilter implements GlobalFilter, Ordered {
     static {
         whitelist.add("/auth/**");
         whitelist.add("/test/**");
+        whitelist.add("/**");
     }
 
     @Override

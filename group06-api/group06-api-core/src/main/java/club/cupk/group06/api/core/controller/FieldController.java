@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/asset/field/")
@@ -19,9 +20,13 @@ public class FieldController {
     private FieldService fieldService;
 
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, String fieldName, String fieldAddress) {
-        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(),
-                Field.builder().fieldAddress(fieldAddress).fieldName(fieldName).build()));
+    public AjaxResult page(@RequestBody Map<String, Object> data) {
+        Long current = Long.valueOf(data.get("current").toString());
+        Long size = Long.valueOf(data.get("size").toString());
+        String name = data.get("name").toString();
+        String fieldAddress = data.get("fieldAddress").toString();
+        PageEntity pageEntity = new PageEntity(current, size);
+        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldAddress(fieldAddress).fieldName(name).build()));
     }
 
     @PostMapping("/add")
@@ -63,7 +68,7 @@ public class FieldController {
     }
 
     @GetMapping("/list")
-    public AjaxResult list(String name, String fieldAddress) {
+    public AjaxResult list(String name,String fieldAddress) {
         List<Field> list = fieldService.getList(Field.builder().fieldAddress(fieldAddress).fieldName(name).build());
         return AjaxResult.success(list);
     }
