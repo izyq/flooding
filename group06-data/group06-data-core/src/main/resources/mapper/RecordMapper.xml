@@ -18,7 +18,7 @@
         SELECT
             w.well_id,
             w.well_name,
-            w.factory,
+            w.well_factory,
             i.indicator_id,
             i.indicator_name,
             i.indicator_unit,
@@ -34,11 +34,11 @@
         WHERE
             YEAR(r.record_time) =#{year}
             AND r.indicator_id = #{indicatorId}
-            AND w.factory=#{factory}
+            AND w.well_factory=#{factory}
         GROUP BY
             w.well_id,
             w.well_name,
-            w.factory,
+            w.well_factory,
             i.indicator_id,
             i.indicator_name,
             i.indicator_unit,

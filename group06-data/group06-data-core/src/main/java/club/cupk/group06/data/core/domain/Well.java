@@ -30,7 +30,7 @@ public class Well implements Serializable {
     private Long createUser;
 
     @ApiModelProperty(value = "注水井的负责单位", position = 10)
-    private String factory;
+    private String wellFactory;
     @ApiModelProperty(value = "注水井所属油田id", position = 11)
     private Long fieldId;
     @TableField(fill = FieldFill.INSERT_UPDATE)
@@ -60,11 +60,11 @@ public class Well implements Serializable {
 
     @ApiModelProperty(value = "注水井开采结束时间", position = 8)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime wellMiningEndTime;
+    private LocalDateTime endTime;
 
     @ApiModelProperty(value = "注水井开采时间", position = 7)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime wellMiningStartTime;
+    private LocalDateTime startTime;
 
     @ApiModelProperty(value = "注水井名", position = 2)
     private String wellName;
@@ -76,7 +76,7 @@ public class Well implements Serializable {
         if (Objects.nonNull(well)) {
             this.createTime = well.createTime;
             this.createUser = well.createUser;
-            this.factory = well.factory;
+            this.wellFactory = well.wellFactory;
             this.fieldId = well.fieldId;
             this.updateTime = well.updateTime;
             this.updateUser = well.updateUser;
@@ -85,8 +85,8 @@ public class Well implements Serializable {
             this.wellDepth = well.wellDepth;
             this.wellDia = well.wellDia;
             this.wellId = well.wellId;
-            this.wellMiningEndTime = well.wellMiningEndTime;
-            this.wellMiningStartTime = well.wellMiningStartTime;
+            this.endTime = well.endTime;
+            this.startTime = well.startTime;
             this.wellName = well.wellName;
             this.wellPeriod = well.wellPeriod;
         }

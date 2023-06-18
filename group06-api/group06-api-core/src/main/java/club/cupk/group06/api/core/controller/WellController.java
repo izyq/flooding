@@ -34,11 +34,11 @@ public class WellController {
                 .wellCoordinate(wellDTO.getCoordinate())
                 .wellDepth(wellDTO.getDepth())
                 .wellDia(wellDTO.getDia())
-                .wellMiningStartTime(wellDTO.getStartTime())
-                .wellMiningEndTime(wellDTO.getEndTime())
+                .startTime(wellDTO.getStartTime())
+                .endTime(wellDTO.getEndTime())
                 .wellPeriod(wellDTO.getPeriod())
                 .fieldId(wellDTO.getField())
-                .factory(wellDTO.getFactory())
+                .wellFactory(wellDTO.getFactory())
                 .build()
         ));
     }
@@ -52,11 +52,11 @@ public class WellController {
                 .wellCoordinate(wellDTO.getCoordinate())
                 .wellDepth(wellDTO.getDepth())
                 .wellDia(wellDTO.getDia())
-                .wellMiningStartTime(wellDTO.getStartTime())
-                .wellMiningEndTime(wellDTO.getEndTime())
+                .startTime(wellDTO.getStartTime())
+                .endTime(wellDTO.getEndTime())
                 .wellPeriod(wellDTO.getPeriod())
                 .fieldId(wellDTO.getField())
-                .factory(wellDTO.getFactory())
+                .wellFactory(wellDTO.getFactory())
                 .build()
         ));
     }

@@ -2,7 +2,6 @@ package club.cupk.group06.api.core;
 
 import club.cupk.group06.api.core.service.EvalResultService;
 import club.cupk.group06.api.core.service.WellService;
-import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.dto.indicator.EvalResDTO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -13,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,11 +27,11 @@ public class ServiceTests {
                 .wellCoordinate(null)
                 .wellDepth(1.0F)
                 .wellDia(1F)
-                .wellMiningStartTime(LocalDateTime.now())
-                .wellMiningEndTime(LocalDateTime.now())
+                .startTime(LocalDateTime.now())
+                .endTime(LocalDateTime.now())
                 .wellPeriod("")
                 .fieldId(1L)
-                .factory("wellDTO.getFactory()")
+                .wellFactory("wellDTO.getFactory()")
                 .build()
         );
     }
