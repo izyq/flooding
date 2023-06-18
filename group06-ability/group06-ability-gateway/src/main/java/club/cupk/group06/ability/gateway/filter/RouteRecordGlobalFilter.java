@@ -23,7 +23,7 @@ public class RouteRecordGlobalFilter implements  GlobalFilter, Ordered {
 
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {
             long end = System.currentTimeMillis();
-            log.info("实际调用地址为：{}，调用耗时为：{}ms", proxyRequestUri, (end - start));
+            log.debug("实际调用地址为：{}，调用耗时为：{}ms", proxyRequestUri, (end - start));
         }));
     }
 
