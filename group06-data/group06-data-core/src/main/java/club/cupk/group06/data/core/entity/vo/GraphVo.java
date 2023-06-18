@@ -9,6 +9,7 @@ import lombok.Data;
  */
 @Data
 public class GraphVo {
+    private Long total;
     private Long wellId;
     private String wellName;
     private String factory;

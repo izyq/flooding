@@ -8,8 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/asset/well")
 @AllArgsConstructor
@@ -19,24 +17,19 @@ public class WellController {
 
 
     @GetMapping("/page")
-    public AjaxResult page(@RequestBody Map<String, Object>data) {
-        Long current = Long.valueOf(data.get("current").toString());
-        Long size = Long.valueOf(data.get("size").toString());
-        PageEntity pageEntity = new PageEntity(current, size);
-        String wellName = data.get("wellName").toString();
-        String wellAddress = data.get("wellAddress").toString();
-        String wellFactory = data.get("wellFactory").toString();
-        return AjaxResult.success(wellService.getPage(pageEntity.toPage(),
-                Well.builder().wellName(wellName)
-                        .wellAddress(wellAddress)
-                        .wellFactory(wellFactory)
-                        .build()));
+    public AjaxResult page(PageEntity pageEntity, String wellName, String wellAddress, String wellField, String wellFactory) {
+        return wellService.getWellByName(WellDTO.builder()
+                .current(pageEntity.getCurrent())
+                .size(pageEntity.getSize())
+                .name(wellName)
+                .factory(wellFactory)
+                .fieldName(wellField)
+                .address(wellAddress).build());
     }
 
     @GetMapping("/list")
-    public AjaxResult list(@RequestBody Map<String, Object>data) {
-        String wellName = data.get("wellName").toString();
-        return AjaxResult.success(wellService.getList(Well.builder().wellName(wellName).build()));
+    public AjaxResult list(Well well) {
+        return AjaxResult.success(wellService.getList(well));
     }
 
     @PostMapping("/add")
