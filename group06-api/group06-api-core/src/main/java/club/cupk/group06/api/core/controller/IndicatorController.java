@@ -17,11 +17,11 @@ public class IndicatorController {
     private IndicatorService indicatorService;
 
     @GetMapping("/page")
-    public AjaxResult pageName(PageEntity pageEntity, String name) {
-        if(name==null){
-            return AjaxResult.success(page(pageEntity,null));
+    public AjaxResult pageName(PageEntity pageEntity, String fieldName, String floodingPlan) {
+        if (fieldName == null) {
+            return AjaxResult.success(page(pageEntity, null));
         }
-        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder().indicatorName(name).build());
+        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder().indicatorName(fieldName).build());
     }
 
     @GetMapping("/pageAll")
