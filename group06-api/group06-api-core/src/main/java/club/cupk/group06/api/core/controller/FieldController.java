@@ -19,8 +19,9 @@ public class FieldController {
     private FieldService fieldService;
 
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, String name,String fieldAddress) {
-        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldAddress(fieldAddress).fieldName(name).build()));
+    public AjaxResult page(PageEntity pageEntity, String fieldName, String fieldAddress) {
+        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(),
+                Field.builder().fieldAddress(fieldAddress).fieldName(fieldName).build()));
     }
 
     @PostMapping("/add")
@@ -62,7 +63,7 @@ public class FieldController {
     }
 
     @GetMapping("/list")
-    public AjaxResult list(String name,String fieldAddress) {
+    public AjaxResult list(String name, String fieldAddress) {
         List<Field> list = fieldService.getList(Field.builder().fieldAddress(fieldAddress).fieldName(name).build());
         return AjaxResult.success(list);
     }
