@@ -6,6 +6,7 @@ import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
 import club.cupk.group06.data.core.mapper.RecordMapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -42,7 +43,10 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
         }
         try {
             return AjaxResult.success(
-                    page(page, Wrappers.lambdaQuery(Indicator.class).like(Indicator::getIndicatorName, indicator.getIndicatorName()))
+                    page(page, Wrappers.lambdaQuery(Indicator.class)
+                            .like(StringUtils.isNotBlank(indicator.getIndicatorName()),Indicator::getIndicatorName, indicator.getIndicatorName())
+                            .like(StringUtils.isNotBlank(indicator.getFloodingPlan()),Indicator::getFloodingPlan,indicator.getFloodingPlan())
+                    )
             );
 
         } catch (Exception e) {

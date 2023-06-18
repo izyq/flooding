@@ -2,6 +2,7 @@ package club.cupk.group06.api.core;
 
 import club.cupk.group06.api.core.service.EvalResultService;
 import club.cupk.group06.api.core.service.WellService;
+import club.cupk.group06.data.core.common.GeoPoint;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.dto.indicator.EvalResDTO;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -22,14 +23,14 @@ public class ServiceTests {
     @Test
     public void addWell(){
         wellService.save(Well.builder()
-                .wellName("ceshiya")
-                .wellAddress("ceshiya")
-                .wellCoordinate(null)
+                .wellName("cshiya")
+                .wellAddress("cesya")
+                .wellCoordinate(new GeoPoint(1.9,2))
                 .wellDepth(1.0F)
                 .wellDia(1F)
                 .startTime(LocalDateTime.now())
                 .endTime(LocalDateTime.now())
-                .wellPeriod("")
+                .wellPeriod("123期")
                 .fieldId(1L)
                 .wellFactory("wellDTO.getFactory()")
                 .build()

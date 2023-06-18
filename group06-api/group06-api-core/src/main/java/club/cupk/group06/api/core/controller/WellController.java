@@ -45,19 +45,24 @@ public class WellController {
 
     @PostMapping("/add")
     public AjaxResult add(@RequestBody WellDTO wellDTO) {
-        return AjaxResult.success(wellService.save(Well.builder()
-                .wellName(wellDTO.getName())
-                .wellAddress(wellDTO.getAddress())
-                .wellCoordinate(wellDTO.getCoordinate())
-                .wellDepth(wellDTO.getDepth())
-                .wellDia(wellDTO.getDia())
-                .startTime(wellDTO.getStartTime())
-                .endTime(wellDTO.getEndTime())
-                .wellPeriod(wellDTO.getPeriod())
-                .fieldId(wellDTO.getField())
-                .wellFactory(wellDTO.getFactory())
-                .build()
-        ));
+        try{
+            return AjaxResult.success(wellService.save(Well.builder()
+                    .wellName(wellDTO.getName())
+                    .wellAddress(wellDTO.getAddress())
+                    .wellCoordinate(wellDTO.getCoordinate())
+                    .wellDepth(wellDTO.getDepth())
+                    .wellDia(wellDTO.getDia())
+                    .startTime(wellDTO.getStartTime())
+                    .endTime(wellDTO.getEndTime())
+                    .wellPeriod(wellDTO.getPeriod())
+                    .fieldId(wellDTO.getField())
+                    .wellFactory(wellDTO.getFactory())
+                    .build()
+            ));
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
+
     }
 
     @PutMapping("/edit")
