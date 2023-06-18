@@ -3,9 +3,9 @@ package club.cupk.group06.api.core.service.impl;
 import club.cupk.group06.api.core.service.IndicatorService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Indicator;
-import club.cupk.group06.data.core.domain.WaterFloodingRecord;
+import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
-import club.cupk.group06.data.core.mapper.WaterFloodingRecordMapper;
+import club.cupk.group06.data.core.mapper.RecordMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -22,7 +22,7 @@ import java.util.List;
 public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator> implements IndicatorService {
 
     @Resource
-    private WaterFloodingRecordMapper waterFloodingRecordMapper;
+    private RecordMapper recordMapper;
 
     @Override
     public Page getPage(Page page, Indicator indicator) {
@@ -55,7 +55,7 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
     public AjaxResult removeCascade(Long[] indicatorIds) {
         try {
             Arrays.asList(indicatorIds).forEach((e) -> {
-                waterFloodingRecordMapper.delete(Wrappers.lambdaQuery(WaterFloodingRecord.class).eq(WaterFloodingRecord::getIndicatorId, e));
+                recordMapper.delete(Wrappers.lambdaQuery(Record.class).eq(Record::getIndicatorId, e));
             });
             removeByIds(Arrays.asList(indicatorIds));
             return AjaxResult.success();

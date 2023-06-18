@@ -6,13 +6,12 @@ import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.dto.graph.GraphDTO;
 import club.cupk.group06.data.core.entity.vo.GraphVo;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
-import club.cupk.group06.data.core.mapper.WaterFloodingRecordMapper;
+import club.cupk.group06.data.core.mapper.RecordMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +32,7 @@ public class GraphServiceImpl implements GraphService {
     private IndicatorMapper indicatorMapper;
 
     @Resource
-    private WaterFloodingRecordMapper waterFloodingRecordMapper;
+    private RecordMapper recordMapper;
 
     @Override
     public AjaxResult addVisualIndicator(Integer indicatorId) {
@@ -63,14 +62,14 @@ public class GraphServiceImpl implements GraphService {
     public AjaxResult getGraph(Page page, Long indicatorId, Long year, String factory) {
 
         try{
-            List<GraphVo> thisYear = waterFloodingRecordMapper.getRecordByYearAndFactory(GraphDTO.builder()
+            List<GraphVo> thisYear = recordMapper.getRecordByYearAndFactory(GraphDTO.builder()
                     .current(page.getCurrent())
                     .size(page.getSize())
                     .indicatorId(indicatorId)
                     .year(year)
                     .factory(factory)
                     .build());
-            List<GraphVo> beforeYear = waterFloodingRecordMapper.getRecordByYearAndFactory(GraphDTO.builder()
+            List<GraphVo> beforeYear = recordMapper.getRecordByYearAndFactory(GraphDTO.builder()
                     .current(page.getCurrent())
                     .size(page.getSize())
                     .indicatorId(indicatorId)

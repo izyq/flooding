@@ -1,8 +1,8 @@
 package club.cupk.group06.api.core.service.impl;
 
-import club.cupk.group06.api.core.service.WaterFloodingPlanService;
+import club.cupk.group06.api.core.service.PlanService;
 import club.cupk.group06.api.core.service.WellService;
-import club.cupk.group06.data.core.domain.WaterFloodingPlan;
+import club.cupk.group06.data.core.domain.Plan;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.entity.vo.WellVo;
 import club.cupk.group06.data.core.mapper.WellMapper;
@@ -49,8 +49,8 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
         return null;
     }
 
-    public WaterFloodingPlanService getWaterFloodingPlanService() {
-        return SpringUtils.getBean(WaterFloodingPlanService.class);
+    public PlanService getPlanService() {
+        return SpringUtils.getBean(PlanService.class);
     }
 
     /**
@@ -59,8 +59,8 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
     @Override
     public WellVo getOneVo(Long wellId) {
         WellVo wellVo = EntityUtils.toObj(getById(wellId), WellVo::new);
-        List<WaterFloodingPlan> waterFloodingPlanList = getWaterFloodingPlanService().list(Wrappers.lambdaQuery(WaterFloodingPlan.class).eq(WaterFloodingPlan::getWellId, wellVo.getWellId()));
-        wellVo.setWaterFloodingPlanList(waterFloodingPlanList);
+        List<Plan> planList = getPlanService().list(Wrappers.lambdaQuery(Plan.class).eq(Plan::getWellId, wellVo.getWellId()));
+        wellVo.setPlanList(planList);
         return wellVo;
     }
 
@@ -71,9 +71,9 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
     public List<WellVo> listVo(Well well) {
         List<WellVo> wellVoList = EntityUtils.toList(list(Wrappers.lambdaQuery(well)), WellVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoList, WellVo::getWellId);
-        List<WaterFloodingPlan> waterFloodingPlanList = getWaterFloodingPlanService().list(Wrappers.lambdaQuery(WaterFloodingPlan.class).in(WaterFloodingPlan::getWellId, wellIds));
-        Map<Long, List<WaterFloodingPlan>> map = waterFloodingPlanList.stream().collect(Collectors.groupingBy(WaterFloodingPlan::getWellId));
-        wellVoList.forEach(e -> e.setWaterFloodingPlanList(map.get(e.getWellId())));
+        List<Plan> planList = getPlanService().list(Wrappers.lambdaQuery(Plan.class).in(Plan::getWellId, wellIds));
+        Map<Long, List<Plan>> map = planList.stream().collect(Collectors.groupingBy(Plan::getWellId));
+        wellVoList.forEach(e -> e.setPlanList(map.get(e.getWellId())));
         return wellVoList;
     }
 
@@ -84,9 +84,9 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
     public IPage<WellVo> pageVo(IPage<Well> page, Well well) {
         IPage<WellVo> wellVoPage = EntityUtils.toPage(page(page, Wrappers.lambdaQuery(well)), WellVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoPage.getRecords(), WellVo::getWellId);
-        List<WaterFloodingPlan> waterFloodingPlanList = getWaterFloodingPlanService().list(Wrappers.lambdaQuery(WaterFloodingPlan.class).in(WaterFloodingPlan::getWellId, wellIds));
-        Map<Long, List<WaterFloodingPlan>> map = waterFloodingPlanList.stream().collect(Collectors.groupingBy(WaterFloodingPlan::getWellId));
-        wellVoPage.getRecords().forEach(e -> e.setWaterFloodingPlanList(map.get(e.getWellId())));
+        List<Plan> planList = getPlanService().list(Wrappers.lambdaQuery(Plan.class).in(Plan::getWellId, wellIds));
+        Map<Long, List<Plan>> map = planList.stream().collect(Collectors.groupingBy(Plan::getWellId));
+        wellVoPage.getRecords().forEach(e -> e.setPlanList(map.get(e.getWellId())));
         return wellVoPage;
     }
 }

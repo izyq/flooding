@@ -2,24 +2,26 @@ package club.cupk.group06.data.core.entity.vo;
 
 import club.cupk.group06.data.core.domain.Evaluation;
 import club.cupk.group06.data.core.domain.Indicator;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+/**
+ * evaluation和indicator
+ *
+ * @author izyq
+ **/
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class IndicatorVo extends Indicator {
-
+public class EvaluationVo extends Evaluation {
     private static final long serialVersionUID = 1L;
 
-    private List<Evaluation> evaluationList;
+    private Indicator indicator;
 
-    public IndicatorVo(Indicator indicator) {
-        super(indicator);
+    public EvaluationVo() {
+    }
+
+    public EvaluationVo(Evaluation evaluation) {
+        super(evaluation);
+        this.indicator = new Indicator();
     }
 }

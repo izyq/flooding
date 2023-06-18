@@ -1,6 +1,6 @@
 package club.cupk.group06.data.core.entity.vo;
 
-import club.cupk.group06.data.core.domain.WaterFloodingPlan;
+import club.cupk.group06.data.core.domain.Plan;
 import club.cupk.group06.data.core.domain.Well;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +14,7 @@ import java.util.List;
 public class WellVo extends Well {
     private static final long serialVersionUID = 1L;
 
-    private List<WaterFloodingPlan> waterFloodingPlanList;
+    private List<Plan> planList;
 
     public WellVo(Well well) {
         super(well);
