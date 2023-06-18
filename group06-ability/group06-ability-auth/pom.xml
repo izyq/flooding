@@ -139,7 +139,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>club.cupk.group06.ability.auth.Group06AbilityAuthApplication</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
