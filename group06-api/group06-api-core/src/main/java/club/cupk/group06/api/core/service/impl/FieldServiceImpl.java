@@ -4,6 +4,7 @@ import club.cupk.group06.api.core.service.FieldService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Field;
 import club.cupk.group06.data.core.mapper.FieldMapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -24,15 +25,12 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
 
     @Override
     public List<Field> getList(Field field) {
-        return fieldMapper.selectList(Wrappers.lambdaQuery(field));
+        return list(Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null, Field::getFieldName, field.getFieldName()).like(field.getFieldAddress() != null,Field::getFieldAddress, field.getFieldAddress()));
     }
 
     @Override
     public Page<Field> getPage(Page page, Field field) {
-        if (field.getFieldName() == null) {
-            return page(page);
-        }
-        return page(page, Wrappers.lambdaQuery(Field.class).like(Field::getFieldName, field.getFieldName()));
+        return page(page, Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null, Field::getFieldName, field.getFieldName()).like(field.getFieldAddress() != null,Field::getFieldAddress, field.getFieldAddress()));
     }
 
     @Override
