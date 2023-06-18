@@ -18,10 +18,13 @@ public class IndicatorController {
 
     @GetMapping("/page")
     public AjaxResult pageName(PageEntity pageEntity, String fieldName, String floodingPlan) {
-        if (fieldName == null) {
+        if (fieldName == null && floodingPlan==null) {
             return AjaxResult.success(page(pageEntity, null));
         }
-        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder().indicatorName(fieldName).build());
+        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder()
+                .indicatorName(fieldName)
+                .floodingPlan(floodingPlan)
+                .build());
     }
 
     @GetMapping("/pageAll")
