@@ -42,6 +42,9 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         log.info("start update fill ....");
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
         UserId = Long.parseLong(request.getHeader("userId"));
+        if (UserId == null) {
+            UserId = 0L;
+        }
         this.strictUpdateFill(metaObject, "updateUser", Long.class, UserId);
         this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
     }
