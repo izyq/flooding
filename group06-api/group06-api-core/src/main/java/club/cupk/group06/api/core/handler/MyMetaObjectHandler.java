@@ -43,7 +43,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-        UserId = Long.parseLong(request.getHeader("userId"));
         try {
             UserId = Long.parseLong(request.getHeader("userId"));
         } catch (Exception e) {
