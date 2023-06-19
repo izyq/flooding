@@ -2,7 +2,10 @@ package club.cupk.group06.data.system.mapper;
 
 import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.domain.UserRole;
+import club.cupk.group06.data.system.dto.UserDto;
+import club.cupk.group06.data.system.vo.UserItemVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,5 +43,13 @@ public interface UserMapper extends BaseMapper<UserPo> {
      * @param password 新密码
      */
     void updatePassword(@Param("phone") String phone, @Param("password") String password);
+
+    /**
+     * 用户分页查询
+     * @param userDto
+     * @return
+     */
+    IPage<UserItemVo> getUser(IPage<UserItemVo> page,UserDto userDto);
+
 
 }

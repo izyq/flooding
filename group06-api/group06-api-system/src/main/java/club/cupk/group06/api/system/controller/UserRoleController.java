@@ -6,9 +6,11 @@ import club.cupk.group06.data.system.domain.Role;
 import club.cupk.group06.data.system.domain.UserPo;
 import club.cupk.group06.data.system.domain.UserRole;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 @RestController
@@ -16,6 +18,7 @@ import java.util.Arrays;
 @AllArgsConstructor
 public class UserRoleController {
 
+    @Resource
     private UserRoleService userRoleService;
 
     @GetMapping("/page")

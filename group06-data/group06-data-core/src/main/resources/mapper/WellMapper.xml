@@ -47,16 +47,16 @@
         JOIN field ON well.field_id = field.field_id
         <where>
             <if test="wellName != null">
-                AND well.well_name LIKE CONCAT('%',#{wellName},'%')
+                well.well_name LIKE CONCAT('%',#{wellName},'%')
             </if>
             <if test="wellAddress != null">
-                AND well.well_address LIKE CONCAT('%',#{wellAddress},'%')
+                well.well_address LIKE CONCAT('%',#{wellAddress},'%')
             </if>
             <if test="wellField != null">
-                AND field.field_name LIKE CONCAT('%',#{wellField},'%')
+                field.field_name LIKE CONCAT('%',#{wellField},'%')
             </if>
             <if test="wellFactory != null">
-                AND well.well_factory LIKE CONCAT('%',#{wellFactory},'%')
+                well.well_factory LIKE CONCAT('%',#{wellFactory},'%')
             </if>
         </where>
     </select>

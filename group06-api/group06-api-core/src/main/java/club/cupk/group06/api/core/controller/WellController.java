@@ -9,11 +9,14 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
+import javax.annotation.Resource;
+
 @RestController
 @RequestMapping("/asset/well")
 @AllArgsConstructor
 public class WellController {
 
+    @Resource
     private WellService wellService;
 
     @GetMapping("/page")

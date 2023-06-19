@@ -3,10 +3,13 @@ package club.cupk.group06.api.system.controller;
 import club.cupk.group06.api.system.service.UserService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.system.domain.UserPo;
+import club.cupk.group06.data.system.dto.UserDto;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 
 @RestController
@@ -14,7 +17,25 @@ import java.util.Arrays;
 @AllArgsConstructor
 public class UserController {
 
+    @Resource
     private UserService userService;
+
+    @GetMapping("/get")
+    public AjaxResult getUserByQuery(@NotNull PageEntity pageEntity,
+                                     String userPhone,
+                                     String userName,
+                                     String userEmail,
+                                     String userWell,
+                                     String userField){
+        return userService.getUserByQuery(pageEntity.toPage(),
+                UserDto.builder()
+                        .userEmail(userEmail)
+                        .userField(userField)
+                        .userName(userName)
+                        .userPhone(userPhone)
+                        .userWell(userWell).build()
+                );
+    }
 
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, UserPo userPo) {

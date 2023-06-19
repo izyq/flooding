@@ -12,6 +12,20 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
+    <resultMap id="userQueryMap" type="club.cupk.group06.data.system.vo.UserItemVo">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPhone" column="user_phone"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="userWell" column="user_well"/>
+        <result property="roleName" column="role_name"/>
+        <result property="managerField" column="user_field1"/>
+        <result property="wellField" column="user_field2"/>
+    </resultMap>
+
     <resultMap id="userRole" type="club.cupk.group06.data.system.domain.UserRole">
         <result property="userId" column="user_id"/>
         <result property="roleId" column="role_id"/>
@@ -37,5 +51,50 @@
         SELECT COUNT(*)
         FROM user
         WHERE user_phone = #{phone}
+    </select>
+
+
+
+    <sql id="userQuery">
+        <where>
+            <if test="userPhone!=null and userPhone!= ''">
+                user.user_phone LIKE CONCAT('%',#{userPhone},'%')
+            </if>
+            <if test="userName!=null and userName!= ''">
+                user.user_name LIKE CONCAT('%',#{userName},'%')
+            </if>
+            <if test="userEmail!=null and userEmail!= ''">
+                user.user_email LIKE CONCAT('%',#{userEmail},'%')
+            </if>
+            <if test="userWell!=null and userWell!= ''">
+                user_well LIKE CONCAT('%',#{userWell},'%')
+            </if>
+            <if test="userField!=null and userField!= ''">
+                user_field1 LIKE CONCAT('%',#{userField},'%')
+            </if>
+            <if test="userField!=null and userField!= ''">
+                user_field2 LIKE CONCAT('%',#{userField},'%')
+            </if>
+        </where>
+    </sql>
+
+    <select id="getUser" resultMap="userQueryMap" parameterType="club.cupk.group06.data.system.dto.UserDto">
+        SELECT user.user_id,
+            user.user_name,
+            user.user_email,
+            user.user_phone,
+            user.create_time,
+            user.update_time,
+            role.role_name,
+            well.well_name AS user_well,
+            f1.field_name AS user_field2,
+            f2.field_name AS user_field1
+        FROM user
+            LEFT JOIN user_role ON user.user_id=user_role.user_id
+            LEFT JOIN role ON role.role_id=user_role.role_id
+            LEFT JOIN well ON user_role.asset_id=well.well_id
+            LEFT JOIN field AS f1 ON well.field_id=f1.field_id
+            LEFT JOIN field AS f2 ON user_role.asset_id=f2.field_id
+        <include refid="userQuery"/>
     </select>
 </mapper>
