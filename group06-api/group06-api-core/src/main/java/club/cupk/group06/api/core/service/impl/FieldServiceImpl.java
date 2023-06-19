@@ -4,6 +4,7 @@ import club.cupk.group06.api.core.service.FieldService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Field;
 import club.cupk.group06.data.core.mapper.FieldMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -30,9 +31,8 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     }
 
     @Override
-    public Page<Field> getPage(Page page, Field field) {
-        return page(page, Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null && !field.getFieldName().equals(""), Field::getFieldName, field.getFieldName())
-                .like(field.getFieldAddress() != null && !field.getFieldAddress().equals(""),Field::getFieldAddress, field.getFieldAddress()));
+    public IPage<Field> pageField(IPage<Field> page, String fieldName, String fieldAddress) {
+        return fieldMapper.pageField(page, fieldName, fieldAddress);
     }
 
     @Override

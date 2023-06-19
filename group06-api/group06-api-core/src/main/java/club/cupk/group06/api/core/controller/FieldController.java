@@ -6,6 +6,7 @@ import club.cupk.group06.data.core.domain.Field;
 import club.cupk.group06.data.core.dto.filed.EditFieldDTO;
 import club.cupk.group06.data.core.dto.filed.FieldDTO;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -20,13 +21,8 @@ public class FieldController {
     private FieldService fieldService;
 
     @GetMapping("/page")
-    public AjaxResult page(@RequestBody Map<String, Object> data) {
-        Long current = Long.valueOf(data.get("current").toString());
-        Long size = Long.valueOf(data.get("size").toString());
-        String name = data.get("name").toString();
-        String fieldAddress = data.get("fieldAddress").toString();
-        PageEntity pageEntity = new PageEntity(current, size);
-        return AjaxResult.success(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldAddress(fieldAddress).fieldName(name).build()));
+    public AjaxResult page(@NotNull PageEntity pageEntity, String fieldName, String fieldAddress) {
+        return AjaxResult.success(fieldService.pageField(pageEntity.toPage(), fieldName, fieldAddress));
     }
 
     @PostMapping("/add")
