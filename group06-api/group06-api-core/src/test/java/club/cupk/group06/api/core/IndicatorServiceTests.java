@@ -21,7 +21,7 @@ public class IndicatorServiceTests {
 
     @Test
     /*新增指标*/
-    public void add(){
+    public void addTest(){
         indicatorService.save(Indicator.builder()
                 .indicatorName("北京")
                 .floodingPlan("北京")
@@ -36,7 +36,7 @@ public class IndicatorServiceTests {
 
     @Test
     /*编辑指标*/
-    public void edit(){
+    public void editTest(){
         indicatorService.updateById(Indicator.builder()
                         .indicatorId(21L)
                         .indicatorName("北京")
@@ -52,14 +52,14 @@ public class IndicatorServiceTests {
 
     @Test
     /*删除指标*/
-    public void delete(){
+    public void deleteTest(){
         Long[] ids = {20L, 21L};
         indicatorService.removeByIds(Arrays.asList(ids));
     }
 
     @Test
     /*分页查询*/
-    public void page() {
+    public void pageTest() {
         PageEntity pageEntity = new PageEntity(1L, 10L);
         indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder()
                 .indicatorName("新疆油田")
