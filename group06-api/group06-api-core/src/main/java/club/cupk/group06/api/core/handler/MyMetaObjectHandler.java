@@ -26,8 +26,10 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-        UserId = Long.parseLong(request.getHeader("userId"));
-        if (UserId == null) {
+
+        try {
+            UserId = Long.parseLong(request.getHeader("userId"));
+        } catch (Exception e) {
             UserId = 0L;
         }
         log.info("start insert fill ....");
@@ -42,7 +44,9 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         log.info("start update fill ....");
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
         UserId = Long.parseLong(request.getHeader("userId"));
-        if (UserId == null) {
+        try {
+            UserId = Long.parseLong(request.getHeader("userId"));
+        } catch (Exception e) {
             UserId = 0L;
         }
         this.strictUpdateFill(metaObject, "updateUser", Long.class, UserId);
