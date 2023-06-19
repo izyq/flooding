@@ -247,8 +247,7 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
                 recordsIterator.remove();
             }
         }
-        wellVoPage.setTotal(indicatorVoPage.getTotal());
-        wellVoPage.setSize(indicatorVoPage.getSize());
+        wellVoPage.setTotal(wellVoPage.getRecords().size());
         wellVoPage.setPages(indicatorVoPage.getPages());
         return wellVoPage;
     }
