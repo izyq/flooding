@@ -91,7 +91,7 @@ public class RecordController {
 
     @GetMapping(value = "/well/detail/{wellId}")
     public AjaxResult detailWellVo(@PathVariable("wellId") Long wellId) {
-        return AjaxResult.success(recordService.getWellVo(wellId));
+        return AjaxResult.success(recordService.getRecordVo(wellId));
     }
 
     @GetMapping(value = "/indicator/detail/{indicatorId}")

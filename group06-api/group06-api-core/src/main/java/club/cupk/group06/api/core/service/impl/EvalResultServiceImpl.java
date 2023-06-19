@@ -3,7 +3,7 @@ package club.cupk.group06.api.core.service.impl;
 import club.cupk.group06.api.core.service.EvalResultService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.dto.indicator.EvalResDTO;
-import club.cupk.group06.data.core.entity.vo.well.EvalResultPageVo;
+import club.cupk.group06.data.core.vo.well.EvalResultPageVo;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;

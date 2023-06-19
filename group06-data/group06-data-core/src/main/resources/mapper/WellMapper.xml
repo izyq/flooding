@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club.cupk.group06.data.core.mapper.WellMapper">
 
+    <resultMap id="wellVo" type="club.cupk.group06.data.core.vo.WellVo">
+        <id property="wellId" column="well_id"/>
+        <result property="wellName" column="well_name"/>
+        <result property="wellAddress" column="well_address"/>
+        <result property="wellDepth" column="well_depth"/>
+        <result property="wellDia" column="well_dia"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="wellPeriod" column="well_period"/>
+        <result property="wellFactory" column="well_factory"/>
+        <result property="wellField" column="field_name"/>
+    </resultMap>
+
     <delete id="deletePlanByWellIds" parameterType="Long">
         DELETE wp FROM well AS w
         JOIN plan AS wp
@@ -28,38 +41,20 @@
         </foreach>
     </delete>
 
-    <sql id="wellQuery">
-        <where>
-            <if test="name!=null and name!=''">
-                well.well_name LIKE CONCAT('%',#{name},'%')
-            </if>
-            <if test="fieldName!=null and fieldName!=''">
-                field.field_name LIKE CONCAT('%',#{fieldName},'%')
-            </if>
-            <if test="factory!=null and factory!=''">
-                well.well_factory LIKE CONCAT('%',#{factory},'%')
-            </if>
-            <if test="address!=null and address!=''">
-                well.well_address LIKE CONCAT('%',#{address},'%')
-            </if>
-        </where>
-    </sql>
-
-    
-    <select id="getWellByName" parameterType="club.cupk.group06.data.core.dto.well.WellDTO" resultType="club.cupk.group06.data.core.entity.vo.WellVo" >
+    <select id="pageWell" resultMap="wellVo">
         SELECT well.*, field.field_name
         FROM well
-                 JOIN field ON well.field_id = field.field_id
-        <include refid="wellQuery"></include>
-        LIMIT ${(current-1)*size},${size};
-    </select>
-
-    <select id="getWellCountByName" parameterType="club.cupk.group06.data.core.dto.well.WellDTO" resultType="java.lang.Long">
-        SELECT count(1)
-        FROM well
-                 JOIN field ON well.field_id = field.field_id
-        WHERE well.well_name LIKE CONCAT('%',#{name},'%')
-          AND field.field_name LIKE CONCAT('%',#{fieldName},'%')
-          AND well.well_factory LIKE CONCAT('%',#{factory},'%')
+        JOIN field ON well.field_id = field.field_id
+        <where>
+            <if test="wellName != null">
+                AND well.well_name LIKE CONCAT('%',#{wellName},'%')
+            </if>
+            <if test="wellField != null">
+                AND field.field_name LIKE CONCAT('%',#{wellField},'%')
+            </if>
+            <if test="wellFactory != null">
+                AND well.well_factory LIKE CONCAT('%',#{wellFactory},'%')
+            </if>
+        </where>
     </select>
 </mapper>

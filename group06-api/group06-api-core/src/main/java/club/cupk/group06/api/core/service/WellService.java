@@ -1,10 +1,8 @@
 package club.cupk.group06.api.core.service;
 
 
-import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.group06.data.core.dto.well.WellDTO;
-import club.cupk.group06.data.core.entity.vo.WellVo;
+import club.cupk.group06.data.core.vo.WellVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -38,9 +36,8 @@ public interface WellService extends IService<Well> {
 
     /**
      * 根据油田名，井名，单位模糊查询
-     * @param wellDTO
      * @return
      */
-    AjaxResult getWellByName(WellDTO wellDTO);
+    IPage<WellVo> pageWell(IPage<WellVo> page, String wellName, String wellAddress, String wellField, String wellFactory);
 
 }

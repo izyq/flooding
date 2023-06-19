@@ -15,16 +15,10 @@ public class WellController {
 
     private WellService wellService;
 
-
     @GetMapping("/page")
     public AjaxResult page(PageEntity pageEntity, String wellName, String wellAddress, String wellField, String wellFactory) {
-        return wellService.getWellByName(WellDTO.builder()
-                .current(pageEntity.getCurrent())
-                .size(pageEntity.getSize())
-                .name(wellName)
-                .factory(wellFactory)
-                .fieldName(wellField)
-                .address(wellAddress).build());
+        return AjaxResult.success(wellService.pageWell(pageEntity.toPage(),
+                wellName, wellAddress, wellField, wellFactory));
     }
 
     @GetMapping("/list")

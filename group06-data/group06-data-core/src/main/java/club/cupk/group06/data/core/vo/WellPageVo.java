@@ -1,4 +1,4 @@
-package club.cupk.group06.data.core.entity.vo;
+package club.cupk.group06.data.core.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

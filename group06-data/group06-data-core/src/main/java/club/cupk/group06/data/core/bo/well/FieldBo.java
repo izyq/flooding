@@ -1,4 +1,4 @@
-package club.cupk.group06.data.core.entity.bo.well;
+package club.cupk.group06.data.core.bo.well;
 
 import club.cupk.group06.data.core.domain.Field;
 import com.fasterxml.jackson.annotation.JsonFormat;

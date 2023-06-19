@@ -6,10 +6,10 @@ import club.cupk.group06.api.core.service.WellService;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.group06.data.core.entity.bo.record.IndicatorBo;
-import club.cupk.group06.data.core.entity.bo.record.WellBo;
-import club.cupk.group06.data.core.entity.vo.record.IndicatorVo;
-import club.cupk.group06.data.core.entity.vo.record.WellRecordVo;
+import club.cupk.group06.data.core.bo.record.IndicatorBo;
+import club.cupk.group06.data.core.bo.record.WellBo;
+import club.cupk.group06.data.core.vo.record.IndicatorVo;
+import club.cupk.group06.data.core.vo.record.WellRecordVo;
 import club.cupk.group06.data.core.mapper.RecordMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -47,7 +47,7 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
     }
 
     @Override
-    public WellRecordVo getWellVo(Long wellId) {
+    public WellRecordVo getRecordVo(Long wellId) {
         WellRecordVo wellVo = EntityUtils.toObj(wellService.getById(wellId), WellRecordVo::new);
         List<Record> records = list(Wrappers.lambdaQuery(Record.class).eq(Record::getWellId, wellId));
         Set<Long> indicatorIds = EntityUtils.toSet(records, Record::getIndicatorId);
@@ -58,7 +58,7 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
             subBoList.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellId, e.getIndicatorId()), e));
             wellVo.setIndicatorBoList(subBoList);
         }
-        return fillterWell(wellVo);
+        return filterWell(wellVo);
     }
 
     @Override
@@ -82,11 +82,11 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
             list.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellVo.getWellId(), e.getIndicatorId()), e));
             wellVo.setIndicatorBoList(list);
         }
-        return fillterWell(wellVoList);
+        return filterWell(wellVoList);
     }
 
     @Override
-    public List<WellRecordVo> fillterWell(List<WellRecordVo> list) {
+    public List<WellRecordVo> filterWell(List<WellRecordVo> list) {
         list.forEach(wellVo -> {
             wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
                             && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
@@ -96,7 +96,7 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
     }
 
     @Override
-    public WellRecordVo fillterWell(WellRecordVo wellVo) {
+    public WellRecordVo filterWell(WellRecordVo wellVo) {
         wellVo.setIndicatorBoList(wellVo.getIndicatorBoList().stream().filter(indicatorBo -> indicatorBo.getFloodingPlan() != null && !indicatorBo.getFloodingPlan().isEmpty()
                         && indicatorBo.getIndicatorType() != null && !indicatorBo.getIndicatorType().isEmpty())
                 .collect(Collectors.toList()));

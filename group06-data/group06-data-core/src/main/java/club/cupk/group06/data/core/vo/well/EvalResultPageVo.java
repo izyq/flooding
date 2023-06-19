@@ -1,6 +1,6 @@
-package club.cupk.group06.data.core.entity.vo.well;
+package club.cupk.group06.data.core.vo.well;
 
-import club.cupk.group06.data.core.entity.vo.EvalResultVo;
+import club.cupk.group06.data.core.vo.EvalResultVo;
 import lombok.Data;
 
 import java.util.List;

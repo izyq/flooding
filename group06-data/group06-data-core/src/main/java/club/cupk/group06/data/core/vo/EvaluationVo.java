@@ -1,4 +1,4 @@
-package club.cupk.group06.data.core.entity.vo;
+package club.cupk.group06.data.core.vo;
 
 import club.cupk.group06.data.core.domain.Evaluation;
 import club.cupk.group06.data.core.domain.Indicator;

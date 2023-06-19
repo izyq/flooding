@@ -5,7 +5,7 @@ import club.cupk.group06.api.core.service.IndicatorService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Evaluation;
 import club.cupk.group06.data.core.domain.Indicator;
-import club.cupk.group06.data.core.entity.vo.EvaluationVo;
+import club.cupk.group06.data.core.vo.EvaluationVo;
 import club.cupk.group06.data.core.mapper.EvaluationMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
