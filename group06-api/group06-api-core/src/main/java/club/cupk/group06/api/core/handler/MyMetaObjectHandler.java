@@ -3,7 +3,10 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
@@ -18,10 +21,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     //TODO
     //通过Auth获取用户信息填充创建人员和更新人员
-    Long UserId = 666L;
+    Long UserId;
 
     @Override
     public void insertFill(MetaObject metaObject) {
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        UserId = Long.parseLong(request.getHeader("userId"));
         log.info("start insert fill ....");
         this.strictInsertFill(metaObject, "createUser", Long.class, UserId);
         this.strictUpdateFill(metaObject, "updateUser", Long.class, UserId);
@@ -32,6 +37,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        UserId = Long.parseLong(request.getHeader("userId"));
         this.strictUpdateFill(metaObject, "updateUser", Long.class, UserId);
         this.strictUpdateFill(metaObject, "updateTime", LocalDateTime.class, LocalDateTime.now());
     }
