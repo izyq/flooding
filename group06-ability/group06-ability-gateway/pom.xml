@@ -131,7 +131,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>club.cupk.group06.ability.gateway.Group06AbilityGatewayApplication</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>
