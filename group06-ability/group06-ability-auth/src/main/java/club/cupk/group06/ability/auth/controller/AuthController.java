@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ import javax.validation.constraints.Pattern;
 @RestController
 @AllArgsConstructor
 @RequestMapping
+@Slf4j
 public class AuthController {
 
     private final AuthService authService;
@@ -46,6 +48,7 @@ public class AuthController {
             @ApiParam(value = "手机号", required = true)
             @Pattern(regexp = "^1[3-9]\\d{9}$")
             @RequestParam("phone") String phone) {
+        log.info("给手机[{}]发了验证码-----------------------------",phone);
         authService.codeSend(phone);
     }
 
@@ -71,6 +74,7 @@ public class AuthController {
     @PreAuthorize("isAnonymous()")
     @PostMapping("/register")
     public Object register(@NotNull @RequestBody RegisterDto form) {
+        log.info("用户进行注册---------------------------------");
         return authService.register(form.getToken(), form.getName(), form.getPassword());
     }
 
@@ -83,6 +87,7 @@ public class AuthController {
     @PreAuthorize("isAnonymous()")
     @PostMapping("/login/password")
     public Object loginByPassword(@NotNull @RequestBody LoginDto form) {
+        log.info("用户使用手机号，密码进行了登录-----------------------------");
         return authService.loginByPassword(form.getName(), form.getPassword());
     }
 
@@ -95,6 +100,7 @@ public class AuthController {
     @PreAuthorize("isAnonymous()")
     @PostMapping("/login/verifyCode")
     public Object loginByVerifyCode(@NotNull @RequestBody VerifyDto form) {
+        log.info("手机号验证码登录-----------------------------");
         return authService.loginByVerifyCode(form.getPhone(), form.getCode());
     }
 
@@ -105,6 +111,8 @@ public class AuthController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/logout")
     public void logout() {
+
+        log.info("用户退出登录---------------------------------");
         authService.logout();
     }
 
@@ -116,6 +124,7 @@ public class AuthController {
     @PreAuthorize("permitAll()")
     @PostMapping("/reset")
     public void reset(@NotNull @RequestBody ResetDto form) {
+        log.info("用户重置密码------------------------------------");
         authService.reset(form.getToken(), form.getPassword());
     }
 

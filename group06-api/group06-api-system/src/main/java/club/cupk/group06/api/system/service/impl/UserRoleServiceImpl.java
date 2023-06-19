@@ -61,6 +61,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return userVo;
     }
 
+    @Override
     public List<UserVo> listVo(UserPo userPo) {
         List<UserVo> userVoList = EntityUtils.toList(userService.list(Wrappers.lambdaQuery(userPo)), UserVo::new);
         Set<Long> userIds = EntityUtils.toSet(userVoList, UserPo::getUserId);
@@ -84,6 +85,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return userVoList;
     }
 
+    @Override
     public IPage<UserVo> pageVo(IPage<UserPo> page, UserPo userPo) {
         IPage<UserVo> userVoPage = EntityUtils.toPage(userService.page(page, Wrappers.lambdaQuery(userPo)), UserVo::new);
         Set<Long> userIds = EntityUtils.toSet(userVoPage.getRecords(), UserPo::getUserId);
@@ -106,6 +108,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return userVoPage;
     }
 
+    @Override
     public RoleVo getRoleVo(Long roleId) {
         RoleVo roleVo = EntityUtils.toObj(roleService.getById(roleId), RoleVo::new);
         List<UserRole> userRoles = list(Wrappers.lambdaQuery(UserRole.class).eq(UserRole::getRoleId, roleId));
@@ -120,6 +123,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return roleVo;
     }
 
+    @Override
     public List<RoleVo> listVo(Role role) {
         List<RoleVo> roleVoList = EntityUtils.toList(roleService.list(Wrappers.lambdaQuery(role)), RoleVo::new);
         Set<Long> roleIds = EntityUtils.toSet(roleVoList, Role::getRoleId);
@@ -143,6 +147,7 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
         return roleVoList;
     }
 
+    @Override
     public IPage<RoleVo> pageVo(IPage<Role> page, Role role) {
         IPage<RoleVo> roleVoPage = EntityUtils.toPage(roleService.page(page, Wrappers.lambdaQuery(role)), RoleVo::new);
         Set<Long> roleIds = EntityUtils.toSet(roleVoPage.getRecords(), Role::getRoleId);
