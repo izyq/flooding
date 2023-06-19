@@ -31,6 +31,7 @@ public class WellController {
                         .wellAddress(wellAddress)
                         .wellFactory(wellFactory)
                         .build()));
+
     }
 
     @GetMapping("/list")

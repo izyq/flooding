@@ -66,9 +66,10 @@ public class IndicatorController {
 
     }
 
-    @DeleteMapping("/delete/{indicatorIds}")
-    public AjaxResult delete(@PathVariable Long[] indicatorIds) {
-        return AjaxResult.success(indicatorService.removeByIds(Arrays.asList(indicatorIds)));
+    @DeleteMapping("/delete/{indicatorId}")
+    public AjaxResult delete(@PathVariable Long indicatorId) {
+        Long[] ids = {indicatorId};
+        return AjaxResult.success(indicatorService.removeByIds(Arrays.asList(ids)));
     }
 
     @GetMapping(value = "/detail/{indicatorId}")
