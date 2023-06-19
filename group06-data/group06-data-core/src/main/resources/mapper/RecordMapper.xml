@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="club.cupk.group06.data.core.mapper.RecordMapper">
     
-    <resultMap id="graphMap" type="club.cupk.group06.data.core.entity.vo.GraphVo">
+    <resultMap id="graphMap" type="club.cupk.group06.data.core.vo.GraphVo">
         <result column="well_id" property="wellId"/>
         <result column="well_name" property="wellName"/>
         <result column="factory" property="factory"/>

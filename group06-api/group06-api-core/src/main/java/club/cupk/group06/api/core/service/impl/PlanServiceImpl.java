@@ -4,7 +4,7 @@ import club.cupk.group06.api.core.service.PlanService;
 import club.cupk.group06.api.core.service.WellService;
 import club.cupk.group06.data.core.domain.Plan;
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.group06.data.core.entity.vo.PlanVo;
+import club.cupk.group06.data.core.vo.PlanVo;
 import club.cupk.group06.data.core.mapper.PlanMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;

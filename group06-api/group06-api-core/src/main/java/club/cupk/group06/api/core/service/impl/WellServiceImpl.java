@@ -2,12 +2,9 @@ package club.cupk.group06.api.core.service.impl;
 
 import club.cupk.group06.api.core.service.PlanService;
 import club.cupk.group06.api.core.service.WellService;
-import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Plan;
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.group06.data.core.dto.well.WellDTO;
-import club.cupk.group06.data.core.entity.vo.WellPageVo;
-import club.cupk.group06.data.core.entity.vo.WellVo;
+import club.cupk.group06.data.core.vo.WellVo;
 import club.cupk.group06.data.core.mapper.WellMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -38,9 +35,9 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
             return page(page);
         }
         return page(page, Wrappers.lambdaQuery(Well.class)
-                .like(well.getWellName() != null && !well.getWellName().equals(""),Well::getWellName, well.getWellName())
+                .like(well.getWellName() != null && !well.getWellName().equals(""), Well::getWellName, well.getWellName())
                 .like(well.getWellAddress() != null && !well.getWellAddress().equals(""), Well::getWellAddress, well.getWellAddress())
-                .like(well.getWellFactory() != null&& !well.getWellFactory().equals(""), Well::getWellFactory, well.getWellFactory()));
+                .like(well.getWellFactory() != null && !well.getWellFactory().equals(""), Well::getWellFactory, well.getWellFactory()));
     }
 
     @Override
@@ -101,21 +98,9 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
 
     /**
      * 根据油田名，井名，单位模糊查询
-     *
-     * @param wellDTO
-     * @return
      */
     @Override
-    public AjaxResult getWellByName(WellDTO wellDTO) {
-        try{
-            List<WellVo> wellList = wellMapper.getWellByName(wellDTO);
-            WellPageVo wellPageVo = new WellPageVo();
-            wellPageVo.setSize((long) wellList.size())
-                    .setWellVoList(wellList)
-                    .setTotal(wellMapper.getWellCountByName(wellDTO));
-            return AjaxResult.success(wellPageVo);
-        }catch (Exception e){
-            return AjaxResult.error(e.getMessage());
-        }
+    public IPage<WellVo> pageWell(IPage<WellVo> page, String wellName, String wellAddress, String wellField, String wellFactory) {
+        return wellMapper.pageWell(page, wellName, wellAddress, wellField, wellFactory);
     }
 }

@@ -2,7 +2,7 @@ package club.cupk.group06.data.core.mapper;
 
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.dto.indicator.EvalResDTO;
-import club.cupk.group06.data.core.entity.vo.EvalResultVo;
+import club.cupk.group06.data.core.vo.EvalResultVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.transaction.annotation.Transactional;

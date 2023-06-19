@@ -1,4 +1,4 @@
-package club.cupk.group06.data.core.entity.bo.record;
+package club.cupk.group06.data.core.bo.record;
 
 import club.cupk.group06.data.core.domain.Indicator;
 import com.fasterxml.jackson.annotation.JsonFormat;

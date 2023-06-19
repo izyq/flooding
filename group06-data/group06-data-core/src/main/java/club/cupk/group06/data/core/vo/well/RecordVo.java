@@ -1,7 +1,7 @@
-package club.cupk.group06.data.core.entity.vo.well;
+package club.cupk.group06.data.core.vo.well;
 
 import club.cupk.group06.data.core.domain.Record;
-import club.cupk.group06.data.core.entity.bo.well.FieldBo;
+import club.cupk.group06.data.core.bo.well.FieldBo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

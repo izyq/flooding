@@ -1,7 +1,7 @@
 package club.cupk.group06.api.core.service;
 
 import club.cupk.group06.data.core.domain.Plan;
-import club.cupk.group06.data.core.entity.vo.PlanVo;
+import club.cupk.group06.data.core.vo.PlanVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;

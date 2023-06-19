@@ -1,7 +1,7 @@
-package club.cupk.group06.data.core.entity.vo.record;
+package club.cupk.group06.data.core.vo.record;
 
 import club.cupk.group06.data.core.domain.Well;
-import club.cupk.group06.data.core.entity.bo.record.IndicatorBo;
+import club.cupk.group06.data.core.bo.record.IndicatorBo;
 
 import java.util.List;
 
