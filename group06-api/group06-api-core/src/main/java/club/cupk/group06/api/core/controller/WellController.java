@@ -30,24 +30,19 @@ public class WellController {
 
     @PostMapping("/add")
     public AjaxResult add(@RequestBody WellDTO wellDTO) {
-        try{
-            return AjaxResult.success(wellService.save(Well.builder()
-                    .wellName(wellDTO.getName())
-                    .wellAddress(wellDTO.getAddress())
-                    .wellCoordinate(wellDTO.getCoordinate())
-                    .wellDepth(wellDTO.getDepth())
-                    .wellDia(wellDTO.getDia())
-                    .startTime(wellDTO.getStartTime())
-                    .endTime(wellDTO.getEndTime())
-                    .wellPeriod(wellDTO.getPeriod())
-                    .fieldId(wellDTO.getField())
-                    .wellFactory(wellDTO.getFactory())
-                    .build()
-            ));
-        }catch (Exception e){
-            return AjaxResult.error(e.getMessage());
-        }
-
+        return AjaxResult.success(wellService.save(Well.builder()
+                .wellName(wellDTO.getName())
+                .wellAddress(wellDTO.getAddress())
+                .wellCoordinate(wellDTO.getCoordinate())
+                .wellDepth(wellDTO.getDepth())
+                .wellDia(wellDTO.getDia())
+                .startTime(wellDTO.getStartTime())
+                .endTime(wellDTO.getEndTime())
+                .wellPeriod(wellDTO.getPeriod())
+                .fieldId(wellDTO.getField())
+                .wellFactory(wellDTO.getFactory())
+                .build()
+        ));
     }
 
     @PutMapping("/edit")
@@ -70,13 +65,9 @@ public class WellController {
 
     @DeleteMapping("/delete/{id}")
     public AjaxResult delete(@PathVariable Long id) {
-        try {
-            Long[] ids = new Long[1];
-            ids[0] = id;
-            return AjaxResult.success(wellService.deleteWell(ids));
-        } catch (Exception e) {
-            return AjaxResult.error(e.getMessage());
-        }
+        Long[] ids = new Long[1];
+        ids[0] = id;
+        return AjaxResult.success(wellService.deleteWell(ids));
     }
 
     @GetMapping(value = "/detail/{wellId}")
