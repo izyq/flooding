@@ -58,22 +58,22 @@
     <sql id="userQuery">
         <where>
             <if test="userPhone!=null and userPhone!= ''">
-                user.user_phone LIKE CONCAT('%',#{userPhone},'%')
+                and user.user_phone LIKE CONCAT('%',#{userPhone},'%')
             </if>
             <if test="userName!=null and userName!= ''">
-                user.user_name LIKE CONCAT('%',#{userName},'%')
+                and user.user_name LIKE CONCAT('%',#{userName},'%')
             </if>
             <if test="userEmail!=null and userEmail!= ''">
-                user.user_email LIKE CONCAT('%',#{userEmail},'%')
+                and user.user_email LIKE CONCAT('%',#{userEmail},'%')
             </if>
             <if test="userWell!=null and userWell!= ''">
-                user_well LIKE CONCAT('%',#{userWell},'%')
+                and user_well LIKE CONCAT('%',#{userWell},'%')
             </if>
             <if test="userField!=null and userField!= ''">
-                user_field1 LIKE CONCAT('%',#{userField},'%')
+                and user_field1 LIKE CONCAT('%',#{userField},'%')
             </if>
             <if test="userField!=null and userField!= ''">
-                user_field2 LIKE CONCAT('%',#{userField},'%')
+                and user_field2 LIKE CONCAT('%',#{userField},'%')
             </if>
         </where>
     </sql>

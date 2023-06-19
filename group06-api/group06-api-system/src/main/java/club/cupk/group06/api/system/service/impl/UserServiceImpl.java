@@ -1,9 +1,7 @@
 package club.cupk.group06.api.system.service.impl;
 
 import club.cupk.group06.api.system.service.UserService;
-import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.system.domain.UserPo;
-import club.cupk.group06.data.system.dto.UserDto;
 import club.cupk.group06.data.system.mapper.UserMapper;
 import club.cupk.group06.data.system.vo.UserItemVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
