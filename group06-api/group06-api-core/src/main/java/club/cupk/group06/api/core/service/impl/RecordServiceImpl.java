@@ -25,6 +25,7 @@ import xin.altitude.cms.common.util.BeanCopyUtils;
 import xin.altitude.cms.common.util.EntityUtils;
 import xin.altitude.cms.common.util.TableUtils;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -232,18 +233,23 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
         }
         Table<Long, Long, Record> table = TableUtils.createHashTable(records, Record::getWellId, Record::getIndicatorId);
         Map<Long, List<Long>> map = records.stream().collect(Collectors.groupingBy(Record::getWellId, Collectors.mapping(Record::getIndicatorId, Collectors.toList())));
-        List<IndicatorBo> indicatorBoList = EntityUtils.toList(indicatorService.list(Wrappers.lambdaQuery(Indicator.class)
+        IPage<IndicatorBo> indicatorVoPage = EntityUtils.toPage(indicatorService.page(new Page<>(page.getCurrent(), page.getSize()), Wrappers.lambdaQuery(Indicator.class)
                 .in(Indicator::getIndicatorId, indicatorIds)
                 .eq(Indicator::getIndicatorType, "0")//0表示为生产数据
         ), IndicatorBo::new);
-        for (WellRecordVo wellRecordVo : wellVoPage.getRecords()) {
-            List<IndicatorBo> list = indicatorBoList.stream().filter(e -> map.get(wellRecordVo.getWellId()) != null && map.get(wellRecordVo.getWellId()).contains(e.getIndicatorId())).collect(Collectors.toList());
+        Iterator recordsIterator = wellVoPage.getRecords().iterator();
+        while (recordsIterator.hasNext()){
+            WellRecordVo wellRecordVo = (WellRecordVo)recordsIterator.next();
+            List<IndicatorBo> list = indicatorVoPage.getRecords().stream().filter(e -> map.get(wellRecordVo.getWellId()) != null && map.get(wellRecordVo.getWellId()).contains(e.getIndicatorId())).collect(Collectors.toList());
             list.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellRecordVo.getWellId(), e.getIndicatorId()), e));
             wellRecordVo.setIndicatorBoList(list);
             if(wellRecordVo.getIndicatorBoList().size() == 0){
-                wellVoPage.getRecords().remove(wellRecordVo);
+                recordsIterator.remove();
             }
         }
+        wellVoPage.setTotal(indicatorVoPage.getTotal());
+        wellVoPage.setSize(indicatorVoPage.getSize());
+        wellVoPage.setPages(indicatorVoPage.getPages());
         return wellVoPage;
     }
 }
