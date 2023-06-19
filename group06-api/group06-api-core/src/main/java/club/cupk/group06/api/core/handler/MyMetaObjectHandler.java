@@ -27,6 +27,9 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
         UserId = Long.parseLong(request.getHeader("userId"));
+        if (UserId == null) {
+            UserId = 0L;
+        }
         log.info("start insert fill ....");
         this.strictInsertFill(metaObject, "createUser", Long.class, UserId);
         this.strictUpdateFill(metaObject, "updateUser", Long.class, UserId);
