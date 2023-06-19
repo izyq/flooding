@@ -5,6 +5,7 @@ import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.dto.well.WellDTO;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -16,7 +17,8 @@ public class WellController {
     private WellService wellService;
 
     @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, String wellName, String wellAddress, String wellField, String wellFactory) {
+    public AjaxResult page(@NotNull PageEntity pageEntity, String wellName, String wellAddress, String wellField,
+                           String wellFactory) {
         return AjaxResult.success(wellService.pageWell(pageEntity.toPage(),
                 wellName, wellAddress, wellField, wellFactory));
     }

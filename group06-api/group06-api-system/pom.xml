@@ -112,7 +112,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>club.cupk.group06.api.system.Group06ApiSystemApplication</mainClass>
-                    <skip>true</skip>
                 </configuration>
                 <executions>
                     <execution>

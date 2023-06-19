@@ -18,6 +18,17 @@
         SELECT *
         FROM field
     </select>
+    <select id="pageField" resultType="club.cupk.group06.data.core.domain.Field">
+        SELECT * FROM field
+        <where>
+            <if test="fieldName != null">
+                AND field_name LIKE CONCAT('%',#{fieldName},'%')
+            </if>
+            <if test="fieldAddress != null">
+                AND field_address LIKE CONCAT('%',#{fieldAddress},'%')
+            </if>
+        </where>
+    </select>
 
     <delete id="deletePlanByFieldId">
         DELETE wp FROM field AS f JOIN well AS w

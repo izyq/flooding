@@ -38,7 +38,7 @@ public class FieldServiceTests {
     /*分页查询油田*/
     public void fieldPageTest(){
         PageEntity pageEntity = new PageEntity(1L, 10L);
-        System.out.println(fieldService.getPage(pageEntity.toPage(), Field.builder().fieldName("北下关呀").build()));
+        System.out.println(fieldService.pageField(pageEntity.toPage(), "下北关呀", null));
     }
 
     @Test
