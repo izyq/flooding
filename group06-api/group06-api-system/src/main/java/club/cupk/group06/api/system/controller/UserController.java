@@ -28,11 +28,11 @@ public class UserController {
                                      String userWell,
                                      String userField){
         return AjaxResult.success(userService.getUserByQuery(pageEntity.toPage(),
-                                                userEmail,
-                                                userField,
-                                                userName,
-                                                userPhone,
-                                                userWell));
+                userPhone,
+                userName,
+                userEmail,
+                userWell,
+                userField));
     }
 
     @GetMapping("/page")
