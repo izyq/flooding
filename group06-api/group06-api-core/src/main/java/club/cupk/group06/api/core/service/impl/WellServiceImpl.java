@@ -2,8 +2,11 @@ package club.cupk.group06.api.core.service.impl;
 
 import club.cupk.group06.api.core.service.PlanService;
 import club.cupk.group06.api.core.service.WellService;
+import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Plan;
 import club.cupk.group06.data.core.domain.Well;
+import club.cupk.group06.data.core.dto.well.WellDTO;
+import club.cupk.group06.data.core.entity.vo.WellPageVo;
 import club.cupk.group06.data.core.entity.vo.WellVo;
 import club.cupk.group06.data.core.mapper.WellMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -16,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import xin.altitude.cms.common.util.EntityUtils;
 import xin.altitude.cms.common.util.SpringUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +29,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements WellService {
 
+    @Resource
     private WellMapper wellMapper;
 
     @Override
@@ -92,5 +97,25 @@ public class WellServiceImpl extends ServiceImpl<WellMapper, Well> implements We
         Map<Long, List<Plan>> map = planList.stream().collect(Collectors.groupingBy(Plan::getWellId));
         wellVoPage.getRecords().forEach(e -> e.setPlanList(map.get(e.getWellId())));
         return wellVoPage;
+    }
+
+    /**
+     * 根据油田名，井名，单位模糊查询
+     *
+     * @param wellDTO
+     * @return
+     */
+    @Override
+    public AjaxResult getWellByName(WellDTO wellDTO) {
+        try{
+            List<WellVo> wellList = wellMapper.getWellByName(wellDTO);
+            WellPageVo wellPageVo = new WellPageVo();
+            wellPageVo.setSize((long) wellList.size())
+                    .setWellVoList(wellList)
+                    .setTotal(wellMapper.getWellCountByName(wellDTO));
+            return AjaxResult.success(wellPageVo);
+        }catch (Exception e){
+            return AjaxResult.error(e.getMessage());
+        }
     }
 }

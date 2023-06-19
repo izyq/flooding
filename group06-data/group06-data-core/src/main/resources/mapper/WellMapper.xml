@@ -27,4 +27,39 @@
             #{item}
         </foreach>
     </delete>
+
+    <sql id="wellQuery">
+        <where>
+            <if test="name!=null and name!=''">
+                well.well_name LIKE CONCAT('%',#{name},'%')
+            </if>
+            <if test="fieldName!=null and fieldName!=''">
+                field.field_name LIKE CONCAT('%',#{fieldName},'%')
+            </if>
+            <if test="factory!=null and factory!=''">
+                well.well_factory LIKE CONCAT('%',#{factory},'%')
+            </if>
+            <if test="address!=null and address!=''">
+                well.well_address LIKE CONCAT('%',#{address},'%')
+            </if>
+        </where>
+    </sql>
+
+    
+    <select id="getWellByName" parameterType="club.cupk.group06.data.core.dto.well.WellDTO" resultType="club.cupk.group06.data.core.entity.vo.WellVo" >
+        SELECT well.*, field.field_name
+        FROM well
+                 JOIN field ON well.field_id = field.field_id
+        <include refid="wellQuery"></include>
+        LIMIT ${(current-1)*size},${size};
+    </select>
+
+    <select id="getWellCountByName" parameterType="club.cupk.group06.data.core.dto.well.WellDTO" resultType="java.lang.Long">
+        SELECT count(1)
+        FROM well
+                 JOIN field ON well.field_id = field.field_id
+        WHERE well.well_name LIKE CONCAT('%',#{name},'%')
+          AND field.field_name LIKE CONCAT('%',#{fieldName},'%')
+          AND well.well_factory LIKE CONCAT('%',#{factory},'%')
+    </select>
 </mapper>

@@ -16,6 +16,8 @@ public class WellVo extends Well {
 
     private List<Plan> planList;
 
+    private String fieldName;
+
     public WellVo(Well well) {
         super(well);
     }

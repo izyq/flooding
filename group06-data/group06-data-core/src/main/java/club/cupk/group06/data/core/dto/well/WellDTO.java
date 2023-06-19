@@ -55,4 +55,11 @@ public class WellDTO {
 
     @ApiModelProperty(value = "注水井的负责单位", position = 10)
     private String factory;
+
+    @ApiModelProperty(value = "油藏名")
+    private String fieldName;
+
+    private Long current;
+
+    private Long size;
 }
