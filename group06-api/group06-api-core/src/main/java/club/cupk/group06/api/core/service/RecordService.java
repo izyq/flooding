@@ -1,5 +1,6 @@
 package club.cupk.group06.api.core.service;
 
+import club.cupk.group06.data.core.common.QueryTime;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.domain.Well;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface RecordService extends IService<Record> {
     WellRecordVo getRecordVo(Long wellId);
 
-    List<WellRecordVo> listVo(Well well);
+    List<WellRecordVo> listVo(Well well, QueryTime queryTime);
 
     List<WellRecordVo> filterWell(List<WellRecordVo> wellVoList);
 

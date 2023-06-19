@@ -3,6 +3,7 @@ package club.cupk.group06.api.core.service.impl;
 import club.cupk.group06.api.core.service.IndicatorService;
 import club.cupk.group06.api.core.service.RecordService;
 import club.cupk.group06.api.core.service.WellService;
+import club.cupk.group06.data.core.common.QueryTime;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.domain.Well;
@@ -13,6 +14,7 @@ import club.cupk.group06.data.core.vo.record.WellRecordVo;
 import club.cupk.group06.data.core.mapper.RecordMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -62,13 +64,21 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
     }
 
     @Override
-    public List<WellRecordVo> listVo(Well well) {
-        List<WellRecordVo> wellVoList = EntityUtils.toList(wellService.list(Wrappers.lambdaQuery(well)), WellRecordVo::new);
+    public List<WellRecordVo> listVo(Well well, QueryTime queryTime) {
+        List<WellRecordVo> wellVoList = EntityUtils.toList(wellService.list(
+                Wrappers.lambdaQuery(Well.class)
+                        .eq(well.getWellId() != null, Well::getWellId, well.getWellId())
+                        .like(well.getWellName() != null, Well::getWellName, well.getWellName())
+                ), WellRecordVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoList, Well::getWellId);
         if (wellIds.size() == 0) {
             return wellVoList;
         }
-        List<Record> records = list(Wrappers.lambdaQuery(Record.class).in(Record::getWellId, wellIds));
+        List<Record> records = list(Wrappers.lambdaQuery(Record.class)
+                .in(Record::getWellId, wellIds)
+                .ge(queryTime.getStartTimeQuery() != null, Record::getRecordTime, queryTime.getStartTimeQuery())
+                .le(queryTime.getEndTimeQuery() != null, Record::getRecordTime, queryTime.getEndTimeQuery())
+        );
         Set<Long> indicatorIds = EntityUtils.toSet(records, Record::getIndicatorId);
         Map<Long, List<Long>> map = records.stream().collect(Collectors.groupingBy(Record::getWellId, Collectors.mapping(Record::getIndicatorId, Collectors.toList())));
         if (indicatorIds.size() == 0) {

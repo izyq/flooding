@@ -2,6 +2,7 @@ package club.cupk.group06.api.core.controller;
 
 import club.cupk.group06.api.core.service.RecordService;
 import club.cupk.group06.common.web.response.AjaxResult;
+import club.cupk.group06.data.core.common.QueryTime;
 import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.domain.Well;
@@ -73,8 +74,8 @@ public class RecordController {
      * @author izyq
      **/
     @GetMapping("/well/list")
-    public AjaxResult wellIndicator(Well well) {
-        return AjaxResult.success(recordService.listVo(well));
+    public AjaxResult wellIndicator(QueryTime queryTime, Well well) {
+        return AjaxResult.success(recordService.listVo(well,queryTime));
     }
 
     /**
