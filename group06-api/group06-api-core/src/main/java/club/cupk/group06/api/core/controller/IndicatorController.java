@@ -4,6 +4,7 @@ import club.cupk.group06.api.core.service.IndicatorService;
 import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Indicator;
 import lombok.AllArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 import xin.altitude.cms.common.entity.PageEntity;
 
@@ -17,24 +18,8 @@ public class IndicatorController {
     private IndicatorService indicatorService;
 
     @GetMapping("/page")
-    public AjaxResult pageName(PageEntity pageEntity, String fieldName, String floodingPlan) {
-        if (fieldName == null && floodingPlan == null) {
-            return AjaxResult.success(page(pageEntity, null));
-        }
-        return indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder()
-                .indicatorName(fieldName)
-                .floodingPlan(floodingPlan)
-                .build());
-    }
-
-    @GetMapping("/pageAll")
-    public AjaxResult page(PageEntity pageEntity, Indicator indicator) {
-        try {
-            return AjaxResult.success(indicatorService.getPage(pageEntity.toPage(), indicator));
-        } catch (Exception e) {
-            return AjaxResult.error();
-        }
-
+    public AjaxResult page(@NotNull PageEntity pageEntity, String indicatorName, String floodingPlan, String indicatorType) {
+        return AjaxResult.success(indicatorService.pageIndicator(pageEntity.toPage(), indicatorName, floodingPlan, indicatorType));
     }
 
     @GetMapping("/list")

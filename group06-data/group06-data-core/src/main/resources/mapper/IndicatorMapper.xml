@@ -57,5 +57,19 @@
                      evaluation.cust_weight
              ) AS subquery;
     </select>
+    <select id="pageIndicator" resultType="club.cupk.group06.data.core.domain.Indicator">
+        SELECT * FROM indicator
+        <where>
+            <if test="indicatorName != null">
+                AND indicator_name LIKE CONCAT('%',#{indicatorName},'%')
+            </if>
+            <if test="floodingPlan != null">
+                AND flooding_plan LIKE CONCAT('%',#{floodingPlan},'%')
+            </if>
+            <if test="indicatorType != null">
+                AND indicator_type LIKE CONCAT('%',#{indicatorType},'%')
+            </if>
+        </where>
+    </select>
 
 </mapper>

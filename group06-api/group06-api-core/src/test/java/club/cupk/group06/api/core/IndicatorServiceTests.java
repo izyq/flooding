@@ -61,9 +61,6 @@ public class IndicatorServiceTests {
     /*分页查询*/
     public void page() {
         PageEntity pageEntity = new PageEntity(1L, 10L);
-        indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder()
-                .indicatorName("新疆油田")
-                .floodingPlan("注水井")
-                .build());
+        indicatorService.pageIndicator(pageEntity.toPage(), "新疆油田", "注水井", null);
     }
 }

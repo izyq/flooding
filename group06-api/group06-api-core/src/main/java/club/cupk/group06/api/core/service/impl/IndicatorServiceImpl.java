@@ -6,9 +6,8 @@ import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.mapper.IndicatorMapper;
 import club.cupk.group06.data.core.mapper.RecordMapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,33 +24,17 @@ public class IndicatorServiceImpl extends ServiceImpl<IndicatorMapper, Indicator
     @Resource
     private RecordMapper recordMapper;
 
-    @Override
-    public Page getPage(Page page, Indicator indicator) {
-        return page(page, Wrappers.lambdaQuery(indicator));
+    @Resource
+    private IndicatorMapper indicatorMapper;
 
+    @Override
+    public IPage<Indicator> pageIndicator(IPage<Indicator> page, String indicatorName, String floodingPlan, String indicatorType) {
+        return indicatorMapper.pageIndicator(page, indicatorName, floodingPlan, indicatorType);
     }
 
     @Override
     public List<Indicator> getList(Indicator indicator) {
         return list(Wrappers.lambdaQuery(indicator));
-    }
-
-    @Override
-    public AjaxResult getIndicatorByName(Page page, Indicator indicator) {
-        if (indicator.getIndicatorName() == null) {
-            return AjaxResult.success(page(page));
-        }
-        try {
-            return AjaxResult.success(
-                    page(page, Wrappers.lambdaQuery(Indicator.class)
-                            .like(StringUtils.isNotBlank(indicator.getIndicatorName()),Indicator::getIndicatorName, indicator.getIndicatorName())
-                            .like(StringUtils.isNotBlank(indicator.getFloodingPlan()),Indicator::getFloodingPlan,indicator.getFloodingPlan())
-                    )
-            );
-
-        } catch (Exception e) {
-            return AjaxResult.error(e.getMessage());
-        }
     }
 
     @Override
