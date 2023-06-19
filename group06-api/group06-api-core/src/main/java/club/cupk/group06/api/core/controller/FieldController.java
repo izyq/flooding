@@ -60,10 +60,7 @@ public class FieldController {
     }
 
     @GetMapping("/list")
-    public AjaxResult list(@RequestBody Map<String, Object> data) {
-        String name = data.get("name").toString();
-        String fieldAddress = data.get("fieldAddress").toString();
-        List<Field> list = fieldService.getList(Field.builder().fieldAddress(fieldAddress).fieldName(name).build());
-        return AjaxResult.success(list);
+    public AjaxResult list(String fieldName) {
+        return AjaxResult.success(fieldService.getList(fieldName));
     }
 }
