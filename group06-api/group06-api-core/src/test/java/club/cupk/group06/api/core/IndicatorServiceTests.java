@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import xin.altitude.cms.common.entity.PageEntity;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -56,4 +57,13 @@ public class IndicatorServiceTests {
         indicatorService.removeByIds(Arrays.asList(ids));
     }
 
+    @Test
+    /*分页查询*/
+    public void page() {
+        PageEntity pageEntity = new PageEntity(1L, 10L);
+        indicatorService.getIndicatorByName(pageEntity.toPage(), Indicator.builder()
+                .indicatorName("新疆油田")
+                .floodingPlan("注水井")
+                .build());
+    }
 }
