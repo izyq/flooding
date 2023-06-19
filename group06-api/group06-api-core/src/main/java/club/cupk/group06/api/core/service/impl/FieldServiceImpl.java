@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,9 +26,11 @@ public class FieldServiceImpl extends ServiceImpl<FieldMapper, Field> implements
     private FieldMapper fieldMapper;
 
     @Override
-    public List<Field> getList(Field field) {
-        return list(Wrappers.lambdaQuery(Field.class).like(field.getFieldName() != null && !field.getFieldName().equals(""), Field::getFieldName, field.getFieldName())
-                .like(field.getFieldAddress() != null && !field.getFieldAddress().equals(""),Field::getFieldAddress, field.getFieldAddress()));
+    public List<Field> getList(String fieldName) {
+        if (fieldName == null || fieldName.trim().length() == 0) {
+            return new ArrayList<>();
+        }
+        return list(Wrappers.lambdaQuery(Field.class).like(fieldName.trim().length() > 0, Field::getFieldName, fieldName));
     }
 
     @Override

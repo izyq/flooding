@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
 public interface FieldService extends IService<Field> {
-    List<Field> getList(Field field);
+    List<Field> getList(String fieldName);
 
     IPage<Field> pageField(IPage<Field> page, String fieldName, String fieldAddress);
 
