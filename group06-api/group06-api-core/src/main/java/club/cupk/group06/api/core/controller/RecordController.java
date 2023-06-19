@@ -20,10 +20,21 @@ public class RecordController {
 
     private RecordService recordService;
 
-    @GetMapping("/page")
-    public AjaxResult page(PageEntity pageEntity, Record record) {
+    @GetMapping("/uselessPage")
+    public AjaxResult uselessPage(PageEntity pageEntity, Record record) {
         return AjaxResult.success(recordService.getPage(pageEntity.toPage(), record));
     }
+
+    @GetMapping("/recordWellPage")
+    public AjaxResult recordWellVoPage(PageEntity pageEntity, Record record) {
+        return AjaxResult.success(recordService.recordWellVoIPage(pageEntity.toPage(), record));
+    }
+
+    @GetMapping("/page")
+    public AjaxResult pageProduct(PageEntity pageEntity, Well well, QueryTime queryTime) {
+        return AjaxResult.success(recordService.pageProductVo(pageEntity.toPage(), well, queryTime));
+    }
+
 
     @GetMapping("/list")
     public AjaxResult list(Record record) {

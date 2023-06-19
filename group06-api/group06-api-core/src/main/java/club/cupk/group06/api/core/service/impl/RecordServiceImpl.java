@@ -10,11 +10,11 @@ import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.bo.record.IndicatorBo;
 import club.cupk.group06.data.core.bo.record.WellBo;
 import club.cupk.group06.data.core.vo.record.IndicatorVo;
+import club.cupk.group06.data.core.vo.record.RecordVo;
 import club.cupk.group06.data.core.vo.record.WellRecordVo;
 import club.cupk.group06.data.core.mapper.RecordMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -40,8 +40,10 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
 
     @Override
     public Page getPage(Page page, Record record) {
+
         return page(page, Wrappers.lambdaQuery(record));
     }
+
 
     @Override
     public List<Record> getList(Record record) {
@@ -72,7 +74,7 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
                 Wrappers.lambdaQuery(Well.class)
                         .eq(well.getWellId() != null, Well::getWellId, well.getWellId())
                         .like(well.getWellName() != null, Well::getWellName, well.getWellName())
-                ), WellRecordVo::new);
+        ), WellRecordVo::new);
         Set<Long> wellIds = EntityUtils.toSet(wellVoList, Well::getWellId);
         if (wellIds.size() == 0) {
             return wellVoList;
@@ -199,5 +201,49 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
             indicatorVo.setWellBoList(list);
         }
         return indicatorVoPage;
+    }
+    @Override
+    public IPage<RecordVo> recordWellVoIPage(IPage<Record> page, Record record) {
+        IPage<RecordVo> recordVoPage = EntityUtils.toPage(page(page, Wrappers.lambdaQuery(record)), RecordVo::new);
+        Set<Long> wellIds = EntityUtils.toSet(recordVoPage.getRecords(), RecordVo::getWellId);
+        Map<Long, Well> map = EntityUtils.toMap(wellService.listByIds(wellIds), Well::getWellId, e -> e);
+        recordVoPage.getRecords().forEach(e -> BeanCopyUtils.copyProperties(map.get(e.getWellId()), e));
+        return recordVoPage;
+    }
+
+    @Override
+    public IPage<WellRecordVo> pageProductVo(IPage<Well> page, Well well, QueryTime queryTime) {
+        IPage<WellRecordVo> wellVoPage = EntityUtils.toPage(wellService.page(page, Wrappers.lambdaQuery(Well.class)
+                .eq(well.getWellId() != null, Well::getWellId, well.getWellId())
+                .like(well.getWellName() != null, Well::getWellName, well.getWellName())
+        ), WellRecordVo::new);
+        Set<Long> wellIds = EntityUtils.toSet(wellVoPage.getRecords(), Well::getWellId);
+        if (wellIds.size() == 0) {
+            return wellVoPage;
+        }
+        List<Record> records = list(Wrappers.lambdaQuery(Record.class)
+                .in(Record::getWellId, wellIds)
+                .ge(queryTime.getStartTimeQuery() != null, Record::getRecordTime, queryTime.getStartTimeQuery())
+                .le(queryTime.getEndTimeQuery() != null, Record::getRecordTime, queryTime.getEndTimeQuery())
+        );
+        Set<Long> indicatorIds = EntityUtils.toSet(records, Record::getIndicatorId);
+        if (indicatorIds.size() == 0) {
+            return wellVoPage;
+        }
+        Table<Long, Long, Record> table = TableUtils.createHashTable(records, Record::getWellId, Record::getIndicatorId);
+        Map<Long, List<Long>> map = records.stream().collect(Collectors.groupingBy(Record::getWellId, Collectors.mapping(Record::getIndicatorId, Collectors.toList())));
+        List<IndicatorBo> indicatorBoList = EntityUtils.toList(indicatorService.list(Wrappers.lambdaQuery(Indicator.class)
+                .in(Indicator::getIndicatorId, indicatorIds)
+                .eq(Indicator::getIndicatorType, "0")//0表示为生产数据
+        ), IndicatorBo::new);
+        for (WellRecordVo wellRecordVo : wellVoPage.getRecords()) {
+            List<IndicatorBo> list = indicatorBoList.stream().filter(e -> map.get(wellRecordVo.getWellId()) != null && map.get(wellRecordVo.getWellId()).contains(e.getIndicatorId())).collect(Collectors.toList());
+            list.forEach(e -> BeanCopyUtils.copyProperties(table.get(wellRecordVo.getWellId(), e.getIndicatorId()), e));
+            wellRecordVo.setIndicatorBoList(list);
+            if(wellRecordVo.getIndicatorBoList().size() == 0){
+                wellVoPage.getRecords().remove(wellRecordVo);
+            }
+        }
+        return wellVoPage;
     }
 }

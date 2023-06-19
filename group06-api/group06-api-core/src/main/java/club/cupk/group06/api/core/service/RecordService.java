@@ -5,6 +5,7 @@ import club.cupk.group06.data.core.domain.Indicator;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.domain.Well;
 import club.cupk.group06.data.core.vo.record.IndicatorVo;
+import club.cupk.group06.data.core.vo.record.RecordVo;
 import club.cupk.group06.data.core.vo.record.WellRecordVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,4 +33,8 @@ public interface RecordService extends IService<Record> {
     Page getPage(Page page, Record record);
 
     List<Record> getList(Record record);
+
+    IPage<RecordVo> recordWellVoIPage(IPage<Record> page, Record record);
+
+    IPage<WellRecordVo> pageProductVo(IPage<Well> page, Well well, QueryTime queryTime);
 }
