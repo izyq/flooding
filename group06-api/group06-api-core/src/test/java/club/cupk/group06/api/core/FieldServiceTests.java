@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FieldServiceTest {
+public class FieldServiceTests {
     @Resource
     private FieldMapper fieldMapper;
     @Resource
@@ -36,14 +36,14 @@ public class FieldServiceTest {
 
     @Test
     /*分页查询油田*/
-    public void fieldPage(){
+    public void fieldPageTest(){
         PageEntity pageEntity = new PageEntity(1L, 10L);
         System.out.println(fieldService.pageField(pageEntity.toPage(), "下北关呀", null));
     }
 
     @Test
     /*修改油田的信息*/
-    public void updataField(){
+    public void updataFieldTest(){
         fieldService.updateById(Field
                 .builder()
                 .fieldId(32l)
@@ -56,19 +56,19 @@ public class FieldServiceTest {
 
     @Test
     /*删除油田*/
-    public void deleteField(){
+    public void deleteFieldTest(){
         fieldService.deleteField(30L);
     }
 
     @Test
     /*获取油田的详情*/
-    public void detail(){
+    public void detailTest(){
         fieldService.getById(29);
     }
 
     @Test
     /*批量获得油田列表*/
-    public void list(){
+    public void listTest(){
         System.out.println(fieldService.getList(Field.builder().fieldAddress("").fieldName("").build()));
     }
 }

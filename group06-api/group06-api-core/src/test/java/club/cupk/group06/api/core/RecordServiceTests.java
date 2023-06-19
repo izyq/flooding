@@ -25,7 +25,7 @@ public class RecordServiceTests {
 
     @Test
     /*添加指标数据*/
-    public void add(){
+    public void addTest(){
         List<Record> records = new ArrayList<>();
         Record record = new Record();
         record.setWellId(1L);
@@ -38,14 +38,14 @@ public class RecordServiceTests {
 
     @Test
     /*删除指标数据*/
-    public void delete(){
+    public void deleteTest(){
         Long[] recordIds = {68L};
         recordService.removeByIds(Arrays.asList(recordIds));
     }
 
     @Test
     /*分页*/
-    public void page(){
+    public void pageTest(){
         PageEntity pageEntity = new PageEntity(1L, 10L);
         Record record = new Record();
         record.setWellId(1L);
@@ -57,7 +57,7 @@ public class RecordServiceTests {
 
     @Test
     /*通过井id获取数据*/
-    public void listByWellId(){
+    public void listByWellIdTest(){
         Well well = new Well();
         well.setWellId(1L);
         recordService.listVo(well);

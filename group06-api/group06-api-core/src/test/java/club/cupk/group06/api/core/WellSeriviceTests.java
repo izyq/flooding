@@ -22,7 +22,7 @@ public class WellSeriviceTests {
 
     @Test
     /*测试添加油井*/
-    public void addWell(){
+    public void addWellTest(){
         wellService.save(Well.builder()
                 .wellName("北下关一号")
                 .wellAddress("北下关一号")
@@ -39,33 +39,33 @@ public class WellSeriviceTests {
 
     @Test
     /*分页查询油井*/
-    public void page(){
+    public void pageTest(){
         PageEntity pageEntity = new PageEntity(2L, 10L);
         wellService.getPage(pageEntity.toPage(), Well.builder().wellName("克校区").build());
     }
 
     @Test
     /*获取油井list*/
-    public void getList(){
+    public void getListTest(){
         System.out.println(wellService.getList(Well.builder().wellName("").build()));
     }
 
     @Test
     /*删除油井*/
-    public void deleteWell(){
+    public void deleteWellTest(){
         Long[] target = {24L};
         wellService.deleteWell(target);
     }
 
     @Test
     /*查看油井详情*/
-    public void detail(){
+    public void detailTest(){
         wellService.getById(23L);
     }
 
     @Test
     /*修改油井的信息*/
-    public void edit(){
+    public void editTest(){
         wellService.updateById(Well.builder()
                 .wellId(25L)
                 .wellName("交大嘉园")
