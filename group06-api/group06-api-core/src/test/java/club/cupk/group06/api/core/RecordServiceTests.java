@@ -1,7 +1,6 @@
 package club.cupk.group06.api.core;
 
 import club.cupk.group06.api.core.service.RecordService;
-import club.cupk.group06.common.web.response.AjaxResult;
 import club.cupk.group06.data.core.domain.Record;
 import club.cupk.group06.data.core.domain.Well;
 import org.junit.Test;
@@ -60,6 +59,6 @@ public class RecordServiceTests {
     public void listByWellIdTest(){
         Well well = new Well();
         well.setWellId(1L);
-        recordService.listVo(well);
+        recordService.listVo(well, null);
     }
 }

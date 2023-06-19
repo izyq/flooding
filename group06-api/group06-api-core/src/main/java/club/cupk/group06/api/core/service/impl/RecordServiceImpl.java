@@ -65,6 +65,9 @@ public class RecordServiceImpl extends ServiceImpl<RecordMapper, Record> impleme
 
     @Override
     public List<WellRecordVo> listVo(Well well, QueryTime queryTime) {
+        if (queryTime == null) {
+            queryTime = new QueryTime();
+        }
         List<WellRecordVo> wellVoList = EntityUtils.toList(wellService.list(
                 Wrappers.lambdaQuery(Well.class)
                         .eq(well.getWellId() != null, Well::getWellId, well.getWellId())
