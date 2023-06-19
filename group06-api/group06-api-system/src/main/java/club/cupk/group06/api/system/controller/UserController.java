@@ -27,14 +27,12 @@ public class UserController {
                                      String userEmail,
                                      String userWell,
                                      String userField){
-        return userService.getUserByQuery(pageEntity.toPage(),
-                UserDto.builder()
-                        .userEmail(userEmail)
-                        .userField(userField)
-                        .userName(userName)
-                        .userPhone(userPhone)
-                        .userWell(userWell).build()
-                );
+        return AjaxResult.success(userService.getUserByQuery(pageEntity.toPage(),
+                                                userEmail,
+                                                userField,
+                                                userName,
+                                                userPhone,
+                                                userWell));
     }
 
     @GetMapping("/page")

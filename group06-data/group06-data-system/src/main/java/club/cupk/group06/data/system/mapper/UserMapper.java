@@ -45,11 +45,21 @@ public interface UserMapper extends BaseMapper<UserPo> {
     void updatePassword(@Param("phone") String phone, @Param("password") String password);
 
     /**
-     * 用户分页查询
-     * @param userDto
+     *
+     * @param page
+     * @param userPhone
+     * @param userName
+     * @param userEmail
+     * @param userWell
+     * @param userField
      * @return
      */
-    IPage<UserItemVo> getUser(IPage<UserItemVo> page,UserDto userDto);
+    IPage<UserItemVo> getUser(IPage<UserItemVo> page,
+                              @Param("userPhone") String userPhone,
+                              @Param("userName") String userName,
+                              @Param("userEmail") String userEmail,
+                              @Param("userWell") String userWell,
+                              @Param("userField") String userField);
 
 
 }

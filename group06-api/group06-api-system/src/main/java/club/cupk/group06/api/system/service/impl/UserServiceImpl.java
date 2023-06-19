@@ -35,7 +35,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPo> implements 
 
 
     @Override
-    public AjaxResult getUserByQuery(IPage<UserItemVo> page,UserDto userDto) {
-        return AjaxResult.success(userMapper.getUser(page,userDto));
+    public IPage<UserItemVo> getUserByQuery(IPage<UserItemVo> page,
+                                     String userPhone,
+                                     String userName,
+                                     String userEmail,
+                                     String userWell,
+                                     String userField) {
+        try{
+            return userMapper.getUser(page,
+                    userPhone,
+                    userName,
+                    userEmail,
+                    userWell,
+                    userField);
+        }catch (Exception e){
+            return null;
+        }
+
     }
 }

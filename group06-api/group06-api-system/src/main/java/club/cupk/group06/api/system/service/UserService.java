@@ -15,5 +15,10 @@ public interface UserService extends IService<UserPo> {
 
     List<UserPo> getList(UserPo userPo);
 
-    AjaxResult getUserByQuery(IPage<UserItemVo> page,UserDto userDto);
+    IPage<UserItemVo> getUserByQuery(IPage<UserItemVo> page,
+                              String userPhone,
+                              String userName,
+                              String userEmail,
+                              String userWell,
+                              String userField);
 }
