@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: group06-api-system
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ip:8848
+        namespace: public
+        password: password
+        username: nacos

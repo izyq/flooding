@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: group06-ability-gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    nacos:
+      discovery:
+        server-addr: ip:8848
+        namespace: public
+        password: password
+        username: nacos
+      config:
+        server-addr: ip:8848
+        #namespace: 35ec1b17-0e29-4abf-9e9d-6a9c7a712e23
+        #dev环境
+        namespace: 34e69c13-6855-4603-afc2-39771bda8564
+        password: password
+        username: nacos
+        file-extension: yaml
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      loadbalancer:
+        use404: false

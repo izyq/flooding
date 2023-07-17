@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: group06-ability-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ip:8848
+        namespace: public
+        password: cupk666.
+        username: nacos
+      config:
+        server-addr: ip:8848
+        namespace: 35ec1b17-0e29-4abf-9e9d-6a9c7a712e23
+        password: password
+        username: nacos
+        file-extension: yaml

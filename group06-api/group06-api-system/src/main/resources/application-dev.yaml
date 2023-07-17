@@ -1,0 +1,33 @@
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 9003
+spring:
+  application:
+    name: group06-api-system
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    name: product
+    password: 'password'
+    url: jdbc:mysql://
+    username: 'root'
+knife4j:
+  enable: false
+  openapi:
+    title: 注水井综合评价系统API文档
+    description: 系统管理
+    # aaa"
+    email: xiaoymin@foxmail.com
+    concat: CUPK
+    url: https://docs.xiaominfo.com
+    version: v4.0
+    license: Apache 2.0
+    license-url: https://stackoverflow.com/
+    terms-of-service-url: https://stackoverflow.com/
+    group:
+      test1:
+        group-name: 分组名称
+        api-rule: package
+        api-rule-resources:
+          - club.cupk.waterflood.controller
